@@ -1,0 +1,203 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f743bd85725f81045b030d3601214577, type: 3}
+  m_Name: Example
+  m_EditorClassIdentifier: 
+  oneLine:
+    oneFieldBefore:
+      first: Class with one field
+    twoFieldsBefore:
+      first: First field
+      second: Second field
+    threeFieldsBefore:
+      first: First
+      second: Second
+      third: Third
+    arrayWithThreeFieldsBefore:
+    - first: First
+      second: Second
+      third: Third
+    - first: First
+      second: Second
+      third: Third
+    oneField:
+      first: Class with one field
+    twoFields:
+      first: First field
+      second: Second field
+    threeFields:
+      first: First
+      second: Second
+      third: Third
+    arrayWithThreeFields:
+    - first: First
+      second: Second
+      third: Third
+    - first: First
+      second: Second
+      third: Third
+  weights:
+    differentWeights1Before:
+      first: 3
+      second: 2
+      third: 1
+    differentWeights2Before:
+      first: 5
+      second: 1
+    arrayWithDifferentWeightsBefore:
+    - first: 5
+      second: 1
+    - first: 5
+      second: 1
+    differentWeights1:
+      first: 3
+      second: 2
+      third: 1
+    differentWeights2:
+      first: 5
+      second: 1
+    arrayWithDifferentWeights:
+    - first: 5
+      second: 1
+    - first: 5
+      second: 1
+  width:
+    fixedWidthBefore:
+      first: 50px
+      second: Has no WidthAttribute
+      third: 75px
+    onlyFixedWidthBefore:
+      first: 
+      second: 75px
+    arrayWithOnlyFixedWidthsBefore:
+    - first: 50px
+      second: 75px
+    - first: 50px
+      second: 75px
+    fixedWidth:
+      first: 50px
+      second: Has no WidthAttribute
+      third: 75px
+    onlyFixedWidth:
+      first: 50px
+      second: 75px
+    arrayWithOnlyFixedWidths:
+    - first: 50px
+      second: 75px
+    - first: 50px
+      second: 75px
+  hideLabel:
+    oneFieldHidesLabelBefore:
+      first: This field is marked by HideLabelAttribute
+    twoFieldsHidesLabelBefore:
+      first: Only zero-depth fields may be marked
+      second: by HideLabelAttribute
+    arrayHidesLabelsBefore:
+    - first: First array element hides it's label
+      second: by HideLabelAttribute
+    - first: Second array element hides it's label
+      second: by HideLabelAttribute
+    oneFieldHidesLabel:
+      first: This field is marked by HideLabelAttribute
+    twoFieldsHidesLabel:
+      first: Only zero-depth fields may be marked
+      second: by HideLabelAttribute
+    arrayHidesLabels:
+    - first: First array element hides it's label
+      second: by HideLabelAttribute
+    - first: Second array element hides it's label
+      second: by HideLabelAttribute
+  highlight:
+    highlightedZeroDepthFieldBefore:
+      first: HighlightAttribute is useful for focusing on
+    highlightedFieldsBefore:
+      first: Green
+      second: Blue
+      third: No matter
+      fourth: Yellow
+    arrayWithHighlightedFieldsBefore:
+    - first: Green
+      second: Blue
+      third: No matter
+      fourth: Yellow
+    - first: Green
+      second: Blue
+      third: No matter
+      fourth: Yellow
+    highlightedZeroDepthField:
+      first: HighlightAttribute is useful for focusing on
+    highlightedFields:
+      first: Green
+      second: Blue
+      third: No matter
+      fourth: Yellow
+    arrayWithHighlightedFields:
+    - first: Green
+      second: Blue
+      third: No matter
+      fourth: Yellow
+    - first: Green
+      second: Blue
+      third: No matter
+      fourth: Yellow
+  arrays:
+    oneLineArrayBefore:
+      array:
+      - Element 1
+      - Element 2
+      - Element 3
+    twoArraysInOneLineBefore:
+      first: 01000000020000000300000004000000
+      second:
+      - First
+      - Second
+    arrayHidesButtonsBefore:
+      array:
+      - Dublicate
+      - or delete
+      - by right-click
+    arrayWithImmutableLengthBefore:
+      array:
+      - Length of this
+      - array is fixed
+      - in code
+    arrayWithArraysBefore:
+    - array:
+      - 'Second '
+      - "element \u2193"
+      - is empty
+    - array: []
+    oneLineArray:
+      array:
+      - Element 1
+      - Element 2
+      - Element 3
+    twoArraysInOneLine:
+      first: 01000000020000000300000004000000
+      second:
+      - First
+      - Second
+    arrayHidesButtons:
+      array:
+      - Dublicate
+      - or delete
+      - by right-click
+    arrayWithImmutableLength:
+      array:
+      - Length of this
+      - array is fixed
+      - in code
+    arrayWithArrays:
+    - array:
+      - 'Second '
+      - "element \u2193"
+      - is empty
+    - array: []
