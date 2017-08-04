@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     internal class ArrayDrawer : FixedLengthArray {
         private Drawer buttons;
 

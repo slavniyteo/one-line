@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using UnityEditor;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     internal static class SerializedPropertyExtension {
 
         public static IEnumerable<SerializedProperty> GetChildren(this SerializedProperty property) {

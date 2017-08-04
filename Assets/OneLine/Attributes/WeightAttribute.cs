@@ -1,6 +1,6 @@
 using System;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     ///<summary>
     ///Defines weight of marked field in the line.
     ///Available only on d1+fields and has no effect on d0.

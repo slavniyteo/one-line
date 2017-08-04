@@ -1,6 +1,6 @@
 using System;
 
-namespace Nihil.OneLine {
+namespace OneLine {
 
     ///<summary>
     ///Hides buttons "+" and "-" of marked array.

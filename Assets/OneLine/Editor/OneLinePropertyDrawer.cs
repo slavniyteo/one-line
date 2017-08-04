@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     [CustomPropertyDrawer(typeof(OneLineAttribute))]
     public class OneLinePropertyDrawer : PropertyDrawer {
 

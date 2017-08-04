@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Nihil.OneLine.Examples {
+namespace OneLine.Examples {
     [CreateAssetMenu]
     public class Example : ScriptableObject {
 

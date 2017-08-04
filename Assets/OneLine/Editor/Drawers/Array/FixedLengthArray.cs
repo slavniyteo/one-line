@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     internal class FixedLengthArray : Drawer {
 
         private RectUtil rectUtil;

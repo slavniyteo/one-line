@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Nihil.OneLine.Examples {
+namespace OneLine.Examples {
 
     [Serializable]
     public class Highlight {

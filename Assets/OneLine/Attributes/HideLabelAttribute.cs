@@ -1,6 +1,6 @@
 using System;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     ///<summary>
     ///Hides prefix label of d0-field.Has no effect on d1+fields.
     ///Useful for expanding available space in line.

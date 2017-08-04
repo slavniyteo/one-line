@@ -1,6 +1,6 @@
 using System;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     ///<summary>
     ///Defines additive fixed width (in GUI pixels) on marked field in the line.
     ///By default sets weight of field to 0.

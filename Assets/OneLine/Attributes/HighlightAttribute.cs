@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     ///<summary>
     ///Highlights marked field by rgb color with values in range[0..1] (red by default)
     ///Available on d0 and d1+fields.

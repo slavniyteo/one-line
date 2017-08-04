@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     internal class RectUtil {
 
         private const float space = 5;

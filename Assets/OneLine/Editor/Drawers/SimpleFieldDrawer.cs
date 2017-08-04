@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     internal class SimpleFieldDrawer : Drawer {
 
         public float GetWeight(SerializedProperty property) {

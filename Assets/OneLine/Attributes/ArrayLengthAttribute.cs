@@ -1,6 +1,6 @@
 using System;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     ///<summary>
     ///Make marked array immutable.
     ///Marked array misses buttons "+" and "-" and context menu.

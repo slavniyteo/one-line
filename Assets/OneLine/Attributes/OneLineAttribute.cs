@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Nihil.OneLine {
+namespace OneLine {
     ///<summary>
     ///Draws marked field into one line in InspectorWindow.
     ///Into one line will be fitted all inner fields (even arrays)
