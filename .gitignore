@@ -2,3 +2,5 @@
 /Library
 /*.csproj
 /*.sln
+/.vscode/settings.json
+/ProjectSettings/ProjectVersion.txt
