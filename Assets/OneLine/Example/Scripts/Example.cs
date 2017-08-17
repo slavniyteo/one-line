@@ -41,7 +41,7 @@ namespace OneLine.Examples {
 #endregion
 
 #region Weights
-        [Space, Header("[WeightAttribute]")]
+        [Space, Separator, Header("[WeightAttribute]")]
         [SerializeField, OneLine]
         private Weights1 differentWeights1;
         [SerializeField, OneLine]
@@ -68,7 +68,7 @@ namespace OneLine.Examples {
 #endregion
 
 #region Width
-        [Space, Header("[WidthAttribute]")]
+        [Space, Separator("Width"), Header("[WidthAttribute]")]
         [SerializeField, OneLine]
         private WidthAndWeight fixedWidth;
         [SerializeField, OneLine]
