@@ -9,14 +9,41 @@ namespace OneLine {
         private new SeparatorAttribute attribute { get { return base.attribute as SeparatorAttribute; }}
 
         // Workaround, see http://answers.unity3d.com/questions/377207/drawing-a-texture-in-a-custom-propertydrawer.html
-        private static GUIStyle lineStyle;
-        private static Texture2D lineTexture;
-        private static GUIStyle textStyle;
+        private GUIStyle lineStyle;
+        private GUIStyle textStyle;
+        private const float spaceBefore = 10;
 
-        static SeparatorAttributeDrawer(){
-            var color = Color.gray;
+        public override float GetHeight(){
+            return spaceBefore + Mathf.Max(attribute.Thickness, EditorGUIUtility.singleLineHeight + 5);
+        }
 
-            lineTexture = new Texture2D(1,1);
+        public override void OnGUI(Rect rect) {
+            PrepareStyles();
+            rect.y += spaceBefore;
+            rect.height -= spaceBefore;
+
+            string text = attribute.Text;
+            int thickness = attribute.Thickness;
+
+            if (string.IsNullOrEmpty(text)){
+                DrawLine(rect, thickness);
+            }
+            else {
+                var textSize = textStyle.CalcSize(new GUIContent(text));
+                var rects = rect.Split(new float[]{1,0,1}, new float[]{0, textSize.x, 0});
+
+                DrawLine(rects[0], thickness);
+                DrawText(rects[1], text);
+                DrawLine(rects[2], thickness);
+            }
+        }
+
+        private void PrepareStyles(){
+            if (lineStyle != null && textStyle != null){ return; }
+
+            var color = new Color(0.3f, 0.3f, 0.3f, 1);
+
+            var lineTexture = new Texture2D(1,1);
             lineTexture.SetPixel(0,0,color);
             lineTexture.Apply();
             lineStyle = new GUIStyle();
@@ -28,31 +55,10 @@ namespace OneLine {
             textStyle.alignment = TextAnchor.MiddleCenter;
         }
 
-        public override float GetHeight(){
-            return Mathf.Max(attribute.Thickness, EditorGUIUtility.singleLineHeight);
-        }
-
-        public override void OnGUI(Rect rect) {
-            string text = attribute.Text;
-            int thickness = attribute.Thickness;
-
-            if (string.IsNullOrEmpty(text)){
-                DrawLine(rect, thickness);
-            }
-            else {
-                var textSize = GUI.skin.label.CalcSize(new GUIContent(text));
-                var rects = rect.Split(new float[]{1,0,1}, new float[]{0, textSize.x, 0});
-
-                DrawLine(rects[0], thickness);
-                DrawText(rects[1], text);
-                DrawLine(rects[2], thickness);
-            }
-        }
-
-        private static void DrawText(Rect rect, string text){
+        private void DrawText(Rect rect, string text){
             EditorGUI.LabelField(rect, text, textStyle); 
         }
-        private static void DrawLine(Rect rect, int thickness){
+        private void DrawLine(Rect rect, int thickness){
             rect.y += (rect.height - thickness) / 2;
             rect.height = thickness;
             EditorGUI.LabelField(rect, GUIContent.none, lineStyle);

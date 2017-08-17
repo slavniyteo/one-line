@@ -7,7 +7,7 @@ namespace OneLine.Examples {
     public class Example : ScriptableObject {
 
 #region One Line
-        [Space, Header("[OneLineAttribute]")]
+        [Separator("[ One Line Attribute ]")]
         [SerializeField, OneLine]
         private OneField oneField;
         [SerializeField, OneLine]
@@ -41,7 +41,7 @@ namespace OneLine.Examples {
 #endregion
 
 #region Weights
-        [Space, Separator, Header("[WeightAttribute]")]
+        [Separator("[ Weight Attribute ]")]
         [SerializeField, OneLine]
         private Weights1 differentWeights1;
         [SerializeField, OneLine]
@@ -68,7 +68,7 @@ namespace OneLine.Examples {
 #endregion
 
 #region Width
-        [Space, Separator("Width", Thickness = 5), Header("[WidthAttribute]")]
+        [Separator("[ Width Attribute ]")]
         [SerializeField, OneLine]
         private WidthAndWeight fixedWidth;
         [SerializeField, OneLine]
@@ -95,7 +95,7 @@ namespace OneLine.Examples {
 #endregion
 
 #region Hide Label
-        [Space, Header("[HideLabelAttribute]")]
+        [Separator("[ Hide Label Attribute ]")]
         [SerializeField, OneLine, HideLabel]
         private OneField oneFieldHidesLabel;
         [SerializeField, OneLine, HideLabel]
@@ -105,7 +105,7 @@ namespace OneLine.Examples {
 #endregion
 
 #region Highlight
-        [Space, Header("[HighlightAttribute]")]
+        [Separator("[ Highlight Attribute ]")]
         [SerializeField, OneLine, Highlight]
         private OneField highlightedZeroDepthField;
         [SerializeField, OneLine]
@@ -127,7 +127,7 @@ namespace OneLine.Examples {
 #endregion
 
 #region Arrays
-        [Space, Header("Arrays, [HideButtonsAttribute], [ArrayLength]")]
+        [Separator("Arrays, [Hide Buttons Attribute], [Array Length]")]
         [SerializeField, OneLine]
         private OneLineArray oneLineArray;
         [SerializeField, OneLine]
