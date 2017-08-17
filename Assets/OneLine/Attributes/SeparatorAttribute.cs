@@ -9,7 +9,8 @@ namespace OneLine {
     public class SeparatorAttribute : PropertyAttribute {
 
         public SeparatorAttribute() {
-
+            Text = "";
+            Thickness = 2;
         }
 
         public SeparatorAttribute(string text) : this() {
@@ -17,6 +18,7 @@ namespace OneLine {
         }
 
         public string Text { get; set; }
+        public int Thickness { get; set; }
 
     }
 }

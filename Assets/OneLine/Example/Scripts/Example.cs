@@ -68,7 +68,7 @@ namespace OneLine.Examples {
 #endregion
 
 #region Width
-        [Space, Separator("Width"), Header("[WidthAttribute]")]
+        [Space, Separator("Width", Thickness = 5), Header("[WidthAttribute]")]
         [SerializeField, OneLine]
         private WidthAndWeight fixedWidth;
         [SerializeField, OneLine]
