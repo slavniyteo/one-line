@@ -5,11 +5,11 @@ using UnityEditor;
 using UnityEngine;
 
 namespace OneLine {
-    internal class RectUtil {
+    internal static class RectUtil {
 
         private const float space = 5;
-
-        public Rect[] Split(Rect rect, float[] weights, float[] fixedWidthes) {
+        
+        public static Rect[] Split(this Rect rect, float[] weights, float[] fixedWidthes){
             var cells = Sequence(weights.Length)
                         .Select(i => new Cell(weights[i], fixedWidthes[i]))
                         .ToArray();
@@ -32,7 +32,7 @@ namespace OneLine {
             return result.ToArray();
         }
 
-        private float GetWeightUnit(float fullWidth, IEnumerable<Cell> cells) {
+        private static float GetWeightUnit(float fullWidth, IEnumerable<Cell> cells) {
             float result = 0;
             float weightsSum = cells.Sum(cell => cell.Weight);
 
@@ -45,7 +45,7 @@ namespace OneLine {
             return result;
         }
 
-        private IEnumerable<int> Sequence(int length) {
+        private static IEnumerable<int> Sequence(int length) {
             for (int i = 0; i < length; i++) {
                 yield return i;
             }

@@ -8,11 +8,9 @@ using UnityEngine;
 namespace OneLine {
     internal class FixedLengthArray : Drawer {
 
-        private RectUtil rectUtil;
         private Func<SerializedProperty, Drawer> getDrawer;
 
         public FixedLengthArray(Func<SerializedProperty, Drawer> drawer) {
-            this.rectUtil = new RectUtil();
             this.getDrawer = drawer;
         }
 
@@ -44,7 +42,7 @@ namespace OneLine {
         }
 
         protected Rect[] SplitRects(Rect rect, SerializedProperty property) {
-            return rectUtil.Split(rect, GetWeights(property), GetFixedWidthes(property));
+            return rect.Split(GetWeights(property), GetFixedWidthes(property));
         }
 
         protected virtual void DrawElement(Rect rect, SerializedProperty element) {

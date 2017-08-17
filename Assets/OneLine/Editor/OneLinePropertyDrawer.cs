@@ -7,11 +7,9 @@ namespace OneLine {
 
         private const int bounds = 0;
 
-
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
             return 16 + bounds * 2;
         }
-
 
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label) {
             int indentLevel = EditorGUI.indentLevel;

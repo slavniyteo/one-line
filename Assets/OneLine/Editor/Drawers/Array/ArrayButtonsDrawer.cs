@@ -7,12 +7,6 @@ using UnityEngine;
 namespace OneLine {
     internal class ArrayButtonsDrawer : Drawer {
 
-        private RectUtil rectUtil;
-
-        public ArrayButtonsDrawer() {
-            this.rectUtil = new RectUtil();
-        }
-
         #region Width
 
         public float GetWeight(SerializedProperty property) {
@@ -46,7 +40,7 @@ namespace OneLine {
         }
 
         public void DrawLabel(Rect rect, SerializedProperty array) {
-            var rects = rectUtil.Split(rect, new float[] { 1, 0 }, new float[] { 0, 20 });
+            var rects = rect.Split(new float[] { 1, 0 }, new float[] { 0, 20 });
 
             EditorGUI.LabelField(rects[0], array.displayName);
             if (GUI.Button(rects[1], "+")) {
@@ -55,7 +49,7 @@ namespace OneLine {
         }
 
         public void DrawButtons(Rect rect, SerializedProperty array) {
-            var rects = rectUtil.Split(rect, new float[] { 0, 0 }, new float[] { 20, 20 });
+            var rects = rect.Split(new float[] { 0, 0 }, new float[] { 20, 20 });
 
             if (GUI.Button(rects[0], "+")) {
                 array.InsertArrayElementAtIndex(array.arraySize);

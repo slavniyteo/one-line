@@ -7,16 +7,12 @@ using UnityEngine;
 namespace OneLine {
     internal class DirectoryDrawer : Drawer {
 
-        private RectUtil rectUtil;
-
         protected Drawer simpleDrawer;
         protected Drawer fixedLengthArrayDrawer;
         protected Drawer arrayDrawer;
         protected Drawer directoryDrawer;
 
         public DirectoryDrawer() {
-            rectUtil = new RectUtil();
-
             simpleDrawer = new SimpleFieldDrawer();
             fixedLengthArrayDrawer = new FixedLengthArray(GetDrawer);
             arrayDrawer = new ArrayDrawer(GetDrawer);
@@ -67,7 +63,7 @@ namespace OneLine {
         }
 
         protected Rect[] GetRects(Rect rect, SerializedProperty property) {
-            return rectUtil.Split(rect, GetFieldWeights(property), GetFieldFixedWidthes(property));
+            return rect.Split(GetFieldWeights(property), GetFieldFixedWidthes(property));
         }
 
         private void DrawField(Rect rect, SerializedProperty property) {
