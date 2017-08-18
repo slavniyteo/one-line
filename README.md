@@ -10,11 +10,61 @@ OneLine improves your databases and makes it more readable by people. It draws o
 
 # Details
 
-## [OneLineAttribute]
+## OneLinePropertyDrawer
+
+`OneLinePropertyDrawer` is a custom property drawer. It draws any property into single line. To nicely draw your custom data class into one line, just extend `OneLinePropertyDrawer`. Every time your class will be drawen in single line without any additional attributes.
+
+**Example:**
+
+```csharp
+// ./Example.cs
+using System;
+using UnityEngine;
+
+[CreateAssetMenu]
+public class Example : ScriptableObject {
+    [SerializeField]
+    private ThreeFields threeFields;
+
+    [Serializable]
+    public class ThreeFields {
+        [SerializeField]
+        private string first;
+        [SerializeField]
+        private string second;
+        [SerializeField]
+        private string third;
+    }
+}
+
+// ./Editor/ThreeFieldsDrawer.cs
+using UnityEditor;
+using OneLine;
+
+[CustomPropertyDrawer(typeof(Example.ThreeFields))]
+public class ThreeFieldsDrawer : OneLinePropertyDrawer {
+}
+```
+
+**Result:**
+
+![One Line Attribute Example](mdsrc/one-line-property-drawer-example.png)
+
+## Attributes
+
+It is not nice to create additional classes for every data class you want one-linify in Inspector. There is a couple attributes created for make your life better.
+
+### [OneLineAttribute]
 
 `[OneLineAttribute]` is the core of all library. Add it to any field drawen in Inspector and its view will be chanded: it with all children will be drawen into one line (and arrays with all elements and their children). It works fully recursive and automatic. You don't need to add `[OneLine]` to every field -- just to root. `[OneLineAttribute]` uses all other attributes to customize view. But other attributes is just markers and containers for settings (for example, `[WeightAttribute]` tells to `[OneLineAttribute]` that this field must me wery long, but it is not draws anything be itself). Except `[SeparatorAttribute]`: it is used as marker and as drawer depends on context.
 
+**Example:**
+
 ```csharp
+using System;
+using UnityEngine;
+using OneLine;
+
 [CreateAssetMenu]
 public class Example : ScriptableObject {
     [SerializeField, OneLine]
@@ -32,15 +82,21 @@ public class Example : ScriptableObject {
 }
 ```
 
-Produces following result:  
+**Result:**
+
 ![One Line Attribute Example](mdsrc/one-line-attribute-example.png)
 
-## [WeightAttribute]
+### [WeightAttribute]
 
-`[WeightAttribute]` allows you to manage relative sizes of fields. For example, if class contains two fields: short integer ID and long string UUID, you can use `[Weight]` to set UUIDs length equals 8 IDs lenghtes.  
+`[WeightAttribute]` allows you to manage relative sizes of fields. For example, if class contains two fields: short integer ID and long string UUID, you can use `[Weight]` to set UUIDs length equals 8 IDs lenghtes. Added to array, specifies weight of every array element.  
 Note that values of `[WidthAttribute]` and `[WeightAttribute]` are summarized: you cat set weight=2 and width=25 and field will be as two simple fields plus 25.
 
+**Example:**
 ```csharp
+using System;
+using UnityEngine;
+using OneLine;
+
 [CreateAssetMenu]
 public class Example : ScriptableObject {
     [SerializeField, OneLine]
@@ -58,15 +114,21 @@ public class Example : ScriptableObject {
 }
 ```
 
-Produces following result:  
+**Result:**
+
 ![Weight Attribute Example](mdsrc/weight-attribute-example.png)
 
-## [WidthAttribute]
+### [WidthAttribute]
 
-`[WidthAttribute]` is same as `[WeightAttribute]` but operates with fixed widthes. It allows you to set fields width equals 50. And it will. It uses GUI units (like all property drawers). It set Weight of field to 0 (zero), but you can change it with `[WeightAttribute]`.
+`[WidthAttribute]` is same as `[WeightAttribute]` but operates with fixed widthes. It allows you to set fields width equals 50. And it will. It uses GUI units (like all property drawers). It set Weight of field to 0 (zero), but you can change it with `[WeightAttribute]`. Added to array, specifies width of every array element.  
 Note that values of `[WidthAttribute]` and `[WeightAttribute]` are summarized: you cat set weight=2 and width=25 and field will be as two simple fields plus 25.
 
+**Example:**
 ```csharp
+using System;
+using UnityEngine;
+using OneLine;
+
 [CreateAssetMenu]
 public class Example : ScriptableObject {
     [SerializeField, OneLine]
@@ -84,14 +146,21 @@ public class Example : ScriptableObject {
 }
 ```
 
-Produces following result:  
+**Result:**
+
 ![Width Attribute Example](mdsrc/width-attribute-example.png)
 
-## [HideLabelAttribute]
+### [HideLabelAttribute]
 
-`[HideLabelAttribute]` allows you to hide prefix label in view. It is useful to prevent width looses and draw your data in whole line. See example:
+`[HideLabelAttribute]` allows you to hide prefix label in view. It is useful to prevent width looses and draw your data in whole line. It works only with root fields (with nested fields labels aren't drawen). Added to array, hides labels of every array element.
+
+**Example:**
 
 ```csharp
+using System;
+using UnityEngine;
+using OneLine;
+
 [CreateAssetMenu]
 public class Example : ScriptableObject {
     [SerializeField, OneLine, HideLabel]
@@ -109,5 +178,126 @@ public class Example : ScriptableObject {
 }
 ```
 
-Produces following result: 
+**Result:**
+
 ![Hide Label Attribute Example](mdsrc/hide-label-attribute-example.png)
+
+### [HighlightAttribute]
+
+`[Highlight]` allows you to highlight field with some color (r, g, b). C sharp doesn't allow to pass custom classes or struct to attributes, sou you need to pass three float in [0..1]. If you add `[Highlight]` to root field, it highlightes its prefix label too; if you add `[Highlight]` to nested field, it also highlights. Even in arrays.
+
+**Example:**
+
+```csharp
+using System;
+using UnityEngine;
+using OneLine;
+
+[CreateAssetMenu]
+public class Example : ScriptableObject {
+    [SerializeField, OneLine, Highlight]
+    private string rootField;
+    [SerializeField, OneLine] private HighlightedFields nestedFields;
+
+    [Serializable]
+    public class HighlightedFields {
+        [SerializeField, Highlight(0, 1, 0)]
+        private string first;
+        [SerializeField, Highlight(0, 0, 1)]
+        private string second;
+        [SerializeField]
+        private string third;
+        [SerializeField, Highlight(1, 1, 0)]
+        private string fourth;
+    }
+}
+```
+
+**Result:**
+
+![Highlight Attribute Example](mdsrc/highlight-attribute-example.png)
+
+### Arrays
+
+#### Root arrays with `[OneLine]`
+
+If you add `[OneLine]` to field, which contains arrays in children, arrays of this elements will be linified. But if you add `[OneLine]` to array, instead drawing whole array into one line, it will draw array line-by-line (as usial), but every element will be drawen into one line.
+
+**Example:**
+```charp
+using System;
+using UnityEngine;
+using OneLine;
+
+[CreateAssetMenu]
+public class Example : ScriptableObject {
+    [SerializeField, OneLine]
+    private ThreeFields[] rootArray;
+    [SerializeField, OneLine]
+    private OneLineArray nestedArray;
+    [SerializeField, OneLine]
+    private TwoArrays twoNestedArrays;
+
+    [Serializable]
+    public class ThreeFields {
+        [SerializeField]
+        private string first;
+        [SerializeField]
+        private string second;
+        [SerializeField]
+        private string third;
+    }
+    [Serializable]
+    public class OneLineArray {
+        [SerializeField]
+        private string[] array;
+    }
+    [Serializable]
+    public class TwoArrays {
+        [SerializeField, Highlight(1, 0, 0)]
+        private int[] first;
+        [SerializeField, Highlight(0, 1, 0), Width(50)]
+        private string[] second;
+    }
+}
+```
+
+**Result:**
+
+![Work With Arrays Example](mdsrc/root-array-example.png)
+
+#### [HideButtons]
+
+`[HideButtons]` hides buttons **+** and **-** from array. It allow you to increase useful space. You may change array size with Right-click drop-down menu. When array contains 0 (zero) elements, button **+** appears, when you click it, buttons dissapears.
+`[HideButtons]` works only with nested arrays.
+
+**Example:**
+
+```charp
+using System;
+using UnityEngine;
+using OneLine;
+
+[CreateAssetMenu]
+public class Example : ScriptableObject {
+    [SerializeField, OneLine]
+    private ArrayHidesButtons arrayWithElements;
+    [SerializeField, OneLine]
+    private ArrayHidesButtons zeroLengthArray;
+
+    [Serializable]
+    public class ArrayHidesButtons {
+        [SerializeField, HideButtons]
+        private string[] array;
+    }
+}
+```
+
+**Result:**
+
+![Hide Buttons Attribute Example](mdsrc/hide-buttons-attribute-example.png)
+
+#### [FixedLength]
+
+`[FixedLength]` works only with nested arrays.  
+Specifies the length of
