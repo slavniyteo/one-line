@@ -19,11 +19,14 @@ namespace OneLine {
             directoryDrawer = this;
         }
 
-        #region Weights
-
+       #region Weights
         public float GetWeight(SerializedProperty property) {
-            var attribute = property.GetCustomAttribute<WeightAttribute>();
-            float multiplier = attribute != null ? attribute.Weight : 1;
+            var attributes = property.GetCustomAttributes<WeightAttribute>();
+            float result = 0;
+            foreach (var attribute in attributes){
+              result += attribute.Weight;
+            }
+            float multiplier = attributes.Length != 0 ? result : 1;
 
             return GetFieldWeights(property)
                    .Select(x => x * multiplier)
@@ -38,8 +41,12 @@ namespace OneLine {
         }
 
         public float GetFixedWidth(SerializedProperty property) {
-            var attribute = property.GetCustomAttribute<WidthAttribute>();
-            float width = attribute != null ? attribute.Width : 0;
+            var attributes = property.GetCustomAttributes<WidthAttribute>();
+            float result = 0;
+            foreach (var attribute in attributes){
+              result += attribute.Width;
+            }
+            float width = attributes.Length != 0 ? result : 0;
 
             return Math.Max(width, GetFieldFixedWidthes(property).Sum());
         }

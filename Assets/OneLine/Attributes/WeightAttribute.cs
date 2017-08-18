@@ -7,7 +7,7 @@ namespace OneLine {
     ///Fields without WeightAttribute has default weight = 1.
     ///Applied to arrays defines weight of each element.
     ///</summary>
-    [AttributeUsageAttribute(validOn: AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
+    [AttributeUsageAttribute(validOn: AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
     public class WeightAttribute : Attribute {
         private float weight;
 

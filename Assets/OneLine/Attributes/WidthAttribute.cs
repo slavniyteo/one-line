@@ -8,7 +8,7 @@ namespace OneLine {
     ///If field is marked by WidthAttribute and WeightAttribute, it gets both effects additively.
     ///Applied to arrays defines width of each element.
     ///</summary>
-    [AttributeUsageAttribute(validOn: AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
+    [AttributeUsageAttribute(validOn: AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
     public class WidthAttribute : WeightAttribute {
         private float width;
 
