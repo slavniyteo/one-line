@@ -32,7 +32,7 @@ public class Example : ScriptableObject {
 }
 ```
 
-Produces following result: 
+Produces following result:  
 ![One Line Attribute Example](mdsrc/one-line-attribute-example.png)
 
 ## [WeightAttribute]
@@ -58,8 +58,8 @@ public class Example : ScriptableObject {
 }
 ```
 
-Produces following result: 
-![One Line Attribute Example](mdsrc/weight-attribute-example.png)
+Produces following result:  
+![Weight Attribute Example](mdsrc/weight-attribute-example.png)
 
 ## [WidthAttribute]
 
@@ -84,8 +84,8 @@ public class Example : ScriptableObject {
 }
 ```
 
-Produces following result: 
-![One Line Attribute Example](mdsrc/widht-attribute-example.png)
+Produces following result:  
+![Width Attribute Example](mdsrc/width-attribute-example.png)
 
 ## [HideLabelAttribute]
 
@@ -110,4 +110,4 @@ public class Example : ScriptableObject {
 ```
 
 Produces following result: 
-![One Line Attribute Example](mdsrc/hide-label-attribute-example.png)
+![Hide Label Attribute Example](mdsrc/hide-label-attribute-example.png)
