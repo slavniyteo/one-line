@@ -325,4 +325,36 @@ public class Example : ScriptableObject {
 
 ![Fixed Length Attribute Example](mdsrc/fixed-length-array-example.png)
 
+### [SeparatorAttribute]
+
+`[Separator]` allows you to separate fields from each other (like `[Space]` but better). Works only with root field yet.
+
+**Example:**
+
+```csharp
+using System;
+using UnityEngine;
+using OneLine;
+
+[CreateAssetMenu]
+public class Example : ScriptableObject {
+    [SerializeField, OneLine]
+    private TwoFields first;
+
+    [SerializeField, Separator("[ Separator separates ]"), OneLine]
+    private TwoFields second;
+
+    [Serializable]
+    public class TwoFields {
+        [SerializeField]
+        private string first;
+        [SerializeField]
+        private string second;
+    }
+}
+```
+
+**Result:**
+
+![Fixed Length Attribute Example](mdsrc/separator-attribute-example.png)
 
