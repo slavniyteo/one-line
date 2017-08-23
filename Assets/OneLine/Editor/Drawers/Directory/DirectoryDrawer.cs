@@ -21,12 +21,7 @@ namespace OneLine {
 
        #region Weights
         public override float GetWeight(SerializedProperty property) {
-            var attributes = property.GetCustomAttributes<WeightAttribute>();
-            float result = 0;
-            foreach (var attribute in attributes){
-              result += attribute.Weight;
-            }
-            float multiplier = attributes.Length != 0 ? result : 1;
+            float multiplier = base.GetWeight(property);
 
             return GetFieldWeights(property)
                    .Select(x => x * multiplier)
@@ -41,12 +36,7 @@ namespace OneLine {
         }
 
         public override float GetFixedWidth(SerializedProperty property) {
-            var attributes = property.GetCustomAttributes<WidthAttribute>();
-            float result = 0;
-            foreach (var attribute in attributes){
-              result += attribute.Width;
-            }
-            float width = attributes.Length != 0 ? result : 0;
+            float width = base.GetFixedWidth(property);
 
             return Math.Max(width, GetFieldFixedWidthes(property).Sum());
         }
