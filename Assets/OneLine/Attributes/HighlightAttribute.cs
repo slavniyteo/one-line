@@ -21,20 +21,5 @@ namespace OneLine {
 
         public Color Color { get { return color; } }
 
-        public void Draw(Rect rect) {
-            var back = GUI.backgroundColor;
-            GUI.backgroundColor = color;
-
-            const int bound = 1;
-            rect = new Rect(
-                x: rect.x - bound,
-                y: rect.y - bound,
-                width: rect.width + bound * 2,
-                height: rect.height + bound * 2
-            );
-            GUI.Box(rect, "");
-            GUI.backgroundColor = back;
-        }
-
     }
 }

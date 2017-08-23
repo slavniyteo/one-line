@@ -82,7 +82,7 @@ namespace OneLine {
         protected void DrawColor(Rect rect, SerializedProperty child) {
             var attribute = child.GetCustomAttribute<HighlightAttribute>();
             if (attribute != null) {
-                attribute.Draw(rect);
+                GuiUtil.DrawRect(rect.WithBounds(1), attribute.Color);
             }
         }
 

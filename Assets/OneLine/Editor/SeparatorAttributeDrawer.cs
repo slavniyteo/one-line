@@ -8,8 +8,7 @@ namespace OneLine {
 
         private new SeparatorAttribute attribute { get { return base.attribute as SeparatorAttribute; }}
 
-        // Workaround, see http://answers.unity3d.com/questions/377207/drawing-a-texture-in-a-custom-propertydrawer.html
-        private GUIStyle lineStyle;
+        private Color color = new Color(0.3f, 0.3f, 0.3f, 1);
         private GUIStyle textStyle;
         private const float spaceBefore = 10;
 
@@ -39,15 +38,7 @@ namespace OneLine {
         }
 
         private void PrepareStyles(){
-            if (lineStyle != null && textStyle != null){ return; }
-
-            var color = new Color(0.3f, 0.3f, 0.3f, 1);
-
-            var lineTexture = new Texture2D(1,1);
-            lineTexture.SetPixel(0,0,color);
-            lineTexture.Apply();
-            lineStyle = new GUIStyle();
-            lineStyle.normal.background = lineTexture;
+            if (textStyle != null){ return; }
 
             textStyle = new GUIStyle();
             textStyle.fontStyle = FontStyle.Bold;
@@ -61,7 +52,7 @@ namespace OneLine {
         private void DrawLine(Rect rect, int thickness){
             rect.y += (rect.height - thickness) / 2;
             rect.height = thickness;
-            EditorGUI.LabelField(rect, GUIContent.none, lineStyle);
+            GuiUtil.DrawRect(rect, color);
         }
     }
 }

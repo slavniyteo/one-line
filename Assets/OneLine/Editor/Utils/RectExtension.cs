@@ -8,6 +8,15 @@ namespace OneLine {
     internal static class RectExtension {
 
         private const float space = 5;
+
+        public static Rect WithBounds(this Rect rect, float bounds){
+            return new Rect(
+                x: rect.x - bounds,
+                y: rect.y - bounds,
+                width: rect.width + 2*bounds,
+                height: rect.height + 2*bounds
+            );
+        }
         
         public static Rect[] Split(this Rect rect, float[] weights, float[] fixedWidthes){
             var cells = Sequence(weights.Length)
