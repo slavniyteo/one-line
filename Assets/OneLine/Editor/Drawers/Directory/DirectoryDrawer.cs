@@ -20,7 +20,7 @@ namespace OneLine {
         }
 
        #region Weights
-        public float GetWeight(SerializedProperty property) {
+        public override float GetWeight(SerializedProperty property) {
             var attributes = property.GetCustomAttributes<WeightAttribute>();
             float result = 0;
             foreach (var attribute in attributes){
@@ -40,7 +40,7 @@ namespace OneLine {
                    .ToArray();
         }
 
-        public float GetFixedWidth(SerializedProperty property) {
+        public override float GetFixedWidth(SerializedProperty property) {
             var attributes = property.GetCustomAttributes<WidthAttribute>();
             float result = 0;
             foreach (var attribute in attributes){
@@ -60,7 +60,7 @@ namespace OneLine {
 
         #endregion
 
-        public virtual void Draw(Rect rect, SerializedProperty property) {
+        public override void Draw(Rect rect, SerializedProperty property) {
             var rects = GetRects(rect, property);
             int i = 0;
             foreach (var child in property.GetChildren()) {
@@ -74,16 +74,9 @@ namespace OneLine {
         }
 
         private void DrawField(Rect rect, SerializedProperty property) {
-            DrawColor(rect, property);
+            DrawHighlight(rect, property);
             GetDrawer(property).Draw(rect, property);
             DrawTooltip(rect, property);
-        }
-
-        protected void DrawColor(Rect rect, SerializedProperty child) {
-            var attribute = child.GetCustomAttribute<HighlightAttribute>();
-            if (attribute != null) {
-                GuiUtil.DrawRect(rect.WithBounds(1), attribute.Color);
-            }
         }
 
         protected Drawer GetDrawer(SerializedProperty property) {

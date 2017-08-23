@@ -9,13 +9,13 @@ namespace OneLine {
 
         #region Width
 
-        public float GetWeight(SerializedProperty property) {
+        public override float GetWeight(SerializedProperty property) {
             bool needDrawLabel = NeedDrawLabel(property);
             bool needDrawButtons = NeedDrawButtons(property);
             return needDrawLabel && !needDrawButtons ? 1 : 0;
         }
 
-        public float GetFixedWidth(SerializedProperty property) {
+        public override float GetFixedWidth(SerializedProperty property) {
             return NeedDrawButtons(property) ? 45 : 0;
         }
 
@@ -30,7 +30,7 @@ namespace OneLine {
 
         #endregion
 
-        public void Draw(Rect rect, SerializedProperty array) {
+        public override void Draw(Rect rect, SerializedProperty array) {
             if (NeedDrawButtons(array)) {
                 DrawButtons(rect, array);
             }

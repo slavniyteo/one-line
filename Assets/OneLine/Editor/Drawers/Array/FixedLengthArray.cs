@@ -16,13 +16,13 @@ namespace OneLine {
 
         #region Width
 
-        public virtual float GetWeight(SerializedProperty property) {
+        public override float GetWeight(SerializedProperty property) {
             return property.GetArrayElements()
                    .Select(element => getDrawer(element).GetWeight(element))
                    .Sum();
         }
 
-        public virtual float GetFixedWidth(SerializedProperty property) {
+        public override float GetFixedWidth(SerializedProperty property) {
             return property.GetArrayElements()
                    .Select(element => getDrawer(element).GetFixedWidth(element) + 5)
                    .Sum();
@@ -32,7 +32,7 @@ namespace OneLine {
 
         #region Draw
 
-        public virtual void Draw(Rect rect, SerializedProperty property) {
+        public override void Draw(Rect rect, SerializedProperty property) {
             int length = GetLength(property);
             Rect[] rects = SplitRects(rect, property);
 

@@ -12,7 +12,7 @@ namespace OneLine {
         }
 
         public override void Draw(Rect totalRect, SerializedProperty property) {
-            DrawColor(totalRect, property);
+            DrawHighlight(totalRect, property);
             var indentedRect = DrawLabel(totalRect, property);
             EditorGUI.indentLevel = 0;
 

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace OneLine {
     internal class SimpleFieldDrawer : Drawer {
 
-        public float GetWeight(SerializedProperty property) {
+        public override float GetWeight(SerializedProperty property) {
             var attributes = property.GetCustomAttributes<WeightAttribute>();
             float result = 0;
             foreach (var attribute in attributes){
@@ -16,7 +16,7 @@ namespace OneLine {
             return attributes.Length != 0 ? result : 1;
         }
 
-        public float GetFixedWidth(SerializedProperty property) {
+        public override float GetFixedWidth(SerializedProperty property) {
             var attributes = property.GetCustomAttributes<WidthAttribute>();
             float result = 0;
             foreach (var attribute in attributes){
@@ -25,7 +25,7 @@ namespace OneLine {
             return attributes.Length != 0 ? result : 0;
         }
 
-        public void Draw(Rect rect, SerializedProperty property) {
+        public override void Draw(Rect rect, SerializedProperty property) {
             EditorGUI.BeginProperty(rect, GUIContent.none, property);
             EditorGUI.PropertyField(rect, property, GUIContent.none);
             EditorGUI.EndProperty();

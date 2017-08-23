@@ -5,9 +5,16 @@ using UnityEditor;
 using UnityEngine;
 
 namespace OneLine {
-    internal interface Drawer {
-        float GetWeight(SerializedProperty property);
-        float GetFixedWidth(SerializedProperty property);
-        void Draw(Rect rect, SerializedProperty property);
+    internal abstract class Drawer {
+        public abstract float GetWeight(SerializedProperty property);
+        public abstract float GetFixedWidth(SerializedProperty property);
+        public abstract void Draw(Rect rect, SerializedProperty property);
+
+        protected void DrawHighlight(Rect rect, SerializedProperty property) {
+            var attribute = property.GetCustomAttribute<HighlightAttribute>();
+            if (attribute != null) {
+                GuiUtil.DrawRect(rect.WithBounds(1), attribute.Color);
+            }
+        }
     }
 }
