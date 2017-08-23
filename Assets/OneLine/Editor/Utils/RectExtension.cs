@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace OneLine {
-    internal static class RectUtil {
+    internal static class RectExtension {
 
         private const float space = 5;
         
