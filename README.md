@@ -357,37 +357,3 @@ public class Example : ScriptableObject {
 **Result:**
 
 ![Fixed Length Attribute Example](mdsrc/separator-attribute-example.png)
-
-# Known issues
-
-## Property decorators on nested fields
-
-If nested field marked with some property decorator attribute (like `Space` or `Header`), decorator continues drawing and produces visual artefacts. I do not know how to prevent this behaviour. And community doesn't know too: [see my question without answers](http://answers.unity3d.com/questions/1394991/how-to-preserve-drawing-decoratordrawer-like-heade.html)
-
-**Example:**
-
-```csharp
-using System;
-using UnityEngine;
-using OneLine;
-
-[CreateAssetMenu]
-public class Example : ScriptableObject {
-    [SerializeField, OneLine]
-    private ThreeFields threeFields;
-
-    [Serializable]
-    public class ThreeFields {
-        [SerializeField]
-        private string first;
-        [SerializeField, Header("Header is here")]
-        private string second;
-        [SerializeField]
-        private string third;
-    }
-}
-```
-
-**Result:**
-
-![One Line Attribute Example](mdsrc/issue-decorators-example.png)
