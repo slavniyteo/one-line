@@ -21,8 +21,8 @@ OneLine improves your databases and makes it more readable by people. It draws o
 using System;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class Example : ScriptableObject {
+[CreateAssetMenu(menuName = "OneLine/OneLineDrawerExample")]
+public class OneLineDrawerExample : ScriptableObject {
     [SerializeField]
     private ThreeFields threeFields;
 
@@ -41,8 +41,8 @@ public class Example : ScriptableObject {
 using UnityEditor;
 using OneLine;
 
-[CustomPropertyDrawer(typeof(Example.ThreeFields))]
-public class ThreeFieldsDrawer : OneLinePropertyDrawer {
+[CustomPropertyDrawer(typeof(OneLineDrawerExample.ThreeFields))]
+public class OneLineDrawerExampleEditor : OneLinePropertyDrawer {
 }
 ```
 
@@ -65,8 +65,8 @@ using System;
 using UnityEngine;
 using OneLine;
 
-[CreateAssetMenu]
-public class Example : ScriptableObject {
+[CreateAssetMenu(menuName = "OneLine/OneLineExample")]
+public class OneLineExample : ScriptableObject {
     [SerializeField, OneLine]
     private ThreeFields threeFields;
 
@@ -97,8 +97,8 @@ using System;
 using UnityEngine;
 using OneLine;
 
-[CreateAssetMenu]
-public class Example : ScriptableObject {
+[CreateAssetMenu(menuName = "OneLine/WeightExample")]
+public class WeightExample : ScriptableObject {
     [SerializeField, OneLine]
     private Weights differentWeights;
 
@@ -129,8 +129,8 @@ using System;
 using UnityEngine;
 using OneLine;
 
-[CreateAssetMenu]
-public class Example : ScriptableObject {
+[CreateAssetMenu(menuName = "OneLine/WidthExample")]
+public class WidthExample : ScriptableObject {
     [SerializeField, OneLine]
     private WidthAndWeight fixedWidth;
 
@@ -161,8 +161,8 @@ using System;
 using UnityEngine;
 using OneLine;
 
-[CreateAssetMenu]
-public class Example : ScriptableObject {
+[CreateAssetMenu(menuName = "OneLine/HideLabelExample")]
+public class HideLabelExample : ScriptableObject {
     [SerializeField, OneLine, HideLabel]
     private ThreeFields thisSelfDocumentedFieldNameWillNotBeShownInTheInspector;
 
@@ -193,11 +193,12 @@ using System;
 using UnityEngine;
 using OneLine;
 
-[CreateAssetMenu]
-public class Example : ScriptableObject {
+[CreateAssetMenu(menuName = "OneLine/HighlightExample")]
+public class HighlightExample : ScriptableObject {
     [SerializeField, OneLine, Highlight]
     private string rootField;
-    [SerializeField, OneLine] private HighlightedFields nestedFields;
+    [SerializeField, OneLine] 
+    private HighlightedFields nestedFields;
 
     [Serializable]
     public class HighlightedFields {
@@ -228,8 +229,8 @@ using System;
 using UnityEngine;
 using OneLine;
 
-[CreateAssetMenu]
-public class Example : ScriptableObject {
+[CreateAssetMenu(menuName = "OneLine/RootArrayExample")]
+public class RootArrayExample : ScriptableObject {
     [SerializeField, OneLine]
     private ThreeFields[] rootArray;
     [SerializeField, OneLine]
@@ -277,8 +278,8 @@ using System;
 using UnityEngine;
 using OneLine;
 
-[CreateAssetMenu]
-public class Example : ScriptableObject {
+[CreateAssetMenu(menuName = "OneLine/HideButtonsExample")]
+public class HideButtonsExample : ScriptableObject {
     [SerializeField, OneLine]
     private ArrayHidesButtons arrayWithElements;
     [SerializeField, OneLine]
@@ -308,8 +309,8 @@ using System;
 using UnityEngine;
 using OneLine;
 
-[CreateAssetMenu]
-public class Example : ScriptableObject {
+[CreateAssetMenu(menuName = "OneLine/FixedLengthExample")]
+public class FixedLengthExample : ScriptableObject {
     [SerializeField, OneLine]
     private ImmutableLengthArray arrayWithImmutableLength;
 
@@ -336,8 +337,8 @@ using System;
 using UnityEngine;
 using OneLine;
 
-[CreateAssetMenu]
-public class Example : ScriptableObject {
+[CreateAssetMenu(menuName = "OneLine/SeparatorExample")]
+public class SeparatorExample : ScriptableObject {
     [SerializeField, OneLine]
     private TwoFields first;
 
