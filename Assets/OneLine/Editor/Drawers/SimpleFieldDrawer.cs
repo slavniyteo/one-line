@@ -8,6 +8,28 @@ using UnityEngine;
 namespace OneLine {
     internal class SimpleFieldDrawer : Drawer {
 
+        public override float GetWeight(SerializedProperty property){
+            switch (property.propertyType){
+                case SerializedPropertyType.Boolean: {
+                    return 0;
+                }
+                default: {
+                    return base.GetWeight(property);
+                }
+            }
+        }
+
+        public override float GetFixedWidth(SerializedProperty property){
+            switch (property.propertyType){
+                case SerializedPropertyType.Boolean: {
+                    return EditorGUIUtility.singleLineHeight - 2;
+                }
+                default: {
+                    return base.GetFixedWidth(property);
+                }
+            }
+        }
+
         public override void Draw(Rect rect, SerializedProperty property) {
             EditorGUI.BeginProperty(rect, GUIContent.none, property);
             DrawProperty(rect, property);
