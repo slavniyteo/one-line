@@ -6,10 +6,10 @@ using UnityEditor;
 using UnityEngine;
 
 namespace OneLine {
-    internal class ArrayDrawer : FixedLengthArray {
+    internal class DynamicArrayDrawer : FixedArrayDrawer {
         private Drawer buttons;
 
-        public ArrayDrawer(Func<SerializedProperty, Drawer> drawer) : base(drawer) {
+        public DynamicArrayDrawer(Func<SerializedProperty, Drawer> drawer) : base(drawer) {
             buttons = new ArrayButtonsDrawer();
         }
 

@@ -58,6 +58,5 @@ namespace OneLine {
                 array.DeleteArrayElementAtIndex(array.arraySize - 1);
             }
         }
-
     }
 }

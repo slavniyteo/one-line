@@ -8,14 +8,14 @@ namespace OneLine {
     internal class DirectoryDrawer : Drawer {
 
         protected Drawer simpleDrawer;
-        protected Drawer fixedLengthArrayDrawer;
-        protected Drawer arrayDrawer;
+        protected Drawer fixedArrayDrawer;
+        protected Drawer dynamicArrayDrawer;
         protected Drawer directoryDrawer;
 
         public DirectoryDrawer() {
             simpleDrawer = new SimpleFieldDrawer();
-            fixedLengthArrayDrawer = new FixedLengthArray(GetDrawer);
-            arrayDrawer = new ArrayDrawer(GetDrawer);
+            fixedArrayDrawer = new FixedArrayDrawer(GetDrawer);
+            dynamicArrayDrawer = new DynamicArrayDrawer(GetDrawer);
             directoryDrawer = this;
         }
 
@@ -72,10 +72,10 @@ namespace OneLine {
         protected Drawer GetDrawer(SerializedProperty property) {
             if (property.isArray && !(property.propertyType == SerializedPropertyType.String)) {
                 if (property.GetCustomAttribute<ArrayLengthAttribute>() == null) {
-                    return arrayDrawer;
+                    return dynamicArrayDrawer;
                 }
                 else {
-                    return fixedLengthArrayDrawer;
+                    return fixedArrayDrawer;
                 }
             }
             else if (property.hasVisibleChildren) {

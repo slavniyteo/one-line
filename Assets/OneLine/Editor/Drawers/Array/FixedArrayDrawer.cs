@@ -6,11 +6,11 @@ using UnityEditor;
 using UnityEngine;
 
 namespace OneLine {
-    internal class FixedLengthArray : Drawer {
+    internal class FixedArrayDrawer : Drawer {
 
         private Func<SerializedProperty, Drawer> getDrawer;
 
-        public FixedLengthArray(Func<SerializedProperty, Drawer> drawer) {
+        public FixedArrayDrawer(Func<SerializedProperty, Drawer> drawer) {
             this.getDrawer = drawer;
         }
 
