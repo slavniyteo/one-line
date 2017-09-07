@@ -87,11 +87,14 @@ namespace OneLine {
         }
 
         protected void DrawTooltip(Rect rect, SerializedProperty child) {
+            string tooltip = child.displayName;
+
             var attribute = child.GetCustomAttribute<TooltipAttribute>();
             if (attribute != null) {
-                var guiContent = new GUIContent("", attribute.tooltip);
-                EditorGUI.LabelField(rect, guiContent);
+                tooltip = attribute.tooltip;
             }
+
+            EditorGUI.LabelField(rect, new GUIContent("", tooltip));
         }
 
     }

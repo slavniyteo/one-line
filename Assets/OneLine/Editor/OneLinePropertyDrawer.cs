@@ -19,7 +19,7 @@ namespace OneLine {
                 width: rect.width,
                 height: rect.height - bounds * 2
             );
-            new ZeroDepthDirectoryDrawer().Draw(rect, property);
+            new RootDirectoryDrawer().Draw(rect, property);
             EditorGUI.indentLevel = indentLevel;
         }
     }

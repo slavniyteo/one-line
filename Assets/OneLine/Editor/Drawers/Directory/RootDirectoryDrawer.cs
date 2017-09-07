@@ -5,9 +5,9 @@ using UnityEditor;
 using UnityEngine;
 
 namespace OneLine {
-    internal class ZeroDepthDirectoryDrawer : DirectoryDrawer {
+    internal class RootDirectoryDrawer : DirectoryDrawer {
 
-        public ZeroDepthDirectoryDrawer() : base() {
+        public RootDirectoryDrawer() : base() {
             directoryDrawer = new DirectoryDrawer();
         }
 
@@ -35,6 +35,5 @@ namespace OneLine {
             }
             return rect;
         }
-
     }
 }
