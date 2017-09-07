@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace OneLine.Examples {
     [CreateAssetMenu]
-    public class Example : ScriptableObject {
+    public class Overview : ScriptableObject {
 
 #region One Line
         [Separator("[ One Line Attribute ]")]
