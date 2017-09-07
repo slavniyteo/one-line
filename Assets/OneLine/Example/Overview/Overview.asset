@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f743bd85725f81045b030d3601214577, type: 3}
+  m_Name: Overview
+  m_EditorClassIdentifier: 
+  oneField:
+    first: Class with one field
+  twoFields:
+    first: First field
+    second: Second field
+  threeFields:
+    first: First
+    second: Second
+    third: Third
+  arrayWithThreeFields:
+  - first: First
+    second: Second
+    third: Third
+  - first: First
+    second: Second
+    third: Third
+  differentWeights1:
+    first: 3
+    second: 2
+    third: 1
+  differentWeights2:
+    first: 5
+    second: 1
+  arrayWithDifferentWeights:
+  - first: 5
+    second: 1
+  - first: 5
+    second: 1
+  fixedWidth:
+    first: 50px
+    second: Has no WidthAttribute
+    third: 75px
+  onlyFixedWidth:
+    first: 50px
+    second: 75px
+  arrayWithOnlyFixedWidths:
+  - first: 50px
+    second: 75px
+  - first: 50px
+    second: 75px
+  oneFieldHidesLabel:
+    first: This field is marked by HideLabelAttribute
+  twoFieldsHidesLabel:
+    first: Only zero-depth fields may be marked
+    second: by HideLabelAttribute
+  arrayHidesLabels:
+  - first: First array element hides it's label
+    second: by HideLabelAttribute
+  - first: Second array element hides it's label
+    second: by HideLabelAttribute
+  highlightedZeroDepthField:
+    first: HighlightAttribute is useful for pointing on
+  highlightedFields:
+    first: Green
+    second: Blue
+    third: No matter
+    fourth: Yellow
+  arrayWithHighlightedFields:
+  - first: Green
+    second: Blue
+    third: No matter
+    fourth: Yellow
+  - first: Green
+    second: Blue
+    third: No matter
+    fourth: Yellow
+  oneLineArray:
+    array:
+    - Element 0
+    - Element 1
+    - Element 2
+  twoArraysInOneLine:
+    first: 01000000020000000300000004000000
+    second:
+    - First
+    - Second
+  arrayHidesButtons:
+    array:
+    - Dublicate
+    - Or delete
+    - By right-click
+  arrayWithImmutableLength:
+    array:
+    - Length of this
+    - array is fixed
+    - in code
+  arrayWithArrays:
+  - array:
+    - 'Second '
+    - "element \u2193"
+    - is empty
+  - array: []
