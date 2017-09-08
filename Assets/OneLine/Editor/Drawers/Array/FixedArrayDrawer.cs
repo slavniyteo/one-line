@@ -6,58 +6,22 @@ using UnityEditor;
 using UnityEngine;
 
 namespace OneLine {
-    internal class FixedArrayDrawer : Drawer {
-
-        private Func<SerializedProperty, Drawer> getDrawer;
+    internal class FixedArrayDrawer : ComplexFieldDrawer {
 
         public FixedArrayDrawer(Func<SerializedProperty, Drawer> drawer) {
             this.getDrawer = drawer;
         }
 
-        #region Width
-
-        public override float GetWeight(SerializedProperty property) {
-            return property.GetArrayElements()
-                   .Select(element => getDrawer(element).GetWeight(element))
-                   .Sum();
+        protected override IEnumerable<SerializedProperty> GetChildren(SerializedProperty property){
+            return property.GetArrayElements();
         }
-
-        protected virtual float[] GetWeights(SerializedProperty property) {
-            return property.GetArrayElements()
-                   .Select(element => getDrawer(element).GetWeight(element))
-                   .ToArray();
-        }
-
-        public override float GetFixedWidth(SerializedProperty property) {
-            return property.GetArrayElements()
-                   .Select(element => getDrawer(element).GetFixedWidth(element) + 5)
-                   .Sum();
-        }
-
-        protected virtual float[] GetFixedWidthes(SerializedProperty property) {
-            return property.GetArrayElements()
-                   .Select(element => getDrawer(element).GetFixedWidth(element))
-                   .ToArray();
-        }
-
-        #endregion
-
-        #region Draw
 
         public override void Draw(Rect rect, SerializedProperty property) {
-            int length = GetLength(property);
-            Rect[] rects = SplitRects(rect, property);
-
-            for (int i = 0; i < length; i++) {
-                DrawElement(rects[i], property.GetArrayElementAtIndex(i));
-            }
+            GetLength(property);
+            base.Draw(rect, property);
         }
 
-        protected Rect[] SplitRects(Rect rect, SerializedProperty property) {
-            return rect.Split(GetWeights(property), GetFixedWidthes(property));
-        }
-
-        protected virtual void DrawElement(Rect rect, SerializedProperty element) {
+        protected override void DrawField(Rect rect, SerializedProperty element) {
             getDrawer(element).Draw(rect, element);
         }
 
@@ -70,8 +34,6 @@ namespace OneLine {
             property.arraySize = attribute.Length;
             return property.arraySize;
         }
-
-        #endregion
 
     }
 }

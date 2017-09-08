@@ -7,8 +7,6 @@ using UnityEngine;
 namespace OneLine {
     internal static class RectExtension {
 
-        private const float space = 5;
-
         public static Rect WithBounds(this Rect rect, float bounds){
             return new Rect(
                 x: rect.x - bounds,
@@ -18,12 +16,12 @@ namespace OneLine {
             );
         }
         
-        public static Rect[] Split(this Rect rect, float[] weights, float[] fixedWidthes){
+        public static Rect[] Split(this Rect rect, float[] weights, float[] fixedWidthes, float space = 5){
             var cells = Sequence(weights.Length)
                         .Select(i => new Cell(weights[i], fixedWidthes[i]))
                         .ToArray();
 
-            float weightUnit = GetWeightUnit(rect.width, cells);
+            float weightUnit = GetWeightUnit(rect.width, cells, space);
 
             var result = new List<Rect>();
             float nextX = rect.x;
@@ -41,7 +39,7 @@ namespace OneLine {
             return result.ToArray();
         }
 
-        private static float GetWeightUnit(float fullWidth, IEnumerable<Cell> cells) {
+        private static float GetWeightUnit(float fullWidth, IEnumerable<Cell> cells, float space) {
             float result = 0;
             float weightsSum = cells.Sum(cell => cell.Weight);
 

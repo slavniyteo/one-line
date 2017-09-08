@@ -15,12 +15,16 @@ namespace OneLine {
 
         #region Width
 
-        public override float GetWeight(SerializedProperty property) {
-            return base.GetWeight(property) + buttons.GetWeight(property);
+        protected override float[] GetWeights(SerializedProperty property) {
+            List<float> result = base.GetWeights(property).ToList();
+            result.Add(buttons.GetWeight(property));
+            return result.ToArray();
         }
 
-        public override float GetFixedWidth(SerializedProperty property) {
-            return base.GetFixedWidth(property) + buttons.GetFixedWidth(property);
+        protected override float[] GetFixedWidthes(SerializedProperty property) {
+            List<float> result = base.GetFixedWidthes(property).ToList();
+            result.Add(buttons.GetFixedWidth(property));
+            return result.ToArray();
         }
 
         #endregion
@@ -38,9 +42,9 @@ namespace OneLine {
             return property.arraySize;
         }
 
-        protected override void DrawElement(Rect rect, SerializedProperty element) {
+        protected override void DrawField(Rect rect, SerializedProperty element) {
             DrawElementContextMenu(rect, element);
-            base.DrawElement(rect, element);
+            base.DrawField(rect, element);
         }
 
         private void DrawElementContextMenu(Rect rect, SerializedProperty element) {
@@ -63,17 +67,6 @@ namespace OneLine {
             }
         }
 
-        protected override float[] GetWeights(SerializedProperty property) {
-            List<float> result = base.GetWeights(property).ToList();
-            result.Add(buttons.GetWeight(property));
-            return result.ToArray();
-        }
-
-        protected override float[] GetFixedWidthes(SerializedProperty property) {
-            List<float> result = base.GetFixedWidthes(property).ToList();
-            result.Add(buttons.GetFixedWidth(property));
-            return result.ToArray();
-        }
 
         #endregion
 
