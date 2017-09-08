@@ -8,6 +8,7 @@ namespace OneLine {
     internal abstract class ComplexFieldDrawer : Drawer {
 
         private const float SPACE = 5;
+        private Separator separator = new Separator();
 
         internal delegate Drawer DrawerProvider(SerializedProperty property);
         protected DrawerProvider getDrawer;
@@ -39,8 +40,9 @@ namespace OneLine {
             float childrenWidth = GetFixedWidthes(property)
                                     .Select(x => x + SPACE)
                                     .Sum() - SPACE;
+            float additionalSpace = separator.GetAdditionalSpace(property);
 
-            return Math.Max(width, childrenWidth);
+            return Math.Max(width, childrenWidth) + additionalSpace;
         }
 
         protected virtual float[] GetFixedWidthes(SerializedProperty property) {
@@ -59,12 +61,39 @@ namespace OneLine {
             var rects = SplitRects(rect, property);
             int i = 0;
             foreach (var child in GetChildren(property)) {
-                DrawField(rects[i], child);
+                var childRect = separator.CutBounds(rects, i, child);
+                DrawField(childRect, child);
                 i++;
             }
         }
 
         protected abstract void DrawField(Rect rect, SerializedProperty property);
 
+
+        private class Separator {
+            private bool NeedSeparate(SerializedProperty property){
+                return property.hasVisibleChildren;
+            }
+
+            public float GetAdditionalSpace(SerializedProperty property){
+                return NeedSeparate(property) ? 10 : 0;
+            }
+
+            public Rect CutBounds(Rect[] rects, int index, SerializedProperty property){
+                var rect = rects[index];
+                if (NeedSeparate(property)){
+                    var bounds = new Vector2(-5,-5);
+                    if (index == 0) {
+                            bounds = new Vector2(0, -10);
+                    } 
+                    else if (index == rects.Length-1) {
+                            bounds = new Vector2(-10, 0);
+                    }
+                    rect = rect.WithBoundsH(bounds);
+                }
+                return rect;
+            }
+
+        }
     }
 }

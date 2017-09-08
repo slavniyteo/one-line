@@ -15,6 +15,15 @@ namespace OneLine {
                 height: rect.height + 2*bounds
             );
         }
+
+        public static Rect WithBoundsH(this Rect rect, Vector2 bounds){
+            return new Rect(
+                x: rect.x - bounds.x,
+                y: rect.y,
+                width: rect.width + bounds.x + bounds.y,
+                height: rect.height
+            );
+        }
         
         public static Rect[] Split(this Rect rect, float[] weights, float[] fixedWidthes, float space = 5){
             var cells = Sequence(weights.Length)
