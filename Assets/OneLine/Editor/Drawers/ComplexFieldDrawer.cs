@@ -9,7 +9,12 @@ namespace OneLine {
 
         private const float SPACE = 5;
 
-        protected Func<SerializedProperty, Drawer> getDrawer;
+        internal delegate Drawer DrawerProvider(SerializedProperty property);
+        protected DrawerProvider getDrawer;
+
+        public ComplexFieldDrawer(DrawerProvider getDrawer){
+            this.getDrawer = getDrawer;
+        }
 
         protected abstract IEnumerable<SerializedProperty> GetChildren(SerializedProperty property);
 

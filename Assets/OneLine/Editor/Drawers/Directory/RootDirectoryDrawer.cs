@@ -7,8 +7,7 @@ using UnityEngine;
 namespace OneLine {
     internal class RootDirectoryDrawer : DirectoryDrawer {
 
-        public RootDirectoryDrawer() : base() {
-            directoryDrawer = new DirectoryDrawer();
+        public RootDirectoryDrawer(DrawerProvider getDrawer) : base(getDrawer) {
         }
 
         public override void Draw(Rect totalRect, SerializedProperty property) {
@@ -17,7 +16,7 @@ namespace OneLine {
             EditorGUI.indentLevel = 0;
 
             EditorGUI.BeginProperty(totalRect, GUIContent.none, property);
-            base.GetDrawer(property).Draw(indentedRect, property);
+            getDrawer(property).Draw(indentedRect, property);
             EditorGUI.EndProperty();
         }
 

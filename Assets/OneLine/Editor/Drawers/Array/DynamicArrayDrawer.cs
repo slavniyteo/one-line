@@ -9,7 +9,7 @@ namespace OneLine {
     internal class DynamicArrayDrawer : FixedArrayDrawer {
         private Drawer buttons;
 
-        public DynamicArrayDrawer(Func<SerializedProperty, Drawer> drawer) : base(drawer) {
+        public DynamicArrayDrawer(DrawerProvider getDrawer) : base(getDrawer) {
             buttons = new ArrayButtonsDrawer();
         }
 

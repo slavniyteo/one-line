@@ -7,6 +7,20 @@ namespace OneLine {
 
         private const int bounds = 0;
 
+        private Drawer simpleDrawer;
+        private Drawer fixedArrayDrawer;
+        private Drawer dynamicArrayDrawer;
+        private Drawer directoryDrawer;
+        private Drawer rootDirectoryDrawer;
+
+        public OneLinePropertyDrawer(){
+            simpleDrawer = new SimpleFieldDrawer();
+            fixedArrayDrawer = new FixedArrayDrawer(GetDrawer);
+            dynamicArrayDrawer = new DynamicArrayDrawer(GetDrawer);
+            directoryDrawer = new DirectoryDrawer(GetDrawer);
+            rootDirectoryDrawer = new RootDirectoryDrawer(GetDrawer);
+        }
+
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
             return 16 + bounds * 2;
         }
@@ -19,8 +33,27 @@ namespace OneLine {
                 width: rect.width,
                 height: rect.height - bounds * 2
             );
-            new RootDirectoryDrawer().Draw(rect, property);
+            rootDirectoryDrawer.Draw(rect, property);
             EditorGUI.indentLevel = indentLevel;
         }
+
+        private Drawer GetDrawer(SerializedProperty property) {
+            if (property.isArray && !(property.propertyType == SerializedPropertyType.String)) {
+                if (property.GetCustomAttribute<ArrayLengthAttribute>() == null) {
+                    return dynamicArrayDrawer;
+                }
+                else {
+                    return fixedArrayDrawer;
+                }
+            }
+            else if (property.hasVisibleChildren) {
+                return directoryDrawer;
+            }
+            else {
+                return simpleDrawer;
+            }
+        }
+
+
     }
 }

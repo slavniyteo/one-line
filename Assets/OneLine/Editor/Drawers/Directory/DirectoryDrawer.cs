@@ -7,18 +7,8 @@ using UnityEngine;
 namespace OneLine {
     internal class DirectoryDrawer : ComplexFieldDrawer {
 
-        protected Drawer simpleDrawer;
-        protected Drawer fixedArrayDrawer;
-        protected Drawer dynamicArrayDrawer;
-        protected Drawer directoryDrawer;
 
-        public DirectoryDrawer() {
-            simpleDrawer = new SimpleFieldDrawer();
-            fixedArrayDrawer = new FixedArrayDrawer(GetDrawer);
-            dynamicArrayDrawer = new DynamicArrayDrawer(GetDrawer);
-            directoryDrawer = this;
-
-            getDrawer = GetDrawer;
+        public DirectoryDrawer(DrawerProvider getDrawer) : base(getDrawer) {
         }
 
         protected override IEnumerable<SerializedProperty> GetChildren(SerializedProperty property){
@@ -27,25 +17,8 @@ namespace OneLine {
 
         protected override void DrawField(Rect rect, SerializedProperty property) {
             DrawHighlight(rect, property);
-            GetDrawer(property).Draw(rect, property);
+            getDrawer(property).Draw(rect, property);
             DrawTooltip(rect, property);
-        }
-
-        protected Drawer GetDrawer(SerializedProperty property) {
-            if (property.isArray && !(property.propertyType == SerializedPropertyType.String)) {
-                if (property.GetCustomAttribute<ArrayLengthAttribute>() == null) {
-                    return dynamicArrayDrawer;
-                }
-                else {
-                    return fixedArrayDrawer;
-                }
-            }
-            else if (property.hasVisibleChildren) {
-                return directoryDrawer;
-            }
-            else {
-                return simpleDrawer;
-            }
         }
 
         protected void DrawTooltip(Rect rect, SerializedProperty child) {

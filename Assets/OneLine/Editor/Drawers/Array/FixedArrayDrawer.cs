@@ -8,8 +8,7 @@ using UnityEngine;
 namespace OneLine {
     internal class FixedArrayDrawer : ComplexFieldDrawer {
 
-        public FixedArrayDrawer(Func<SerializedProperty, Drawer> drawer) {
-            this.getDrawer = drawer;
+        public FixedArrayDrawer(DrawerProvider getDrawer) : base(getDrawer) {
         }
 
         protected override IEnumerable<SerializedProperty> GetChildren(SerializedProperty property){
