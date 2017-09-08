@@ -54,7 +54,7 @@ namespace OneLine {
             if (GUI.Button(rects[0], "+")) {
                 array.InsertArrayElementAtIndex(array.arraySize);
             }
-            if (GUI.Button(rects[1], "-")) {
+            if (array.arraySize > 0 && GUI.Button(rects[1], "-")) {
                 array.DeleteArrayElementAtIndex(array.arraySize - 1);
             }
         }
