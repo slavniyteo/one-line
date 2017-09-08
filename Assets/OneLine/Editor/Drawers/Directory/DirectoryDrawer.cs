@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace OneLine {
-    internal class DirectoryDrawer : Drawer {
+    internal class DirectoryDrawer : ComplexFieldDrawer {
 
         protected Drawer simpleDrawer;
         protected Drawer fixedArrayDrawer;
@@ -17,53 +17,15 @@ namespace OneLine {
             fixedArrayDrawer = new FixedArrayDrawer(GetDrawer);
             dynamicArrayDrawer = new DynamicArrayDrawer(GetDrawer);
             directoryDrawer = this;
+
+            getDrawer = GetDrawer;
         }
 
-       #region Weights
-        public override float GetWeight(SerializedProperty property) {
-            float multiplier = base.GetWeight(property);
-
-            return GetFieldWeights(property)
-                   .Select(x => x * multiplier)
-                   .Sum();
+        protected override IEnumerable<SerializedProperty> GetChildren(SerializedProperty property){
+            return property.GetChildren();
         }
 
-        private float[] GetFieldWeights(SerializedProperty property) {
-            return property
-                   .GetChildren()
-                   .Select(x => GetDrawer(x).GetWeight(x))
-                   .ToArray();
-        }
-
-        public override float GetFixedWidth(SerializedProperty property) {
-            float width = base.GetFixedWidth(property);
-
-            return Math.Max(width, GetFieldFixedWidthes(property).Sum());
-        }
-
-        private float[] GetFieldFixedWidthes(SerializedProperty property) {
-            return property
-                   .GetChildren()
-                   .Select(x => GetDrawer(x).GetFixedWidth(x))
-                   .ToArray();
-        }
-
-        #endregion
-
-        public override void Draw(Rect rect, SerializedProperty property) {
-            var rects = GetRects(rect, property);
-            int i = 0;
-            foreach (var child in property.GetChildren()) {
-                DrawField(rects[i], child);
-                i++;
-            }
-        }
-
-        protected Rect[] GetRects(Rect rect, SerializedProperty property) {
-            return rect.Split(GetFieldWeights(property), GetFieldFixedWidthes(property));
-        }
-
-        private void DrawField(Rect rect, SerializedProperty property) {
+        protected override void DrawField(Rect rect, SerializedProperty property) {
             DrawHighlight(rect, property);
             GetDrawer(property).Draw(rect, property);
             DrawTooltip(rect, property);

@@ -22,10 +22,22 @@ namespace OneLine {
                    .Sum();
         }
 
+        protected virtual float[] GetWeights(SerializedProperty property) {
+            return property.GetArrayElements()
+                   .Select(element => getDrawer(element).GetWeight(element))
+                   .ToArray();
+        }
+
         public override float GetFixedWidth(SerializedProperty property) {
             return property.GetArrayElements()
                    .Select(element => getDrawer(element).GetFixedWidth(element) + 5)
                    .Sum();
+        }
+
+        protected virtual float[] GetFixedWidthes(SerializedProperty property) {
+            return property.GetArrayElements()
+                   .Select(element => getDrawer(element).GetFixedWidth(element))
+                   .ToArray();
         }
 
         #endregion
@@ -52,22 +64,11 @@ namespace OneLine {
         protected virtual int GetLength(SerializedProperty property) {
             var attribute = property.GetCustomAttribute<ArrayLengthAttribute>();
             if (attribute == null) {
-                throw new InvalidOperationException(string.Format("Can not find ArrayLengthAttribute at property {1)", property.propertyPath));
+                var message = string.Format("Can not find ArrayLengthAttribute at property {1)", property.propertyPath);
+                throw new InvalidOperationException(message);
             }
             property.arraySize = attribute.Length;
             return property.arraySize;
-        }
-
-        protected virtual float[] GetWeights(SerializedProperty property) {
-            return property.GetArrayElements()
-                   .Select(element => getDrawer(element).GetWeight(element))
-                   .ToArray();
-        }
-
-        protected virtual float[] GetFixedWidthes(SerializedProperty property) {
-            return property.GetArrayElements()
-                   .Select(element => getDrawer(element).GetFixedWidth(element))
-                   .ToArray();
         }
 
         #endregion
