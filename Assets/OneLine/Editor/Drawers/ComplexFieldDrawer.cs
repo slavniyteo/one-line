@@ -8,7 +8,9 @@ namespace OneLine {
     internal abstract class ComplexFieldDrawer : Drawer {
 
         private const float SPACE = 5;
-        private Padding padding = new Padding();
+        private FieldDecorator[] fieldDecorators = new FieldDecorator[] {
+            new PaddingDecorator()
+        };
 
         internal delegate Drawer DrawerProvider(SerializedProperty property);
         protected DrawerProvider getDrawer;
@@ -23,10 +25,14 @@ namespace OneLine {
 
         public override float GetWeight(SerializedProperty property) {
             float multiplier = base.GetWeight(property);
-
-            return GetWeights(property)
+            float children = GetWeights(property)
                    .Select(x => x * multiplier)
                    .Sum();
+            float decorators = fieldDecorators
+                   .Select(x => x.GetWeight(property))
+                   .Sum();
+
+            return children + decorators;
         }
 
         protected virtual float[] GetWeights(SerializedProperty property) {
@@ -37,12 +43,14 @@ namespace OneLine {
 
         public override float GetFixedWidth(SerializedProperty property) {
             float width = base.GetFixedWidth(property);
-            float childrenWidth = GetFixedWidthes(property)
+            float children = GetFixedWidthes(property)
                                     .Select(x => x + SPACE)
                                     .Sum() - SPACE;
-            float additionalSpace = padding.GetPadding(property);
+            float decorators = fieldDecorators
+                   .Select(x => x.GetFixedWidth(property))
+                   .Sum();
 
-            return Math.Max(width, childrenWidth) + additionalSpace;
+            return Math.Max(width, children) + decorators;
         }
 
         protected virtual float[] GetFixedWidthes(SerializedProperty property) {
@@ -61,8 +69,10 @@ namespace OneLine {
             var rects = SplitRects(rect, property);
             int i = 0;
             foreach (var child in GetChildren(property)) {
-                var childRect = padding.CutPadding(rects, i, child);
-                DrawField(childRect, child);
+                foreach (var decorator in fieldDecorators){
+                    rects[i] = decorator.Draw(rects, i, child);
+                }
+                DrawField(rects[i], child);
                 i++;
             }
         }
