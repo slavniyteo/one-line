@@ -24,9 +24,25 @@ namespace OneLine {
                 height: rect.height
             );
         }
+
+        public static Rect[] SplitV(this Rect rect, float[] weights, float[] fixedWidthes, float space = 5){
+            return rect.Invert()
+                       .Split(weights, fixedWidthes, 5)
+                       .Select(Invert)
+                       .ToArray();
+        }
+
+        private static Rect Invert(this Rect rect){
+            return new Rect(
+                x: rect.y,
+                y: rect.x,
+                width: rect.height,
+                height: rect.width
+            );
+        }
         
         public static Rect[] Split(this Rect rect, float[] weights, float[] fixedWidthes, float space = 5){
-            var cells = Sequence(weights.Length)
+            var cells = Enumerable.Range(0, weights.Length)
                         .Select(i => new Cell(weights[i], fixedWidthes[i]))
                         .ToArray();
 
@@ -59,12 +75,6 @@ namespace OneLine {
             }
 
             return result;
-        }
-
-        private static IEnumerable<int> Sequence(int length) {
-            for (int i = 0; i < length; i++) {
-                yield return i;
-            }
         }
 
         private class Cell {

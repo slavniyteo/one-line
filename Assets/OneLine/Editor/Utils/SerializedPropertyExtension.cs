@@ -101,5 +101,10 @@ namespace OneLine {
             }
         }
 
+        public static bool IsArrayElement(this SerializedProperty property){
+            var path = property.propertyPath;
+            return path.Substring(path.Length - 3, 3) == "[0]";
+        }
+
     }
 }
