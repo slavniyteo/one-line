@@ -26,12 +26,8 @@ namespace OneLine {
 
         public override float GetWeight(SerializedProperty property) {
             float multiplier = base.GetWeight(property);
-            float children = GetWeights(property)
-                   .Select(x => x * multiplier)
-                   .Sum();
-            float decorators = fieldDecorators
-                   .Select(x => x.GetWeight(property))
-                   .Sum();
+            float children = GetWeights(property).Sum(x => x * multiplier);
+            float decorators = fieldDecorators .Sum(x => x.GetWeight(property));
 
             return children + decorators;
         }
@@ -44,12 +40,8 @@ namespace OneLine {
 
         public override float GetFixedWidth(SerializedProperty property) {
             float width = base.GetFixedWidth(property);
-            float children = GetFixedWidthes(property)
-                                    .Select(x => x + SPACE)
-                                    .Sum() - SPACE;
-            float decorators = fieldDecorators
-                   .Select(x => x.GetFixedWidth(property))
-                   .Sum();
+            float children = GetFixedWidthes(property).Sum(x => x + SPACE) - SPACE;
+            float decorators = fieldDecorators .Sum(x => x.GetFixedWidth(property));
 
             return Math.Max(width, children) + decorators;
         }
@@ -80,32 +72,5 @@ namespace OneLine {
 
         protected abstract void DrawField(Rect rect, SerializedProperty property);
 
-        private class Padding {
-            private bool NeedPadding(SerializedProperty property){
-                return property.hasVisibleChildren;
-            }
-
-            public float GetPadding(SerializedProperty property){
-                return NeedPadding(property) ? 10 : 0;
-            }
-
-            public Rect CutPadding(Rect[] rects, int index, SerializedProperty property){
-                var rect = rects[index];
-                if (NeedPadding(property)){
-                    var padding = new Vector2(-5,-5);
-                    if (rects.Length == 1) {
-                        padding = new Vector2(0,0);
-                    }
-                    else if (index == 0) {
-                        padding = new Vector2(0, -10);
-                    } 
-                    else if (index == rects.Length-1) {
-                        padding = new Vector2(-10, 0);
-                    }
-                    rect = rect.WithBoundsH(padding);
-                }
-                return rect;
-            }
-        }
     }
 }
