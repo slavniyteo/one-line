@@ -22,7 +22,9 @@ namespace OneLine {
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-            return 16 + bounds * 2;
+            var lineHeight = 16 + bounds * 2;
+
+            return lineHeight + (property.IsArrayElement() ? lineHeight + 5 : 0);
         }
 
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label) {
@@ -33,6 +35,12 @@ namespace OneLine {
                 width: rect.width,
                 height: rect.height - bounds * 2
             );
+
+            if (property.IsArrayElement()){
+                var rects = rect.SplitV(new float[]{1,1}, new float[]{0,0}, 5);
+                EditorGUI.LabelField(rects[0],"Array header is here");
+                rect = rects[1];
+            }
             rootDirectoryDrawer.Draw(rect, property);
             EditorGUI.indentLevel = indentLevel;
         }
