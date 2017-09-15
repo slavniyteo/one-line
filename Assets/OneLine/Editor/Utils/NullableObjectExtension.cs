@@ -21,5 +21,9 @@ namespace OneLine {
                 a(obj);
             }
         }
+
+        public static T OrElse<T> (this T obj, T defaultValue) where T:class {
+            return obj != null ? obj : defaultValue;
+        }
     }
 }

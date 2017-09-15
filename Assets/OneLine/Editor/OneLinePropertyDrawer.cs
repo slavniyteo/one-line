@@ -11,7 +11,7 @@ namespace OneLine {
         private Drawer fixedArrayDrawer;
         private Drawer dynamicArrayDrawer;
         private Drawer directoryDrawer;
-        private Drawer rootDirectoryDrawer;
+        private RootDirectoryDrawer rootDirectoryDrawer;
 
         public OneLinePropertyDrawer(){
             simpleDrawer = new SimpleFieldDrawer();
@@ -37,8 +37,8 @@ namespace OneLine {
             );
 
             if (property.IsArrayElement()){
-                var rects = rect.SplitV(new float[]{1,1}, new float[]{0,0}, 5);
-                EditorGUI.LabelField(rects[0],"Array header is here");
+                var rects = rect.SplitV(2);
+                rootDirectoryDrawer.DrawTableHeader(rects[0], property);
                 rect = rects[1];
             }
             rootDirectoryDrawer.Draw(rect, property);

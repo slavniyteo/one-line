@@ -25,7 +25,76 @@ namespace OneLine {
             );
         }
 
-        public static Rect[] SplitV(this Rect rect, float[] weights, float[] fixedWidthes, float space = 5){
+        public static Rect[] CutFromBottom(this Rect rect, float height) {
+            var left = new Rect(
+                x: rect.x,
+                y: rect.y,
+                width: rect.width,
+                height: rect.height - height
+            );
+            var right = new Rect(
+                x: rect.x,
+                y: rect.y + left.height,
+                width: rect.width,
+                height: height
+            );
+            return new Rect[]{left, right};
+        }
+        
+        public static Rect[] CutFromTop(this Rect rect, float height) {
+            var left = new Rect(
+                x: rect.x,
+                y: rect.y,
+                width: rect.width,
+                height: height
+            );
+            var right = new Rect(
+                x: rect.x,
+                y: rect.y + height,
+                width: rect.width,
+                height: rect.height + height
+            );
+            return new Rect[]{left, right};
+        }
+        
+        public static Rect[] CutFromLeft(this Rect rect, float width) {
+            var left = new Rect(
+                x: rect.x,
+                y: rect.y,
+                width: width,
+                height: rect.height
+            );
+            var right = new Rect(
+                x: rect.x + width,
+                y: rect.y,
+                width: rect.width - width,
+                height: rect.height
+            );
+            return new Rect[]{left, right};
+        }
+
+        public static Rect[] CutFromRight(this Rect rect, float width) {
+            var left = new Rect(
+                x: rect.x,
+                y: rect.y,
+                width: rect.width - width,
+                height: rect.height
+            );
+            var right = new Rect(
+                x: rect.x + left.width,
+                y: rect.y,
+                width: width,
+                height: rect.height
+            );
+            return new Rect[]{left, right};
+        }
+
+        public static Rect[] SplitV(this Rect rect, int slices, float space = 5){
+            var weights = Enumerable.Repeat(1f, slices).ToArray();
+            return SplitV(rect, weights, null, space);
+        }
+
+        public static Rect[] SplitV(this Rect rect, IEnumerable<float> weights, IEnumerable<float> fixedWidthes = null, float space = 5){
             return rect.Invert()
                        .Split(weights, fixedWidthes, 5)
                        .Select(Invert)
@@ -41,10 +110,11 @@ namespace OneLine {
             );
         }
         
-        public static Rect[] Split(this Rect rect, float[] weights, float[] fixedWidthes, float space = 5){
-            var cells = Enumerable.Range(0, weights.Length)
-                        .Select(i => new Cell(weights[i], fixedWidthes[i]))
-                        .ToArray();
+        public static Rect[] Split(this Rect rect, IEnumerable<float> weights, IEnumerable<float> fixedWidthes = null, float space = 5){
+            if (fixedWidthes == null){
+                fixedWidthes = weights.Select(x => 0f);
+            }
+            var cells = weights.Merge(fixedWidthes, (weight, width) => new Cell(weight, width));
 
             float weightUnit = GetWeightUnit(rect.width, cells, space);
 
