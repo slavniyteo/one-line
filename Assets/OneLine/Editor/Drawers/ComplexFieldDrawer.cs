@@ -10,7 +10,6 @@ namespace OneLine {
         private const float SPACE = 5;
         private FieldDecorator[] fieldDecorators = new FieldDecorator[] {
             new SeparateDecorator()
-            // new PaddingDecorator()
         };
 
         internal delegate Drawer DrawerProvider(SerializedProperty property);
