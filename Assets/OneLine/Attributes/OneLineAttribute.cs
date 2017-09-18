@@ -12,6 +12,11 @@ namespace OneLine {
     ///</summary>
     [AttributeUsage(validOn: AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     public class OneLineAttribute : PropertyAttribute {
+        public LineHeader Header { get; set; }
+    }
 
+    public enum LineHeader {
+        None = 0,
+        Short = 1
     }
 }

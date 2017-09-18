@@ -14,8 +14,6 @@ namespace OneLine.Examples {
         private TwoFields twoFields;
         [SerializeField, OneLine]
         private ThreeFields threeFields;
-        [SerializeField, OneLine]
-        private ThreeFields[] arrayWithThreeFields;
 
         [Serializable]
         public class OneField {
@@ -46,8 +44,6 @@ namespace OneLine.Examples {
         private Weights1 differentWeights1;
         [SerializeField, OneLine]
         private Weights2 differentWeights2;
-        [SerializeField, OneLine]
-        private Weights2[] arrayWithDifferentWeights;
 
         [Serializable]
         public class Weights1 {
@@ -73,8 +69,6 @@ namespace OneLine.Examples {
         private WidthAndWeight fixedWidth;
         [SerializeField, OneLine]
         private WidthOnly onlyFixedWidth;
-        [SerializeField, OneLine]
-        private WidthOnly[] arrayWithOnlyFixedWidths;
 
         [Serializable]
         public class WidthOnly {
@@ -100,8 +94,6 @@ namespace OneLine.Examples {
         private OneField oneFieldHidesLabel;
         [SerializeField, OneLine, HideLabel]
         private TwoFields twoFieldsHidesLabel;
-        [SerializeField, OneLine, HideLabel]
-        private TwoFields[] arrayHidesLabels;
 #endregion
 
 #region Highlight
@@ -136,6 +128,8 @@ namespace OneLine.Examples {
         private ArrayHidesButtons arrayHidesButtons;
         [SerializeField, OneLine]
         private ImmutableLengthArray arrayWithImmutableLength;
+        [SerializeField, OneLine(Header = LineHeader.Short)]
+        private ThreeFields[] array;
         [SerializeField, OneLine]
         private OneLineArray[] arrayWithArrays;
 

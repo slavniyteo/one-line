@@ -25,7 +25,7 @@ namespace OneLine {
 
         protected void DrawHighlight(Rect rect, SerializedProperty property) {
             property.GetCustomAttribute<HighlightAttribute>()
-                    .IfPresent(x => GuiUtil.DrawRect(rect.WithBounds(1), x.Color));
+                    .IfPresent(x => GuiUtil.DrawRect(rect.Expand(1), x.Color));
         }
     }
 }

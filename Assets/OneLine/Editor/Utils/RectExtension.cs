@@ -7,7 +7,7 @@ using UnityEngine;
 namespace OneLine {
     internal static class RectExtension {
 
-        public static Rect WithBounds(this Rect rect, float bounds){
+        public static Rect Expand(this Rect rect, float bounds){
             return new Rect(
                 x: rect.x - bounds,
                 y: rect.y - bounds,
@@ -16,11 +16,20 @@ namespace OneLine {
             );
         }
 
-        public static Rect WithBoundsH(this Rect rect, Vector2 bounds){
+        public static Rect ExpandV(this Rect rect, float top, float bottom){
             return new Rect(
-                x: rect.x - bounds.x,
+                x: rect.x,
+                y: rect.y - top,
+                width: rect.width,
+                height: rect.height + top + bottom
+            );
+        }
+
+        public static Rect ExpandH(this Rect rect, float left, float right){
+            return new Rect(
+                x: rect.x - left,
                 y: rect.y,
-                width: rect.width + bounds.x + bounds.y,
+                width: rect.width + left + right,
                 height: rect.height
             );
         }

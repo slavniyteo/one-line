@@ -103,7 +103,12 @@ namespace OneLine {
 
         public static bool IsArrayElement(this SerializedProperty property){
             var path = property.propertyPath;
-            return path.Substring(path.Length - 3, 3) == "[0]";
+            return path.Substring(path.Length - 1, 1) == "]" ;
+        }
+
+        public static bool IsArrayFirstElement(this SerializedProperty property){
+            var path = property.propertyPath;
+            return path.Substring(path.Length - 3, 3) == "[0]" ;
         }
 
         public static IEnumerable<TResult> Merge<TFirst, TSecond, TResult> (this IEnumerable<TFirst> first,

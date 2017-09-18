@@ -20,24 +20,12 @@ MonoBehaviour:
     first: First
     second: Second
     third: Third
-  arrayWithThreeFields:
-  - first: First
-    second: Second
-    third: Third
-  - first: First
-    second: Second
-    third: Third
   differentWeights1:
     first: 3
     second: 2
     third: 1
   differentWeights2:
     first: 5
-    second: 1
-  arrayWithDifferentWeights:
-  - first: 5
-    second: 1
-  - first: 5
     second: 1
   fixedWidth:
     first: 50px
@@ -46,20 +34,10 @@ MonoBehaviour:
   onlyFixedWidth:
     first: 50px
     second: 75px
-  arrayWithOnlyFixedWidths:
-  - first: 50px
-    second: 75px
-  - first: 50px
-    second: 75px
   oneFieldHidesLabel:
     first: This field is marked by HideLabelAttribute
   twoFieldsHidesLabel:
     first: Only zero-depth fields may be marked
-    second: by HideLabelAttribute
-  arrayHidesLabels:
-  - first: First array element hides it's label
-    second: by HideLabelAttribute
-  - first: Second array element hides it's label
     second: by HideLabelAttribute
   highlightedZeroDepthField:
     first: HighlightAttribute is useful for pointing on
@@ -97,6 +75,13 @@ MonoBehaviour:
     - Length of this
     - array is fixed
     - in code
+  array:
+  - first: 
+    second: 
+    third: 
+  - first: 
+    second: 
+    third: 
   arrayWithArrays:
   - array:
     - 'Second '

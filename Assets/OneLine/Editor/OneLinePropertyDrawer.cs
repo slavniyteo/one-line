@@ -5,13 +5,13 @@ namespace OneLine {
     [CustomPropertyDrawer(typeof(OneLineAttribute))]
     public class OneLinePropertyDrawer : PropertyDrawer {
 
-        private const int bounds = 0;
-
         private Drawer simpleDrawer;
         private Drawer fixedArrayDrawer;
         private Drawer dynamicArrayDrawer;
         private Drawer directoryDrawer;
         private RootDirectoryDrawer rootDirectoryDrawer;
+
+        private new OneLineAttribute attribute { get { return base.attribute as OneLineAttribute; } }
 
         public OneLinePropertyDrawer(){
             simpleDrawer = new SimpleFieldDrawer();
@@ -22,21 +22,22 @@ namespace OneLine {
         }
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-            var lineHeight = 16 + bounds * 2;
+            var lineHeight = 16;
+            var headerHeight = NeedDrawHeader(property) ? lineHeight + 5 : 0;
 
-            return lineHeight + (property.IsArrayElement() ? lineHeight + 5 : 0);
+            return lineHeight + headerHeight;
+        }
+
+        private bool NeedDrawHeader(SerializedProperty property){
+            bool notArray = ! property.IsArrayElement();
+            bool firstElement = property.IsArrayElement() && property.IsArrayFirstElement();
+            return attribute.Header == LineHeader.Short && (notArray || firstElement);
         }
 
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label) {
             int indentLevel = EditorGUI.indentLevel;
-            rect = new Rect(
-                x: rect.x,
-                y: rect.y + bounds,
-                width: rect.width,
-                height: rect.height - bounds * 2
-            );
 
-            if (property.IsArrayElement()){
+            if (NeedDrawHeader(property)){
                 var rects = rect.SplitV(2);
                 rootDirectoryDrawer.DrawTableHeader(rects[0], property);
                 rect = rects[1];
