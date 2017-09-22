@@ -8,9 +8,7 @@ namespace OneLine {
     internal abstract class ComplexFieldDrawer : Drawer {
 
         private const float SPACE = 5;
-        private FieldDecorator[] fieldDecorators = new FieldDecorator[] {
-            new SeparateDecorator()
-        };
+        private SeparatorDrawer separatorDrawer = new SeparatorDrawer();
 
         internal delegate Drawer DrawerProvider(SerializedProperty property);
         protected DrawerProvider getDrawer;
@@ -23,26 +21,10 @@ namespace OneLine {
 
         #region Weights
 
-        public override float GetWeight(SerializedProperty property) {
-            float multiplier = base.GetWeight(property);
-            float children = GetWeights(property).Sum(x => x * multiplier);
-            float decorators = fieldDecorators .Sum(x => x.GetWeight(property));
-
-            return children + decorators;
-        }
-
         protected virtual float[] GetWeights(SerializedProperty property) {
             return GetChildren(property)
                    .Select(x => getDrawer(x).GetWeight(x))
                    .ToArray();
-        }
-
-        public override float GetFixedWidth(SerializedProperty property) {
-            float width = base.GetFixedWidth(property);
-            float children = GetFixedWidthes(property).Sum(x => x + SPACE) - SPACE;
-            float decorators = fieldDecorators .Sum(x => x.GetFixedWidth(property));
-
-            return Math.Max(width, children) + decorators;
         }
 
         protected virtual float[] GetFixedWidthes(SerializedProperty property) {
@@ -55,19 +37,19 @@ namespace OneLine {
             return rect.Split(GetWeights(property), GetFixedWidthes(property), SPACE);
         }
 
-        #endregion
-
-        public override void Draw(Rect rect, SerializedProperty property) {
-            var rects = SplitRects(rect, property);
-            int i = 0;
-            foreach (var child in GetChildren(property)) {
-                foreach (var decorator in fieldDecorators){
-                    rects[i] = decorator.Draw(rects, i, child);
-                }
-                DrawField(rects[i], child);
-                i++;
-            }
+        public override void AddSlices(SerializedProperty property, Slices slices){
+            GetChildren(property)
+                .ForEachExceptLast((x) => {
+                    getDrawer(x).AddSlices(x, slices);
+                    if (x.depth < 2){
+                        separatorDrawer.AddSlices(property, slices);
+                    }
+                }, x => {
+                    getDrawer(x).AddSlices(x, slices);
+                });
         }
+
+        #endregion
 
         protected abstract void DrawField(Rect rect, SerializedProperty property);
 

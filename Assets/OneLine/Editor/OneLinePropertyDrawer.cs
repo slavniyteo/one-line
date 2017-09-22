@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using System.Linq;
 
 namespace OneLine {
     [CustomPropertyDrawer(typeof(OneLineAttribute))]
@@ -36,6 +37,7 @@ namespace OneLine {
 
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label) {
             int indentLevel = EditorGUI.indentLevel;
+            /* 
 
             if (NeedDrawHeader(property)){
                 var rects = rect.SplitV(2);
@@ -43,6 +45,23 @@ namespace OneLine {
                 rect = rects[1];
             }
             rootDirectoryDrawer.Draw(rect, property);
+            */
+
+            rect = EditorGUI.PrefixLabel(rect, label);
+
+            var clone = property.Copy();
+            var slices = new Slices();
+            try {
+            rootDirectoryDrawer.AddSlices(clone, slices);
+            } catch (System.Exception ex){
+                Debug.Log("slices: " + slices.Weights.Count());
+            }
+
+            var rects = rect.Split(slices.Weights, slices.Widthes, 5);
+            for (int i = 0; i < rects.Length; i++){
+                slices[i].Draw(rects[i]);
+            }
+
             EditorGUI.indentLevel = indentLevel;
         }
 

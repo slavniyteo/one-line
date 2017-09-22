@@ -21,7 +21,14 @@ namespace OneLine {
                            .Sum();
         }
 
-        public abstract void Draw(Rect rect, SerializedProperty property);
+        public virtual void AddSlices(SerializedProperty property, Slices slices){
+            var slice = new Slice(GetWeight(property), GetFixedWidth(property), rect => Draw(rect, property.Copy()));
+            slices.Add(slice);
+        }
+
+        public virtual void Draw(Rect rect, SerializedProperty property) {
+
+        }
 
         protected void DrawHighlight(Rect rect, SerializedProperty property) {
             property.GetCustomAttribute<HighlightAttribute>()

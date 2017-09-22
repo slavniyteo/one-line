@@ -19,7 +19,7 @@ namespace OneLine {
             copy.Next(true);
             do {
                 string lastPath = copy.propertyPath;
-                yield return copy;
+                yield return copy.Copy();
 
                 if (copy.propertyPath != lastPath) {
                     var message =
@@ -45,7 +45,7 @@ namespace OneLine {
                     string message = string.Format("Property path {1} is changed during iteration", property.displayName);
                     throw new InvalidOperationException(message);
                 }
-                yield return property.GetArrayElementAtIndex(i);
+                yield return property.GetArrayElementAtIndex(i).Copy();
             }
         }
 
@@ -117,8 +117,28 @@ namespace OneLine {
             var firstEnumerator = first.GetEnumerator();
             var secondEnumerator = second.GetEnumerator();
             while (firstEnumerator.MoveNext() && secondEnumerator.MoveNext()){
-
                 yield return selector(firstEnumerator.Current, secondEnumerator.Current);
+            }
+        }
+
+        public static void ForEach<T>(this IEnumerable<T> enumerable, Action<T> action){
+            foreach (var value in enumerable){
+                action(value);
+            }
+        }
+
+        public static void ForEachExceptLast<T> (this IEnumerable<T> enumerable, Action<T> action, Action<T> lastAction = null){
+            var enumerator = enumerable.GetEnumerator();
+            var has = enumerator.MoveNext();
+            while (has){
+                var current = enumerator.Current;
+                has = enumerator.MoveNext();
+                if (has) {
+                    action(current);
+                }
+                else if (lastAction != null) {
+                    lastAction(current);
+                }
             }
         }
 

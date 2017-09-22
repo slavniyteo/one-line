@@ -15,16 +15,9 @@ namespace OneLine {
 
         #region Width
 
-        protected override float[] GetWeights(SerializedProperty property) {
-            List<float> result = base.GetWeights(property).ToList();
-            result.Add(buttons.GetWeight(property));
-            return result.ToArray();
-        }
-
-        protected override float[] GetFixedWidthes(SerializedProperty property) {
-            List<float> result = base.GetFixedWidthes(property).ToList();
-            result.Add(buttons.GetFixedWidth(property));
-            return result.ToArray();
+        public override void AddSlices(SerializedProperty property, Slices slices){
+            base.AddSlices(property, slices);
+            buttons.AddSlices(property, slices);
         }
 
         #endregion
