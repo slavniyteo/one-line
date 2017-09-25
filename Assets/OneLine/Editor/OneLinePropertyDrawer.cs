@@ -72,7 +72,7 @@ namespace OneLine {
             if (! NeedDrawHeader(property)) return position;
 
             var rects = position.SplitV(2);
-            rootDirectoryDrawer.DrawTableHeader(rects[0], property);
+            // rootDirectoryDrawer.DrawTableHeader(rects[0], property);
             return rects[1];
         }
 

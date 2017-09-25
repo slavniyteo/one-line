@@ -7,10 +7,7 @@ using UnityEngine;
 namespace OneLine {
     internal class RootDirectoryDrawer : DirectoryDrawer {
 
-        private TableHeader header;
-
         public RootDirectoryDrawer(DrawerProvider getDrawer) : base(getDrawer) {
-            header = new TableHeader(this);
         }
 
         public override void AddSlices(SerializedProperty property, Slices slices){
