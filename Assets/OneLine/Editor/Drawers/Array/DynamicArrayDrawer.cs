@@ -13,19 +13,23 @@ namespace OneLine {
             buttons = new ArrayButtonsDrawer();
         }
 
-        #region Width
-
         public override void AddSlices(SerializedProperty property, Slices slices){
             base.AddSlices(property, slices);
             buttons.AddSlices(property, slices);
         }
 
-        #endregion
-
-        #region Draw
-
-        protected override int GetLength(SerializedProperty property) {
+        protected override int ModifyLength(SerializedProperty property) {
             return property.arraySize;
+        }
+
+        protected override void DrawChild(SerializedProperty child, Slices slices){
+            var count = slices.CountPayload;
+            var contextMenu = new MetaSlice(0, 0, rect => DrawElementContextMenu(rect, child.Copy()));
+            slices.Add(contextMenu);
+
+            base.DrawChild(child, slices);
+
+            contextMenu.After = slices.CountPayload - count;
         }
 
         private void DrawElementContextMenu(Rect rect, SerializedProperty element) {
@@ -47,9 +51,6 @@ namespace OneLine {
                 menu.DropDown(rect);
             }
         }
-
-
-        #endregion
 
     }
 }

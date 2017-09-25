@@ -16,11 +16,11 @@ namespace OneLine {
         }
 
         public override void AddSlices(SerializedProperty property, Slices slices){
-            GetLength(property);
+            ModifyLength(property);
             base.AddSlices(property, slices);
         }
 
-        protected virtual int GetLength(SerializedProperty property) {
+        protected virtual int ModifyLength(SerializedProperty property) {
             var attribute = property.GetCustomAttribute<ArrayLengthAttribute>();
             if (attribute == null) {
                 var message = string.Format("Can not find ArrayLengthAttribute at property {1)", property.propertyPath);
