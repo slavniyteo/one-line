@@ -127,6 +127,8 @@ namespace OneLine.Examples {
         [SerializeField, OneLine]
         private TwoArrays twoArraysInOneLine;
         [SerializeField, OneLine]
+        private ComplexArray arrayWithComplexFields;
+        [SerializeField, OneLine]
         private ArrayHidesButtons arrayHidesButtons;
         [SerializeField, OneLine]
         private ImmutableLengthArray arrayWithImmutableLength;
@@ -138,7 +140,12 @@ namespace OneLine.Examples {
         [Serializable]
         public class OneLineArray {
             [SerializeField]
-            private string[] array;
+            private OneField[] array;
+        }
+        [Serializable]
+        public class ComplexArray {
+            [SerializeField]
+            private TwoFields[] array;
         }
         [Serializable]
         public class TwoArrays {

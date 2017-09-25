@@ -48,6 +48,7 @@ public class StandartTypesOverview : ScriptableObject {
 
     [Serializable]
     public class ThirdUnity {
+        public float floatField;
         public Vector2 vector2Field;
         public Vector3 vector3Field;
         public Vector4 vector4Field;

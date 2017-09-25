@@ -32,14 +32,14 @@ namespace OneLine {
 
         private void DrawChildren(SerializedProperty property, Slices slices){
             GetChildren(property)
-                .ForEachExceptLast((x) => {
-                    DrawChild(x, slices);
-                    if (x.depth < 2){
-                        separatorDrawer.AddSlices(property, slices);
-                    }
+                .ForEachExceptLast((child) => {
+                    DrawChild(child, slices);
+                    // if (x.depth < 2){
+                        separatorDrawer.AddSlices(child, slices);
+                    // }
                 }, 
-                x => {
-                    DrawChild(x, slices);
+                child => {
+                    DrawChild(child, slices);
                 });
         }
 
