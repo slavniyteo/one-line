@@ -10,9 +10,14 @@ namespace OneLine {
 
         public abstract void AddSlices(SerializedProperty property, Slices slices);
 
-        protected void DrawHighlight(Rect rect, SerializedProperty property) {
-            property.GetCustomAttribute<HighlightAttribute>()
-                    .IfPresent(x => GuiUtil.DrawRect(rect.Expand(1), x.Color));
+        protected MetaSlice DrawHighlight(SerializedProperty property, Slices slices, int before, int after) {
+            var attribute = property.GetCustomAttribute<HighlightAttribute>();
+            if (attribute == null) return null;
+
+            var slice = new MetaSlice(before, after, 
+                                      rect => GuiUtil.DrawRect(rect.Expand(1), attribute.Color));
+            slices.Add(slice);
+            return slice;
         }
 
         protected void DrawTooltip(Rect rect, SerializedProperty child) {

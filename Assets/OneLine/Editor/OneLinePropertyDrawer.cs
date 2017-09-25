@@ -72,19 +72,37 @@ namespace OneLine {
             if (! NeedDrawHeader(property)) return position;
 
             var rects = position.SplitV(2);
-            // rootDirectoryDrawer.DrawTableHeader(rects[0], property);
             return rects[1];
         }
 
         private void DrawLine(Rect position, SerializedProperty property, GUIContent label){
-            var slices = new Slices();
-            rootDirectoryDrawer.AddSlices(property, slices);
-
+            var slices = CalculateSlices(property);
             var rects = position.Split(slices.Weights, slices.Widthes, 5);
 
-            slices.ForEachMerged(rects, (slice, rect) =>
-                slice.Draw(rect)
-            );
+            int rectIndex = 0;
+            foreach (var slice in slices){
+                if (slice is MetaSlice){
+                    DrawMetaSlice(slice as MetaSlice, rects, rectIndex);
+                }
+                else {
+                    slice.Draw(rects[rectIndex]);
+                    rectIndex++;
+                }
+            }
+        }
+        
+        private Slices CalculateSlices(SerializedProperty property){
+            var slices = new Slices();
+            rootDirectoryDrawer.AddSlices(property, slices);
+            return slices;
+        }
+
+        private void DrawMetaSlice(MetaSlice slice, Rect[] rects, int currentRect){
+            var from = rects[currentRect - slice.Before];
+            var to = rects[currentRect + slice.After - 1];
+            var rect = from.Union(to);
+
+            slice.Draw(rect);
         }
 
 #endregion

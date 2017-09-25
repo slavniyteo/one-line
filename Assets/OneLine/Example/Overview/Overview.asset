@@ -39,8 +39,13 @@ MonoBehaviour:
   twoFieldsHidesLabel:
     first: Only zero-depth fields may be marked
     second: by HideLabelAttribute
-  highlightedZeroDepthField:
-    first: HighlightAttribute is useful for pointing on
+  highlightedRootField:
+    first: 'HighlightAttribute is useful '
+    second: for pointing on
+  highlightAndHideLabel:
+    first: 
+    second: 
+    third: 
   highlightedFields:
     first: Green
     second: Blue
@@ -80,7 +85,7 @@ MonoBehaviour:
     second: tfygy
     third: 
   - first: 
-    second: yguj
+    second: tfygy
     third: 
   arrayWithArrays:
   - array:

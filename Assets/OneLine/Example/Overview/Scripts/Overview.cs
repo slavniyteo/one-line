@@ -99,7 +99,9 @@ namespace OneLine.Examples {
 #region Highlight
         [Separator("[ Highlight Attribute ]")]
         [SerializeField, OneLine, Highlight]
-        private OneField highlightedZeroDepthField;
+        private TwoFields highlightedRootField;
+        [SerializeField, OneLine, Highlight, HideLabel]
+        private ThreeFields highlightAndHideLabel;
         [SerializeField, OneLine]
         private HighlightedFields highlightedFields;
         [SerializeField, OneLine]

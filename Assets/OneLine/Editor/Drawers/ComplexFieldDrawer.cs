@@ -22,6 +22,15 @@ namespace OneLine {
         #region Weights
 
         public override void AddSlices(SerializedProperty property, Slices slices){
+            var count = slices.CountPayload;
+            var highlight = DrawHighlight(property, slices, slices.CountPayload - count, 0);
+
+            DrawChildren(property, slices);
+            
+            highlight.IfPresent(it => it.After = slices.CountPayload - count);
+        }
+
+        private void DrawChildren(SerializedProperty property, Slices slices){
             GetChildren(property)
                 .ForEachExceptLast((x) => {
                     getDrawer(x).AddSlices(x, slices);
@@ -33,7 +42,7 @@ namespace OneLine {
                     getDrawer(x).AddSlices(x, slices);
                 });
         }
-
+        
         #endregion
 
     }
