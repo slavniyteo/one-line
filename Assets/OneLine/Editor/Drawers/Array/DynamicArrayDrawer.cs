@@ -24,20 +24,8 @@ namespace OneLine {
 
         #region Draw
 
-        public override void Draw(Rect rect, SerializedProperty property) {
-            base.Draw(rect, property);
-
-            Rect[] rects = SplitRects(rect, property);
-            buttons.Draw(rects[property.arraySize], property);
-        }
-
         protected override int GetLength(SerializedProperty property) {
             return property.arraySize;
-        }
-
-        protected override void DrawField(Rect rect, SerializedProperty element) {
-            DrawElementContextMenu(rect, element);
-            base.DrawField(rect, element);
         }
 
         private void DrawElementContextMenu(Rect rect, SerializedProperty element) {

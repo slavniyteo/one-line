@@ -77,10 +77,10 @@ MonoBehaviour:
     - in code
   array:
   - first: 
-    second: 
+    second: tfygy
     third: 
   - first: 
-    second: 
+    second: yguj
     third: 
   arrayWithArrays:
   - array:

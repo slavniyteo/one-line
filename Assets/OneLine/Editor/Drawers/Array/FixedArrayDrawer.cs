@@ -15,13 +15,9 @@ namespace OneLine {
             return property.GetArrayElements();
         }
 
-        public override void Draw(Rect rect, SerializedProperty property) {
+        public override void AddSlices(SerializedProperty property, Slices slices){
             GetLength(property);
-            base.Draw(rect, property);
-        }
-
-        protected override void DrawField(Rect rect, SerializedProperty element) {
-            getDrawer(element).Draw(rect, element);
+            base.AddSlices(property, slices);
         }
 
         protected virtual int GetLength(SerializedProperty property) {

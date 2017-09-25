@@ -80,8 +80,7 @@ namespace OneLine {
             var slices = new Slices();
             rootDirectoryDrawer.AddSlices(property, slices);
 
-            var rects = EditorGUI.PrefixLabel(position, label)
-                                 .Split(slices.Weights, slices.Widthes, 5);
+            var rects = position.Split(slices.Weights, slices.Widthes, 5);
 
             slices.ForEachMerged(rects, (slice, rect) =>
                 slice.Draw(rect)

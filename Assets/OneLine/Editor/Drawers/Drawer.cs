@@ -8,31 +8,22 @@ using UnityEngine;
 namespace OneLine {
     internal abstract class Drawer {
 
-        public virtual float GetWeight(SerializedProperty property) {
-            var weights = property.GetCustomAttributes<WeightAttribute>()
-                                  .Select(x => x.Weight)
-                                  .ToArray();
-            return weights.Length > 0 ? weights.Sum() : 1;
-        }
-
-        public virtual float GetFixedWidth(SerializedProperty property) {
-            return property.GetCustomAttributes<WidthAttribute>()
-                           .Select(x => x.Width)
-                           .Sum();
-        }
-
-        public virtual void AddSlices(SerializedProperty property, Slices slices){
-            var slice = new Slice(GetWeight(property), GetFixedWidth(property), rect => Draw(rect, property.Copy()));
-            slices.Add(slice);
-        }
-
-        public virtual void Draw(Rect rect, SerializedProperty property) {
-
-        }
+        public abstract void AddSlices(SerializedProperty property, Slices slices);
 
         protected void DrawHighlight(Rect rect, SerializedProperty property) {
             property.GetCustomAttribute<HighlightAttribute>()
                     .IfPresent(x => GuiUtil.DrawRect(rect.Expand(1), x.Color));
+        }
+
+        protected void DrawTooltip(Rect rect, SerializedProperty child) {
+            string tooltip = child.displayName;
+
+            var attribute = child.GetCustomAttribute<TooltipAttribute>();
+            if (attribute != null) {
+                tooltip = attribute.tooltip;
+            }
+
+            EditorGUI.LabelField(rect, new GUIContent("", tooltip));
         }
     }
 }

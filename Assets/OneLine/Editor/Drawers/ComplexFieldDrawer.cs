@@ -21,22 +21,6 @@ namespace OneLine {
 
         #region Weights
 
-        protected virtual float[] GetWeights(SerializedProperty property) {
-            return GetChildren(property)
-                   .Select(x => getDrawer(x).GetWeight(x))
-                   .ToArray();
-        }
-
-        protected virtual float[] GetFixedWidthes(SerializedProperty property) {
-            return GetChildren(property)
-                   .Select(x => getDrawer(x).GetFixedWidth(x))
-                   .ToArray();
-        }
-
-        protected Rect[] SplitRects(Rect rect, SerializedProperty property) {
-            return rect.Split(GetWeights(property), GetFixedWidthes(property), SPACE);
-        }
-
         public override void AddSlices(SerializedProperty property, Slices slices){
             GetChildren(property)
                 .ForEachExceptLast((x) => {
@@ -44,14 +28,13 @@ namespace OneLine {
                     if (x.depth < 2){
                         separatorDrawer.AddSlices(property, slices);
                     }
-                }, x => {
+                }, 
+                x => {
                     getDrawer(x).AddSlices(x, slices);
                 });
         }
 
         #endregion
-
-        protected abstract void DrawField(Rect rect, SerializedProperty property);
 
     }
 }
