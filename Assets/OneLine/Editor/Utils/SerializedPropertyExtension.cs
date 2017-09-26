@@ -39,8 +39,12 @@ namespace OneLine {
             return result;
         }
 
+        public static bool IsReallyArray(this SerializedProperty property){
+            return property.isArray && property.propertyType != SerializedPropertyType.String;
+        }
+
         public static IEnumerable<SerializedProperty> GetArrayElements(this SerializedProperty property) {
-            if (!property.isArray || property.propertyType == SerializedPropertyType.String) {
+            if (!property.IsReallyArray()) {
                 string message = string.Format("Property {1} is not array or list", property.displayName);
                 throw new InvalidOperationException(message);
             }

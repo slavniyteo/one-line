@@ -51,11 +51,13 @@ namespace OneLine {
         private bool NeedDrawSeparator(SerializedProperty property){
             property = property.Copy();
 
+            bool isArray = property.IsReallyArray();
             bool isComplex = property.CountChildrenAndMoveNext() > 1;
             bool hasAttribute = property.GetCustomAttribute<SeparatorAttribute>() != null;
+            bool nextIsArray = property.IsReallyArray();
             bool nextIsComplex = property.CountChildrenAndMoveNext() > 1;
             
-            return hasAttribute || isComplex || nextIsComplex;
+            return hasAttribute || isComplex || nextIsComplex || isArray || nextIsArray;
         }
 
         protected virtual void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
