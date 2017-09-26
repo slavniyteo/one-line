@@ -9,7 +9,14 @@ namespace OneLine {
         private const float width = 2;
 
         public override void AddSlices(SerializedProperty property, Slices slices){
-            slices.Add(new Slice(0, width, Draw, Draw));
+            Slice slice;
+            if (property.IsArrayElement()){
+                slice = new Slice(0, width, Draw);
+            }
+            else {
+                slice = new Slice(0, width, Draw, Draw);
+            }
+            slices.Add(slice);
         }
 
 
