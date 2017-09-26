@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace OneLine {
     [CustomPropertyDrawer(typeof(OneLineAttribute))]
@@ -12,14 +13,23 @@ namespace OneLine {
         private Drawer directoryDrawer;
         private RootDirectoryDrawer rootDirectoryDrawer;
 
+        private SlicesCache slicesCache;
+
         private new OneLineAttribute attribute { get { return base.attribute as OneLineAttribute; } }
 
         public OneLinePropertyDrawer(){
             simpleDrawer = new SimpleFieldDrawer();
             fixedArrayDrawer = new FixedArrayDrawer(GetDrawer);
-            dynamicArrayDrawer = new DynamicArrayDrawer(GetDrawer);
+            dynamicArrayDrawer = new DynamicArrayDrawer(GetDrawer, InvalidateCache);
             directoryDrawer = new DirectoryDrawer(GetDrawer);
             rootDirectoryDrawer = new RootDirectoryDrawer(GetDrawer);
+
+            ResetCache();
+            Undo.undoRedoPerformed += ResetCache;
+        }
+
+        private void OnDestroy(){
+            Undo.undoRedoPerformed -= ResetCache;
         }
 
         private Drawer GetDrawer(SerializedProperty property) {
@@ -37,6 +47,14 @@ namespace OneLine {
             else {
                 return simpleDrawer;
             }
+        }
+
+        private void ResetCache(){
+            slicesCache = new SlicesCache(rootDirectoryDrawer.AddSlices);
+        }
+
+        private void InvalidateCache(SerializedProperty property){
+            slicesCache.Invalidate(property);
         }
 
 #region Height
@@ -72,11 +90,12 @@ namespace OneLine {
             if (! NeedDrawHeader(property)) return position;
 
             var rects = position.SplitV(2);
+            EditorGUI.LabelField(rects[0], "Header is coming soon.");
             return rects[1];
         }
 
         private void DrawLine(Rect position, SerializedProperty property, GUIContent label){
-            var slices = CalculateSlices(property);
+            var slices = slicesCache[property];
             var rects = position.Split(slices.Weights, slices.Widthes, 5);
 
             int rectIndex = 0;
@@ -89,12 +108,6 @@ namespace OneLine {
                     rectIndex++;
                 }
             }
-        }
-        
-        private Slices CalculateSlices(SerializedProperty property){
-            var slices = new Slices();
-            rootDirectoryDrawer.AddSlices(property, slices);
-            return slices;
         }
 
         private void DrawMetaSlice(MetaSlice slice, Rect[] rects, int currentRect){

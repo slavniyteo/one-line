@@ -7,6 +7,12 @@ using UnityEngine;
 namespace OneLine {
     internal class ArrayButtonsDrawer : Drawer {
 
+        private Action<SerializedProperty> notifyChange;
+
+        public ArrayButtonsDrawer(Action<SerializedProperty> notifyChange){
+            this.notifyChange = notifyChange;
+        }
+
         #region Width
 
         public override void AddSlices(SerializedProperty property, Slices slices){
@@ -36,18 +42,21 @@ namespace OneLine {
             EditorGUI.LabelField(rects[0], array.displayName);
             if (GUI.Button(rects[1], "+")) {
                 array.InsertArrayElementAtIndex(0);
+                notifyChange(array);
             }
         }
 
         public void DrawPlusButton(Rect rect, SerializedProperty array) {
             if (GUI.Button(rect, "+")) {
                 array.InsertArrayElementAtIndex(array.arraySize);
+                notifyChange(array);
             }
         }
 
         public void DrawMinusButton(Rect rect, SerializedProperty array) {
             if (array.arraySize > 0 && GUI.Button(rect, "-")) {
                 array.DeleteArrayElementAtIndex(array.arraySize - 1);
+                notifyChange(array);
             }
         }
     }

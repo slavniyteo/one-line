@@ -33,17 +33,15 @@ namespace OneLine {
         private void DrawChildren(SerializedProperty property, Slices slices){
             GetChildren(property)
                 .ForEachExceptLast((child) => {
-                    DrawChild(child, slices);
-                    // if (x.depth < 2){
-                        separatorDrawer.AddSlices(child, slices);
-                    // }
+                    DrawChild(property, child, slices);
+                    separatorDrawer.AddSlices(child, slices);
                 }, 
                 child => {
-                    DrawChild(child, slices);
+                    DrawChild(property, child, slices);
                 });
         }
 
-        protected virtual void DrawChild(SerializedProperty child, Slices slices){
+        protected virtual void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
             getDrawer(child).AddSlices(child, slices);
         }
         
