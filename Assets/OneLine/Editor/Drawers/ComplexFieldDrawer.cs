@@ -7,8 +7,8 @@ using UnityEngine;
 namespace OneLine {
     internal abstract class ComplexFieldDrawer : Drawer {
 
-        private const float SPACE = 5;
         private SeparatorDrawer separatorDrawer = new SeparatorDrawer();
+        private SpaceDrawer spaceDrawer = new SpaceDrawer();
 
         internal delegate Drawer DrawerProvider(SerializedProperty property);
         protected DrawerProvider getDrawer;
@@ -57,6 +57,7 @@ namespace OneLine {
         }
 
         protected virtual void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
+            spaceDrawer.AddSlices(child, slices);
             getDrawer(child).AddSlices(child, slices);
         }
         
