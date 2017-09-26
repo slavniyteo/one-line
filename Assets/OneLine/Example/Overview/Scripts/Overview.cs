@@ -134,13 +134,17 @@ namespace OneLine.Examples {
         private ImmutableLengthArray arrayWithImmutableLength;
         [SerializeField, OneLine(Header = LineHeader.Short)]
         private ThreeFields[] array;
-        [SerializeField, OneLine]
+        [SerializeField, OneLine(Header = LineHeader.Short)]
         private OneLineArray[] arrayWithArrays;
 
         [Serializable]
         public class OneLineArray {
             [SerializeField]
+            private string first;
+            [SerializeField]
             private OneField[] array;
+            [SerializeField]
+            private string last;
         }
         [Serializable]
         public class ComplexArray {

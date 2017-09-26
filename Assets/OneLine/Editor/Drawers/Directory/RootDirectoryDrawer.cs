@@ -7,7 +7,10 @@ using UnityEngine;
 namespace OneLine {
     internal class RootDirectoryDrawer : DirectoryDrawer {
 
+        private HeaderDrawer headerDrawer;
+
         public RootDirectoryDrawer(DrawerProvider getDrawer) : base(getDrawer) {
+            headerDrawer = new HeaderDrawer();
         }
 
         public override void AddSlices(SerializedProperty property, Slices slices){
@@ -17,6 +20,14 @@ namespace OneLine {
                                      rect => IndentWithLabel(rect, property.Copy(), true) ));
             }
             base.AddSlices(property, slices);
+        }
+
+        protected override void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
+            var count = slices.CountPayload;
+
+            base.DrawChild(parent, child, slices);
+
+            headerDrawer.AddSlices(slices.CountPayload - count, 0, child, slices);
         }
 
         private static Rect IndentWithLabel(Rect rect, SerializedProperty property, bool drawLabel) {

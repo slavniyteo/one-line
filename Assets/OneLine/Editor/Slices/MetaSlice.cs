@@ -8,8 +8,12 @@ namespace OneLine {
 		public int Before { get; set; }
 		public int After { get; set; }
 
-		public MetaSlice(int before, int after, Action<Rect> draw) 
-		: base (0, 0, draw) {
+		public MetaSlice(int before, int after, Action<Rect> draw)
+		: this(before, after, draw, null){
+		}
+
+		public MetaSlice(int before, int after, Action<Rect> draw, Action<Rect> drawHeader) 
+		: base (0, 0, draw, drawHeader) {
 			Before = before;
 			After = after;
 		}

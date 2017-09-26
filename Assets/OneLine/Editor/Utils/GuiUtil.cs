@@ -8,7 +8,10 @@ namespace OneLine {
     // Workaround to draw rects, see http://answers.unity3d.com/questions/377207/drawing-a-texture-in-a-custom-propertydrawer.html
     internal static class GuiUtil {
 
+        public static Color GrayColor { get { return new Color (0.3f, 0.3f, 0.3f); } }
+
         private static Dictionary<Color, GUIStyle> styles;
+
 
         static GuiUtil(){
             styles = new Dictionary<Color, GUIStyle>();

@@ -5,7 +5,7 @@ namespace OneLine {
     ///<summary>
     ///Draws horizontal or vertical separators
     ///</summary>
-    [AttributeUsage(validOn: AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(validOn: AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
     public class SeparatorAttribute : PropertyAttribute {
 
         public SeparatorAttribute() {
@@ -15,6 +15,10 @@ namespace OneLine {
 
         public SeparatorAttribute(string text) : this() {
             Text = text;
+        }
+
+        public SeparatorAttribute(string text, int thickness) : this(text){
+            Thickness = thickness;
         }
 
         public string Text { get; set; }

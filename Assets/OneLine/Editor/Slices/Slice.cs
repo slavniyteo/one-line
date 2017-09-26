@@ -10,15 +10,30 @@ namespace OneLine {
 		public float Width { get; private set; }
 
 		private Action<Rect> draw;
+		private Action<Rect> drawHeader;
+		private string header;
 
-		public Slice (float weight, float width, Action<Rect> draw) {
+		public Slice (float weight, float width, Action<Rect> draw)
+		: this(weight, width, draw, null){
+		}
+
+		public Slice (float weight, float width, Action<Rect> draw, Action<Rect> drawHeader) {
 			Weight = weight;
 			Width = width;
 			this.draw = draw;
+			this.drawHeader = drawHeader;
 		}
 
 		public void Draw(Rect rect){
-			draw(rect);
+			if (draw != null){
+				draw(rect);
+			}
+		}
+
+		public void DrawHeader(Rect rect){
+			if (drawHeader != null) {
+				drawHeader(rect);
+			}
 		}
 
 	}

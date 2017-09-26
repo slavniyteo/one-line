@@ -38,7 +38,8 @@ namespace OneLine {
 
         public override void AddSlices(SerializedProperty property, Slices slices){
             DrawHighlight(property, slices, 0, 1);
-            var slice = new Slice(GetWeight(property), GetFixedWidth(property), rect => Draw(rect, property.Copy()));
+            var slice = new Slice(GetWeight(property), GetFixedWidth(property), 
+                                  rect => Draw(rect, property.Copy()));
             slices.Add(slice);
         }
 

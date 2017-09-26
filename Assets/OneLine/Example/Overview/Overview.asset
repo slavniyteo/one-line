@@ -61,15 +61,19 @@ MonoBehaviour:
     third: No matter
     fourth: Yellow
   oneLineArray:
+    first: 
     array:
-    - Element 0
-    - Element 1
-    - Element 2
+    - first: 
+    - first: 
+    - first: 
+    last: 
   twoArraysInOneLine:
     first: 01000000020000000300000004000000
     second:
     - First
     - Second
+  arrayWithComplexFields:
+    array: []
   arrayHidesButtons:
     array:
     - Dublicate
@@ -88,8 +92,18 @@ MonoBehaviour:
     second: tfygy
     third: 
   arrayWithArrays:
-  - array:
-    - 'Second '
-    - "element \u2193"
-    - is empty
-  - array: []
+  - first: 
+    array:
+    - first: 
+    - first: 
+    - first: 
+    - first: 
+    - first: 
+    - first: 
+    last: 
+  - first: 
+    array: []
+    last: 
+  - first: 
+    array: []
+    last: 

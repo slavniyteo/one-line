@@ -35,6 +35,7 @@ namespace OneLine {
         private void DrawChildren(SerializedProperty property, Slices slices){
             GetChildren(property)
                 .ForEachExceptLast((child) => {
+                    spaceDrawer.AddSlices(child, slices);
                     DrawChild(property, child, slices);
 
                     if (NeedDrawSeparator(child)){
@@ -42,6 +43,7 @@ namespace OneLine {
                     }
                 }, 
                 child => {
+                    spaceDrawer.AddSlices(child, slices);
                     DrawChild(property, child, slices);
                 });
         }
@@ -57,7 +59,6 @@ namespace OneLine {
         }
 
         protected virtual void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
-            spaceDrawer.AddSlices(child, slices);
             getDrawer(child).AddSlices(child, slices);
         }
         

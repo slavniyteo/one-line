@@ -9,12 +9,12 @@ namespace OneLine {
         private const float width = 2;
 
         public override void AddSlices(SerializedProperty property, Slices slices){
-            slices.Add(new Slice(0, width, Draw));
+            slices.Add(new Slice(0, width, Draw, Draw));
         }
 
 
         public void Draw (Rect rect){
-            GuiUtil.DrawRect(rect, Color.gray);
+            GuiUtil.DrawRect(rect, GuiUtil.GrayColor);
         }
 
     }

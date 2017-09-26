@@ -1,10 +1,11 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 
 namespace OneLine {
-    [CustomPropertyDrawer(typeof(OneLineAttribute))]
+    [CustomPropertyDrawer(typeof(OneLineAttribute), true)]
     public class OneLinePropertyDrawer : PropertyDrawer {
 
         private Drawer simpleDrawer;
@@ -13,7 +14,7 @@ namespace OneLine {
         private Drawer directoryDrawer;
         private RootDirectoryDrawer rootDirectoryDrawer;
 
-        private SlicesCache slicesCache;
+        private SlicesCache cache;
 
         private new OneLineAttribute attribute { get { return base.attribute as OneLineAttribute; } }
 
@@ -50,11 +51,11 @@ namespace OneLine {
         }
 
         private void ResetCache(){
-            slicesCache = new SlicesCache(rootDirectoryDrawer.AddSlices);
+            cache = new SlicesCache(rootDirectoryDrawer.AddSlices);
         }
 
         private void InvalidateCache(SerializedProperty property){
-            slicesCache.Invalidate(property);
+            cache.Invalidate(property);
         }
 
 #region Height
@@ -81,7 +82,7 @@ namespace OneLine {
             EditorGUI.indentLevel = 0;
 
             position = DrawHeaderIfNeed(position, property);
-            DrawLine(position, property, label);
+            DrawLine(position, property, (slice,rect) => slice.Draw(rect));
 
             EditorGUI.indentLevel = indentLevel;
         }
@@ -90,32 +91,33 @@ namespace OneLine {
             if (! NeedDrawHeader(property)) return position;
 
             var rects = position.SplitV(2);
-            EditorGUI.LabelField(rects[0], "Header is coming soon.");
+            DrawLine(rects[0], property, (slice, rect) => slice.DrawHeader(rect));
+            
             return rects[1];
         }
 
-        private void DrawLine(Rect position, SerializedProperty property, GUIContent label){
-            var slices = slicesCache[property];
+        private void DrawLine(Rect position, SerializedProperty property, Action<Slice, Rect> draw){
+            var slices = cache[property];
             var rects = position.Split(slices.Weights, slices.Widthes, 5);
 
             int rectIndex = 0;
             foreach (var slice in slices){
                 if (slice is MetaSlice){
-                    DrawMetaSlice(slice as MetaSlice, rects, rectIndex);
+                    DrawMetaSlice(slice as MetaSlice, rects, rectIndex, draw);
                 }
                 else {
-                    slice.Draw(rects[rectIndex]);
+                    draw(slice, rects[rectIndex]);
                     rectIndex++;
                 }
             }
         }
 
-        private void DrawMetaSlice(MetaSlice slice, Rect[] rects, int currentRect){
+        private void DrawMetaSlice(MetaSlice slice, Rect[] rects, int currentRect, Action<Slice, Rect> draw){
             var from = rects[currentRect - slice.Before];
             var to = rects[currentRect + slice.After - 1];
             var rect = from.Union(to);
 
-            slice.Draw(rect);
+            draw(slice, rect);
         }
 
 #endregion
