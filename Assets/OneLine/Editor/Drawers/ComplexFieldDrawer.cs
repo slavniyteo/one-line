@@ -23,11 +23,13 @@ namespace OneLine {
 
         public override void AddSlices(SerializedProperty property, Slices slices){
             var count = slices.CountPayload;
-            var highlight = DrawHighlight(property, slices, slices.CountPayload - count, 0);
+            var highlight = DrawHighlight(property, slices, 0, 0);
 
             DrawChildren(property, slices);
             
-            highlight.IfPresent(it => it.After = slices.CountPayload - count);
+            count = slices.CountPayload - count;
+            highlight.IfPresent(it => it.After = count);
+            DrawTooltip(property, slices, count, 0);
         }
 
         private void DrawChildren(SerializedProperty property, Slices slices){

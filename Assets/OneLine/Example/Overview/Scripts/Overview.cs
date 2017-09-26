@@ -12,7 +12,7 @@ namespace OneLine.Examples {
         private OneField oneField;
         [SerializeField, OneLine]
         private TwoFields twoFields;
-        [SerializeField, OneLine]
+        [SerializeField, OneLine, Tooltip("Three fields are here!")]
         private ThreeFields threeFields;
 
         [Serializable]
@@ -31,7 +31,7 @@ namespace OneLine.Examples {
         public class ThreeFields {
             [SerializeField]
             private string first;
-            [SerializeField]
+            [SerializeField, Tooltip("I'm here -- the best second field!")]
             private string second;
             [SerializeField]
             private string third;

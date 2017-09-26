@@ -20,15 +20,13 @@ namespace OneLine {
             return slice;
         }
 
-        protected void DrawTooltip(Rect rect, SerializedProperty child) {
-            string tooltip = child.displayName;
+        protected void DrawTooltip(SerializedProperty property, Slices slices, int before, int after) {
+            var attribute = property.GetCustomAttribute<TooltipAttribute>();
+            if (attribute == null) return;
 
-            var attribute = child.GetCustomAttribute<TooltipAttribute>();
-            if (attribute != null) {
-                tooltip = attribute.tooltip;
-            }
-
-            EditorGUI.LabelField(rect, new GUIContent("", tooltip));
+            var slice = new MetaSlice(before, after,
+                                      rect => EditorGUI.LabelField(rect, new GUIContent("", attribute.tooltip)));
+            slices.Add(slice);
         }
     }
 }
