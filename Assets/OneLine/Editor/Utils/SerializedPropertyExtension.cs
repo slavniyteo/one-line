@@ -30,6 +30,15 @@ namespace OneLine {
             while (copy.Next(false) && copy.depth > depth);
         }
 
+        public static int CountChildrenAndMoveNext(this SerializedProperty property){
+            var depth = property.depth;
+            int result = 0;
+            while (property.NextVisible(true) && property.depth > depth){
+                result++;
+            }
+            return result;
+        }
+
         public static IEnumerable<SerializedProperty> GetArrayElements(this SerializedProperty property) {
             if (!property.isArray || property.propertyType == SerializedPropertyType.String) {
                 string message = string.Format("Property {1} is not array or list", property.displayName);

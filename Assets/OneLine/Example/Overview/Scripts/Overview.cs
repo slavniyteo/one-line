@@ -33,7 +33,7 @@ namespace OneLine.Examples {
             private string first;
             [SerializeField, Tooltip("I'm here -- the best second field!")]
             private string second;
-            [SerializeField]
+            [SerializeField, Separator]
             private string third;
         }
 #endregion

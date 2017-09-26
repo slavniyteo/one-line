@@ -36,11 +36,24 @@ namespace OneLine {
             GetChildren(property)
                 .ForEachExceptLast((child) => {
                     DrawChild(property, child, slices);
-                    separatorDrawer.AddSlices(child, slices);
+
+                    if (NeedDrawSeparator(child)){
+                        separatorDrawer.AddSlices(child, slices);
+                    }
                 }, 
                 child => {
                     DrawChild(property, child, slices);
                 });
+        }
+
+        private bool NeedDrawSeparator(SerializedProperty property){
+            property = property.Copy();
+
+            bool isComplex = property.CountChildrenAndMoveNext() > 1;
+            bool hasAttribute = property.GetCustomAttribute<SeparatorAttribute>() != null;
+            bool nextIsComplex = property.CountChildrenAndMoveNext() > 1;
+            
+            return hasAttribute || isComplex || nextIsComplex;
         }
 
         protected virtual void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
