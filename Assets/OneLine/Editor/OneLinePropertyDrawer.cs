@@ -73,6 +73,7 @@ namespace OneLine {
         }
 
         private bool NeedDrawHeader(SerializedProperty property){
+            if (attribute == null) { return false; }
             if (attribute.Header == LineHeader.None){ return false; }
 
             bool notArray = ! property.IsArrayElement();
