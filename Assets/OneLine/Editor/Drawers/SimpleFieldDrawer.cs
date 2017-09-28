@@ -41,6 +41,7 @@ namespace OneLine {
             var slice = new Slice(GetWeight(property), GetFixedWidth(property), 
                                   rect => Draw(rect, property.Copy()));
             slices.Add(slice);
+            DrawTooltip(property, slices, 1, 0);
         }
 
         public void Draw(Rect rect, SerializedProperty property) {
