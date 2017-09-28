@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using UnityEngine.Profiling;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace OneLine {
         private RootDirectoryDrawer rootDirectoryDrawer;
 
         private SlicesCache cache;
+        private Culler culler;
 
         private new OneLineAttribute attribute { get { return base.attribute as OneLineAttribute; } }
 
@@ -25,6 +27,7 @@ namespace OneLine {
             directoryDrawer = new DirectoryDrawer(GetDrawer);
             rootDirectoryDrawer = new RootDirectoryDrawer(GetDrawer);
 
+            culler = new Culler();
             ResetCache();
             Undo.undoRedoPerformed += ResetCache;
         }
@@ -78,6 +81,9 @@ namespace OneLine {
 #region OnGUI
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+            if (culler.NeedDrop(position)){ return; }
+
+            Profiler.BeginSample("OneLine.OnGUI");
             int indentLevel = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
@@ -85,6 +91,7 @@ namespace OneLine {
             DrawLine(position, property, (slice,rect) => slice.Draw(rect));
 
             EditorGUI.indentLevel = indentLevel;
+            Profiler.EndSample();
         }
 
         private Rect DrawHeaderIfNeed(Rect position, SerializedProperty property){
