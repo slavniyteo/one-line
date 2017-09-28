@@ -9,6 +9,8 @@ namespace OneLine {
 		private Dictionary<string, Slices> cache;
 		private Action<SerializedProperty, Slices> calculate;
 
+		public bool IsDirty { get; private set; }
+
 		public SlicesCache(Action<SerializedProperty, Slices> calculate){
 			cache = new Dictionary<string, Slices>();
 			this.calculate = calculate;
@@ -24,6 +26,7 @@ namespace OneLine {
 					var slices = new Slices();
 					calculate(property, slices);
 					cache.Add(id, slices);
+					IsDirty = true;
 					return slices;
 				}
 			}

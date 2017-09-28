@@ -16,7 +16,7 @@ namespace OneLine {
         private RootDirectoryDrawer rootDirectoryDrawer;
 
         private SlicesCache cache;
-        private Culler culler;
+        private InspectorUtil inspectorUtil;
 
         private new OneLineAttribute attribute { get { return base.attribute as OneLineAttribute; } }
 
@@ -27,7 +27,7 @@ namespace OneLine {
             directoryDrawer = new DirectoryDrawer(GetDrawer);
             rootDirectoryDrawer = new RootDirectoryDrawer(GetDrawer);
 
-            culler = new Culler();
+            inspectorUtil = new InspectorUtil();
             ResetCache();
             Undo.undoRedoPerformed += ResetCache;
         }
@@ -54,7 +54,9 @@ namespace OneLine {
         }
 
         private void ResetCache(){
-            cache = new SlicesCache(rootDirectoryDrawer.AddSlices);
+            if (cache == null || cache.IsDirty){
+                cache = new SlicesCache(rootDirectoryDrawer.AddSlices);
+            }
         }
 
         private void InvalidateCache(SerializedProperty property){
@@ -71,6 +73,8 @@ namespace OneLine {
         }
 
         private bool NeedDrawHeader(SerializedProperty property){
+            if (attribute.Header == LineHeader.None){ return false; }
+
             bool notArray = ! property.IsArrayElement();
             bool firstElement = property.IsArrayElement() && property.IsArrayFirstElement();
             return attribute.Header == LineHeader.Short && (notArray || firstElement);
@@ -81,7 +85,8 @@ namespace OneLine {
 #region OnGUI
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-            if (culler.NeedDrop(position)){ return; }
+            if (inspectorUtil.IsOutOfScreen(position)){ return; }
+            if (inspectorUtil.IsWindowWidthChanged()){ ResetCache(); }
 
             Profiler.BeginSample("OneLine.OnGUI");
             int indentLevel = EditorGUI.indentLevel;
