@@ -19,7 +19,7 @@ namespace OneLine {
                 slices.Add(new Slice(0, EditorGUIUtility.labelWidth - 5, 
                                      rect => IndentWithLabel(rect, property.Copy(), true) ));
             }
-            base.AddSlices(property, slices);
+            getDrawer(property).AddSlices(property, slices);
         }
 
         protected override void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
