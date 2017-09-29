@@ -5,14 +5,15 @@ using OneLine;
 [CreateAssetMenu(menuName = "OneLine/RootArrayExample")]
 public class RootArrayExample : ScriptableObject {
     [SerializeField, OneLine]
-    private ThreeFields[] rootArray;
+    private RootField[] rootArray;
+    [Space]
     [SerializeField, OneLine]
-    private OneLineArray nestedArray;
+    private SingleArray singleNestedArray;
     [SerializeField, OneLine]
     private TwoArrays twoNestedArrays;
 
     [Serializable]
-    public class ThreeFields {
+    public class RootField {
         [SerializeField]
         private string first;
         [SerializeField]
@@ -21,7 +22,7 @@ public class RootArrayExample : ScriptableObject {
         private string third;
     }
     [Serializable]
-    public class OneLineArray {
+    public class SingleArray {
         [SerializeField]
         private string[] array;
     }
@@ -29,7 +30,7 @@ public class RootArrayExample : ScriptableObject {
     public class TwoArrays {
         [SerializeField, Highlight(1, 0, 0)]
         private int[] first;
-        [SerializeField, Highlight(0, 1, 0), Width(50)]
+        [SerializeField, Highlight(0, 1, 0), Width(125)]
         private string[] second;
     }
 }
