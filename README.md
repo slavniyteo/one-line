@@ -112,6 +112,8 @@ public class OneLineExample : ScriptableObject {
 
 ![One Line Attribute Example](mdsrc/one-line-attribute-example.png)
 
+---
+
 ### [WeightAttribute]
 
 `[Weight]` allows you to manage relative sizes of fields. For example, if class contains two fields: short integer ID and long string UUID, you can use `[Weight]` to set UUIDs length equals 8 IDs lenghtes. Added to array, specifies weight of every array element.  
@@ -152,6 +154,8 @@ public class WeightExample : ScriptableObject {
 **Result:**
 
 ![Weight Attribute Example](mdsrc/weight-attribute-example.png)
+
+---
 
 ### [WidthAttribute]
 
@@ -194,6 +198,8 @@ public class WidthExample : ScriptableObject {
 
 ![Width Attribute Example](mdsrc/width-attribute-example.png)
 
+---
+
 ### [HideLabelAttribute]
 
 `[HideLabel]` allows you to hide prefix label in view. It is useful to prevent width looses and draw your data in whole line. It works only with root fields (with nested fields labels aren't drawn). Added to array, hides labels of every array element.
@@ -225,6 +231,8 @@ public class HideLabelExample : ScriptableObject {
 **Result:**
 
 ![Hide Label Attribute Example](mdsrc/hide-label-attribute-example.png)
+
+---
 
 ### [HighlightAttribute]
 
@@ -261,6 +269,8 @@ public class HighlightExample : ScriptableObject {
 **Result:**
 
 ![Highlight Attribute Example](mdsrc/highlight-attribute-example.png)
+
+---
 
 ### Root arrays with `[OneLine]`
 
@@ -311,6 +321,8 @@ public class RootArrayExample : ScriptableObject {
 
 ![Work With Arrays Example](mdsrc/root-array-example.png)
 
+---
+
 ### [HideButtonsAttribute]
 
 `[HideButtons]` hides buttons **+** and **-** from array. It allow you to increase useful space. You may change array size with Right-click drop-down menu. When array contains 0 (zero) elements, button **+** appears, when you click it, buttons dissapears.
@@ -342,6 +354,8 @@ public class HideButtonsExample : ScriptableObject {
 
 ![Hide Buttons Attribute Example](mdsrc/hide-buttons-attribute-example.png)
 
+---
+
 ### [FixedLengthAttribute]
 
 Specifies fixed lenth of array. Useful for need to set up fixed number of integers and you don't want to create a lot of hardcoded fields or you need to iterate them at runtime (it is not nice to iterate fields).  
@@ -370,6 +384,8 @@ public class FixedLengthExample : ScriptableObject {
 **Result:**
 
 ![Fixed Length Attribute Example](mdsrc/fixed-length-array-example.png)
+
+---
 
 ### [SeparatorAttribute]
 
