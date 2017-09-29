@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,29 +9,42 @@ using UnityEngine;
 namespace OneLine {
     internal class SimpleFieldDrawer : Drawer {
 
-        public override float GetWeight(SerializedProperty property){
+        public float GetWeight(SerializedProperty property){
             switch (property.propertyType){
                 case SerializedPropertyType.Boolean: {
                     return 0;
                 }
                 default: {
-                    return base.GetWeight(property);
+                    var weights = property.GetCustomAttributes<WeightAttribute>()
+                                        .Select(x => x.Weight)
+                                        .ToArray();
+                    return weights.Length > 0 ? weights.Sum() : 1;
                 }
             }
         }
 
-        public override float GetFixedWidth(SerializedProperty property){
+        public float GetFixedWidth(SerializedProperty property){
             switch (property.propertyType){
                 case SerializedPropertyType.Boolean: {
                     return EditorGUIUtility.singleLineHeight - 2;
                 }
                 default: {
-                    return base.GetFixedWidth(property);
+                    return property.GetCustomAttributes<WidthAttribute>()
+                                .Select(x => x.Width)
+                                .Sum();
                 }
             }
         }
 
-        public override void Draw(Rect rect, SerializedProperty property) {
+        public override void AddSlices(SerializedProperty property, Slices slices){
+            DrawHighlight(property, slices, 0, 1);
+            var slice = new Slice(GetWeight(property), GetFixedWidth(property), 
+                                  rect => Draw(rect, property.Copy()));
+            slices.Add(slice);
+            DrawTooltip(property, slices, 1, 0);
+        }
+
+        public void Draw(Rect rect, SerializedProperty property) {
             EditorGUI.BeginProperty(rect, GUIContent.none, property);
             DrawProperty(rect, property);
             EditorGUI.EndProperty();

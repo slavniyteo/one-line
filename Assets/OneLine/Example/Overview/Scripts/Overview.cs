@@ -12,7 +12,7 @@ namespace OneLine.Examples {
         private OneField oneField;
         [SerializeField, OneLine]
         private TwoFields twoFields;
-        [SerializeField, OneLine]
+        [SerializeField, OneLine, Tooltip("Three fields are here!")]
         private ThreeFields threeFields;
 
         [Serializable]
@@ -31,9 +31,9 @@ namespace OneLine.Examples {
         public class ThreeFields {
             [SerializeField]
             private string first;
-            [SerializeField]
+            [SerializeField, Space(25), Tooltip("I'm here -- the best second field!")]
             private string second;
-            [SerializeField]
+            [SerializeField, Separator]
             private string third;
         }
 #endregion
@@ -99,7 +99,9 @@ namespace OneLine.Examples {
 #region Highlight
         [Separator("[ Highlight Attribute ]")]
         [SerializeField, OneLine, Highlight]
-        private OneField highlightedZeroDepthField;
+        private TwoFields highlightedRootField;
+        [SerializeField, OneLine, Highlight, HideLabel]
+        private ThreeFields highlightAndHideLabel;
         [SerializeField, OneLine]
         private HighlightedFields highlightedFields;
         [SerializeField, OneLine]
@@ -125,18 +127,29 @@ namespace OneLine.Examples {
         [SerializeField, OneLine]
         private TwoArrays twoArraysInOneLine;
         [SerializeField, OneLine]
+        private ComplexArray arrayWithComplexFields;
+        [SerializeField, OneLine]
         private ArrayHidesButtons arrayHidesButtons;
         [SerializeField, OneLine]
         private ImmutableLengthArray arrayWithImmutableLength;
         [SerializeField, OneLine(Header = LineHeader.Short)]
         private ThreeFields[] array;
-        [SerializeField, OneLine]
+        [SerializeField, OneLine(Header = LineHeader.Short)]
         private OneLineArray[] arrayWithArrays;
 
         [Serializable]
         public class OneLineArray {
             [SerializeField]
-            private string[] array;
+            private string first;
+            [SerializeField]
+            private OneField[] array;
+            [SerializeField]
+            private string last;
+        }
+        [Serializable]
+        public class ComplexArray {
+            [SerializeField]
+            private TwoFields[] array;
         }
         [Serializable]
         public class TwoArrays {

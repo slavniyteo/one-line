@@ -7,16 +7,22 @@ using UnityEngine;
 namespace OneLine {
     internal class ArrayButtonsDrawer : Drawer {
 
-        #region Width
+        private Action<SerializedProperty> notifyChange;
 
-        public override float GetWeight(SerializedProperty property) {
-            bool needDrawLabel = NeedDrawLabel(property);
-            bool needDrawButtons = NeedDrawButtons(property);
-            return needDrawLabel && !needDrawButtons ? 1 : 0;
+        public ArrayButtonsDrawer(Action<SerializedProperty> notifyChange){
+            this.notifyChange = notifyChange;
         }
 
-        public override float GetFixedWidth(SerializedProperty property) {
-            return NeedDrawButtons(property) ? 45 : 0;
+        #region Width
+
+        public override void AddSlices(SerializedProperty property, Slices slices){
+            if (NeedDrawButtons(property)){
+                slices.Add(new Slice(0, 20, rect => DrawPlusButton(rect, property.Copy())));
+                slices.Add(new Slice(0, 20, rect => DrawMinusButton(rect, property.Copy())));
+            }
+            else if (NeedDrawLabel(property)){
+                slices.Add(new Slice(1,0, rect => DrawLabel(rect, property.Copy())));
+            }
         }
 
         private bool NeedDrawButtons(SerializedProperty property) {
@@ -30,32 +36,27 @@ namespace OneLine {
 
         #endregion
 
-        public override void Draw(Rect rect, SerializedProperty array) {
-            if (NeedDrawButtons(array)) {
-                DrawButtons(rect, array);
-            }
-            else if (NeedDrawLabel(array)) {
-                DrawLabel(rect, array);
-            }
-        }
-
         public void DrawLabel(Rect rect, SerializedProperty array) {
             var rects = rect.Split(new float[] { 1, 0 }, new float[] { 0, 20 });
 
             EditorGUI.LabelField(rects[0], array.displayName);
             if (GUI.Button(rects[1], "+")) {
                 array.InsertArrayElementAtIndex(0);
+                notifyChange(array);
             }
         }
 
-        public void DrawButtons(Rect rect, SerializedProperty array) {
-            var rects = rect.Split(new float[] { 0, 0 }, new float[] { 20, 20 });
-
-            if (GUI.Button(rects[0], "+")) {
+        public void DrawPlusButton(Rect rect, SerializedProperty array) {
+            if (GUI.Button(rect, "+")) {
                 array.InsertArrayElementAtIndex(array.arraySize);
+                notifyChange(array);
             }
-            if (array.arraySize > 0 && GUI.Button(rects[1], "-")) {
+        }
+
+        public void DrawMinusButton(Rect rect, SerializedProperty array) {
+            if (array.arraySize > 0 && GUI.Button(rect, "-")) {
                 array.DeleteArrayElementAtIndex(array.arraySize - 1);
+                notifyChange(array);
             }
         }
     }

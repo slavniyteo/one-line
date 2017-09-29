@@ -19,7 +19,7 @@ namespace OneLine {
             copy.Next(true);
             do {
                 string lastPath = copy.propertyPath;
-                yield return copy;
+                yield return copy.Copy();
 
                 if (copy.propertyPath != lastPath) {
                     var message =
@@ -30,8 +30,21 @@ namespace OneLine {
             while (copy.Next(false) && copy.depth > depth);
         }
 
+        public static int CountChildrenAndMoveNext(this SerializedProperty property){
+            var depth = property.depth;
+            int result = 0;
+            while (property.NextVisible(true) && property.depth > depth){
+                result++;
+            }
+            return result;
+        }
+
+        public static bool IsReallyArray(this SerializedProperty property){
+            return property.isArray && property.propertyType != SerializedPropertyType.String;
+        }
+
         public static IEnumerable<SerializedProperty> GetArrayElements(this SerializedProperty property) {
-            if (!property.isArray || property.propertyType == SerializedPropertyType.String) {
+            if (!property.IsReallyArray()) {
                 string message = string.Format("Property {1} is not array or list", property.displayName);
                 throw new InvalidOperationException(message);
             }
@@ -45,7 +58,7 @@ namespace OneLine {
                     string message = string.Format("Property path {1} is changed during iteration", property.displayName);
                     throw new InvalidOperationException(message);
                 }
-                yield return property.GetArrayElementAtIndex(i);
+                yield return property.GetArrayElementAtIndex(i).Copy();
             }
         }
 
@@ -109,17 +122,6 @@ namespace OneLine {
         public static bool IsArrayFirstElement(this SerializedProperty property){
             var path = property.propertyPath;
             return path.Substring(path.Length - 3, 3) == "[0]" ;
-        }
-
-        public static IEnumerable<TResult> Merge<TFirst, TSecond, TResult> (this IEnumerable<TFirst> first,
-                                                                            IEnumerable<TSecond> second,
-                                                                            Func<TFirst, TSecond, TResult> selector){
-            var firstEnumerator = first.GetEnumerator();
-            var secondEnumerator = second.GetEnumerator();
-            while (firstEnumerator.MoveNext() && secondEnumerator.MoveNext()){
-
-                yield return selector(firstEnumerator.Current, secondEnumerator.Current);
-            }
         }
 
     }

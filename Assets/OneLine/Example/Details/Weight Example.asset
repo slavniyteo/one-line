@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c9e2fe1d546114781a6a8a361b52d8, type: 3}
   m_Name: Weight Example
   m_EditorClassIdentifier: 
-  differentWeights:
+  root:
     first: 3
     second: 2
     third: 1
+    forth:
+      first: 100

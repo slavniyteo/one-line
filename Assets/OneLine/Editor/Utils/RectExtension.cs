@@ -7,6 +7,27 @@ using UnityEngine;
 namespace OneLine {
     internal static class RectExtension {
 
+        public static Rect Union(this Rect rect, params Rect[] other){
+            if (other == null || other.Length == 0){
+                return rect;
+            }
+            else if (other[0] == rect){
+                return rect;
+            }
+            else {
+                var xMin = Math.Min(rect.xMin, other.Select(x => x.xMin).Aggregate((x,y) => Math.Min(x,y)));
+                var yMin = Math.Min(rect.yMin, other.Select(x => x.yMin).Aggregate((x,y) => Math.Min(x,y)));
+                var xMax = Math.Max(rect.xMax, other.Select(x => x.xMax).Aggregate((x,y) => Math.Max(x,y)));
+                var yMax = Math.Max(rect.yMax, other.Select(x => x.yMax).Aggregate((x,y) => Math.Max(x,y)));
+                return new Rect(
+                    x: xMin,
+                    y: yMin,
+                    width: xMax - xMin,
+                    height: yMax - yMin
+                );
+            }
+        }
+
         public static Rect Expand(this Rect rect, float bounds){
             return new Rect(
                 x: rect.x - bounds,
@@ -123,7 +144,7 @@ namespace OneLine {
             if (fixedWidthes == null){
                 fixedWidthes = weights.Select(x => 0f);
             }
-            var cells = weights.Merge(fixedWidthes, (weight, width) => new Cell(weight, width));
+            var cells = weights.Merge(fixedWidthes, (weight, width) => new Cell(weight, width)).Where( cell => cell.HasWidth);
 
             float weightUnit = GetWeightUnit(rect.width, cells, space);
 

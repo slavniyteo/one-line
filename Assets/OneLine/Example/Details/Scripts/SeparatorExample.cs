@@ -7,6 +7,7 @@ public class SeparatorExample : ScriptableObject {
     [SerializeField, OneLine]
     private TwoFields first;
 
+    [Space]
     [SerializeField, Separator("[ Separator separates ]"), OneLine]
     private TwoFields second;
 

@@ -8,46 +8,33 @@ using UnityEngine;
 namespace OneLine {
     internal class DynamicArrayDrawer : FixedArrayDrawer {
         private Drawer buttons;
+        private Action<SerializedProperty> notifyChange;
 
-        public DynamicArrayDrawer(DrawerProvider getDrawer) : base(getDrawer) {
-            buttons = new ArrayButtonsDrawer();
+        public DynamicArrayDrawer(DrawerProvider getDrawer, Action<SerializedProperty> notifyChange) : base(getDrawer) {
+            buttons = new ArrayButtonsDrawer(notifyChange);
+            this.notifyChange = notifyChange;
         }
 
-        #region Width
-
-        protected override float[] GetWeights(SerializedProperty property) {
-            List<float> result = base.GetWeights(property).ToList();
-            result.Add(buttons.GetWeight(property));
-            return result.ToArray();
+        public override void AddSlices(SerializedProperty property, Slices slices){
+            base.AddSlices(property, slices);
+            buttons.AddSlices(property, slices);
         }
 
-        protected override float[] GetFixedWidthes(SerializedProperty property) {
-            List<float> result = base.GetFixedWidthes(property).ToList();
-            result.Add(buttons.GetFixedWidth(property));
-            return result.ToArray();
-        }
-
-        #endregion
-
-        #region Draw
-
-        public override void Draw(Rect rect, SerializedProperty property) {
-            base.Draw(rect, property);
-
-            Rect[] rects = SplitRects(rect, property);
-            buttons.Draw(rects[property.arraySize], property);
-        }
-
-        protected override int GetLength(SerializedProperty property) {
+        protected override int ModifyLength(SerializedProperty property) {
             return property.arraySize;
         }
 
-        protected override void DrawField(Rect rect, SerializedProperty element) {
-            DrawElementContextMenu(rect, element);
-            base.DrawField(rect, element);
+        protected override void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
+            var count = slices.CountPayload;
+            var contextMenu = new MetaSlice(0, 0, rect => DrawElementContextMenu(rect, parent, child));
+            slices.Add(contextMenu);
+
+            base.DrawChild(parent, child, slices);
+
+            contextMenu.After = slices.CountPayload - count;
         }
 
-        private void DrawElementContextMenu(Rect rect, SerializedProperty element) {
+        private void DrawElementContextMenu(Rect rect, SerializedProperty parent, SerializedProperty element) {
             Event current = Event.current;
             if (current.type == EventType.ContextClick && rect.Contains(current.mousePosition)) {
                 current.Use();
@@ -58,17 +45,16 @@ namespace OneLine {
                 menu.AddItem(new GUIContent("Dublicate"), false, () => {
                     element.DuplicateCommand();
                     element.serializedObject.ApplyModifiedProperties();
+                    notifyChange(parent);
                 });
                 menu.AddItem(new GUIContent("Delete"), false, () => {
                     element.DeleteCommand();
                     element.serializedObject.ApplyModifiedProperties();
+                    notifyChange(parent);
                 });
                 menu.DropDown(rect);
             }
         }
-
-
-        #endregion
 
     }
 }

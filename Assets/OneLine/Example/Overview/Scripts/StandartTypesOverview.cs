@@ -6,14 +6,22 @@ namespace OneLine {
 [CreateAssetMenu]
 public class StandartTypesOverview : ScriptableObject {
 
-    [OneLine]
+    [Separator("Pure types"),OneLineWithHeader, HideLabel]
     public PureClasses pure;
-    [OneLine]
+
+    [Separator, Space(25), Separator("Colors and reference")]
+    [OneLineWithHeader, HideLabel]
     public FirstUnity first;
-    [OneLine]
+
+    [Separator, Space(25), Separator("Enumerators and Curves")]
+    [OneLineWithHeader, HideLabel]
     public SecondUnity second;
-    [OneLine]
+
+    [Separator, Space(25), Separator("Enumerators and Curves")]
+    [OneLineWithHeader, HideLabel]
     public ThirdUnity third;
+
+    [Separator, Space(25), Separator("Other")]
     [OneLine]
     public Matrix4x4 matrixField;
     [OneLine]
@@ -48,6 +56,7 @@ public class StandartTypesOverview : ScriptableObject {
 
     [Serializable]
     public class ThirdUnity {
+        public float floatField;
         public Vector2 vector2Field;
         public Vector3 vector3Field;
         public Vector4 vector4Field;

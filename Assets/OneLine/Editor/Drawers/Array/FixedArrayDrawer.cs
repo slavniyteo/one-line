@@ -15,16 +15,12 @@ namespace OneLine {
             return property.GetArrayElements();
         }
 
-        public override void Draw(Rect rect, SerializedProperty property) {
-            GetLength(property);
-            base.Draw(rect, property);
+        public override void AddSlices(SerializedProperty property, Slices slices){
+            ModifyLength(property);
+            base.AddSlices(property, slices);
         }
 
-        protected override void DrawField(Rect rect, SerializedProperty element) {
-            getDrawer(element).Draw(rect, element);
-        }
-
-        protected virtual int GetLength(SerializedProperty property) {
+        protected virtual int ModifyLength(SerializedProperty property) {
             var attribute = property.GetCustomAttribute<ArrayLengthAttribute>();
             if (attribute == null) {
                 var message = string.Format("Can not find ArrayLengthAttribute at property {1)", property.propertyPath);

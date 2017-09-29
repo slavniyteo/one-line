@@ -7,10 +7,8 @@ using UnityEngine;
 namespace OneLine {
     internal abstract class ComplexFieldDrawer : Drawer {
 
-        private const float SPACE = 5;
-        private FieldDecorator[] fieldDecorators = new FieldDecorator[] {
-            new SeparateDecorator()
-        };
+        private SeparatorDrawer separatorDrawer = new SeparatorDrawer();
+        private SpaceDrawer spaceDrawer = new SpaceDrawer();
 
         internal delegate Drawer DrawerProvider(SerializedProperty property);
         protected DrawerProvider getDrawer;
@@ -23,53 +21,50 @@ namespace OneLine {
 
         #region Weights
 
-        public override float GetWeight(SerializedProperty property) {
-            float multiplier = base.GetWeight(property);
-            float children = GetWeights(property).Sum(x => x * multiplier);
-            float decorators = fieldDecorators .Sum(x => x.GetWeight(property));
+        public override void AddSlices(SerializedProperty property, Slices slices){
+            var count = slices.CountPayload;
+            var highlight = DrawHighlight(property, slices, 0, 0);
 
-            return children + decorators;
+            DrawChildren(property, slices);
+            
+            count = slices.CountPayload - count;
+            highlight.IfPresent(it => it.After = count);
+            DrawTooltip(property, slices, count, 0);
         }
 
-        protected virtual float[] GetWeights(SerializedProperty property) {
-            return GetChildren(property)
-                   .Select(x => getDrawer(x).GetWeight(x))
-                   .ToArray();
+        private void DrawChildren(SerializedProperty property, Slices slices){
+            GetChildren(property)
+                .ForEachExceptLast((child) => {
+                    spaceDrawer.AddSlices(child, slices);
+                    DrawChild(property, child, slices);
+
+                    if (NeedDrawSeparator(child)){
+                        separatorDrawer.AddSlices(child, slices);
+                    }
+                }, 
+                child => {
+                    spaceDrawer.AddSlices(child, slices);
+                    DrawChild(property, child, slices);
+                });
         }
 
-        public override float GetFixedWidth(SerializedProperty property) {
-            float width = base.GetFixedWidth(property);
-            float children = GetFixedWidthes(property).Sum(x => x + SPACE) - SPACE;
-            float decorators = fieldDecorators .Sum(x => x.GetFixedWidth(property));
+        private bool NeedDrawSeparator(SerializedProperty property){
+            property = property.Copy();
 
-            return Math.Max(width, children) + decorators;
+            bool isArray = property.IsReallyArray();
+            bool isComplex = property.CountChildrenAndMoveNext() > 1;
+            bool hasAttribute = property.GetCustomAttribute<SeparatorAttribute>() != null;
+            bool nextIsArray = property.IsReallyArray();
+            bool nextIsComplex = property.CountChildrenAndMoveNext() > 1;
+            
+            return hasAttribute || isComplex || nextIsComplex || isArray || nextIsArray;
         }
 
-        protected virtual float[] GetFixedWidthes(SerializedProperty property) {
-            return GetChildren(property)
-                   .Select(x => getDrawer(x).GetFixedWidth(x))
-                   .ToArray();
+        protected virtual void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
+            getDrawer(child).AddSlices(child, slices);
         }
-
-        protected Rect[] SplitRects(Rect rect, SerializedProperty property) {
-            return rect.Split(GetWeights(property), GetFixedWidthes(property), SPACE);
-        }
-
+        
         #endregion
-
-        public override void Draw(Rect rect, SerializedProperty property) {
-            var rects = SplitRects(rect, property);
-            int i = 0;
-            foreach (var child in GetChildren(property)) {
-                foreach (var decorator in fieldDecorators){
-                    rects[i] = decorator.Draw(rects, i, child);
-                }
-                DrawField(rects[i], child);
-                i++;
-            }
-        }
-
-        protected abstract void DrawField(Rect rect, SerializedProperty property);
 
     }
 }

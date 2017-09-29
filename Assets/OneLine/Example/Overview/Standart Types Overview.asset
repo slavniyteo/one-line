@@ -13,27 +13,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pure:
     integerField: 542
+    longField: 0
     floatField: 2
     doubleField: 212314
     booleanField: 1
     stringField: 65777164
   first:
-    colorField:
-      r: 0.38235295
-      g: 0.12370243
-      b: 0.12370243
-      a: 0
-    color32Field: {}
+    colorField: {r: 0.38235295, g: 0.12370243, b: 0.12370243, a: 0}
+    color32Field:
+      serializedVersion: 2
+      rgba: 0
     objectField: {fileID: 0}
   second:
-    layerMaskField: {}
+    layerMaskField:
+      serializedVersion: 2
+      m_Bits: 0
     enumField: 16
     curveField:
-      m_Curve: []
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
-      m_RotationOrder: 4
+      m_RotationOrder: 0
   third:
+    floatField: 0
     vector2Field: {x: 0, y: 0}
     vector3Field: {x: 0, y: 0, z: 0}
     vector4Field: {x: 0, y: 0, z: 0, w: 0}
@@ -55,6 +70,7 @@ MonoBehaviour:
     e32: 0
     e33: 0
   rectField:
+    serializedVersion: 2
     x: 0
     y: 0
     width: 0

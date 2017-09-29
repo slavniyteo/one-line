@@ -8,9 +8,9 @@ namespace OneLine {
 
         private new SeparatorAttribute attribute { get { return base.attribute as SeparatorAttribute; }}
 
-        private Color color = new Color(0.3f, 0.3f, 0.3f, 1);
+        private Color Color { get { return GuiUtil.GrayColor; } }
         private GUIStyle textStyle;
-        private const float spaceBefore = 10;
+        private const float spaceBefore = 0;
 
         public override float GetHeight(){
             return spaceBefore + Mathf.Max(attribute.Thickness, EditorGUIUtility.singleLineHeight + 5);
@@ -42,7 +42,7 @@ namespace OneLine {
 
             textStyle = new GUIStyle();
             textStyle.fontStyle = FontStyle.Bold;
-            textStyle.normal.textColor = color;
+            textStyle.normal.textColor = Color;
             textStyle.alignment = TextAnchor.MiddleCenter;
         }
 
@@ -52,7 +52,7 @@ namespace OneLine {
         private void DrawLine(Rect rect, int thickness){
             rect.y += (rect.height - thickness) / 2;
             rect.height = thickness;
-            GuiUtil.DrawRect(rect, color);
+            GuiUtil.DrawRect(rect, Color);
         }
     }
 }

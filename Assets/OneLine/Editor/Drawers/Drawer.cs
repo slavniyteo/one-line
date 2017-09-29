@@ -8,24 +8,25 @@ using UnityEngine;
 namespace OneLine {
     internal abstract class Drawer {
 
-        public virtual float GetWeight(SerializedProperty property) {
-            var weights = property.GetCustomAttributes<WeightAttribute>()
-                                  .Select(x => x.Weight)
-                                  .ToArray();
-            return weights.Length > 0 ? weights.Sum() : 1;
+        public abstract void AddSlices(SerializedProperty property, Slices slices);
+
+        protected MetaSlice DrawHighlight(SerializedProperty property, Slices slices, int before, int after) {
+            var attribute = property.GetCustomAttribute<HighlightAttribute>();
+            if (attribute == null) return null;
+
+            var slice = new MetaSlice(before, after, 
+                                      rect => GuiUtil.DrawRect(rect.Expand(1), attribute.Color));
+            slices.Add(slice);
+            return slice;
         }
 
-        public virtual float GetFixedWidth(SerializedProperty property) {
-            return property.GetCustomAttributes<WidthAttribute>()
-                           .Select(x => x.Width)
-                           .Sum();
-        }
+        protected void DrawTooltip(SerializedProperty property, Slices slices, int before, int after) {
+            var attribute = property.GetCustomAttribute<TooltipAttribute>();
+            if (attribute == null) return;
 
-        public abstract void Draw(Rect rect, SerializedProperty property);
-
-        protected void DrawHighlight(Rect rect, SerializedProperty property) {
-            property.GetCustomAttribute<HighlightAttribute>()
-                    .IfPresent(x => GuiUtil.DrawRect(rect.Expand(1), x.Color));
+            var slice = new MetaSlice(before, after,
+                                      rect => EditorGUI.LabelField(rect, new GUIContent("", attribute.tooltip)));
+            slices.Add(slice);
         }
     }
 }
