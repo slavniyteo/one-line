@@ -139,12 +139,12 @@ public class WeightExample : ScriptableObject {
         private int second;
         [SerializeField] // by default weight == 1
         private int third;
-        [SerializeField, Weight(10)]
-        private NestedField forth;
+        [SerializeField, Weight(100)] // Does not work with complex fields
+        private ComplexField forth;
     }
 
     [Serializable]
-    public class NestedField {
+    public class ComplexField {
         [SerializeField]
         private int first;
     }
@@ -182,12 +182,12 @@ public class WidthExample : ScriptableObject {
         private string second;
         [SerializeField, Weight(2), Width(25)]
         private string third;
-        [SerializeField, Width(10000000)]
-        private NestedField forth;
+        [SerializeField, Width(10000000)] // Does not work with complex fields
+        private ComplexField forth;
     }
 
     [Serializable]
-    public class NestedField {
+    public class ComplexField {
         [SerializeField]
         private string first;
     }
