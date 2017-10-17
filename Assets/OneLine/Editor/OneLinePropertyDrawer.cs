@@ -17,6 +17,7 @@ namespace OneLine {
 
         private SlicesCache cache;
         private InspectorUtil inspectorUtil;
+        private ArraysSizeObserver arraysSizeObserver;
 
         private new OneLineAttribute attribute { get { return base.attribute as OneLineAttribute; } }
 
@@ -30,6 +31,7 @@ namespace OneLine {
             inspectorUtil = new InspectorUtil();
             ResetCache();
             Undo.undoRedoPerformed += ResetCache;
+            arraysSizeObserver = new ArraysSizeObserver();
         }
 
         private void OnDestroy(){
@@ -88,6 +90,7 @@ namespace OneLine {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             if (inspectorUtil.IsOutOfScreen(position)){ return; }
             if (inspectorUtil.IsWindowWidthChanged()){ ResetCache(); }
+            if (arraysSizeObserver.IsArraySizeChanged(property)){ ResetCache(); }
 
             Profiler.BeginSample("OneLine.OnGUI");
             int indentLevel = EditorGUI.indentLevel;
