@@ -4,7 +4,7 @@ OneLine improves your databases and makes it more readable by people. It draws o
 
 # TL;DR
 
-- After importing look at `Assets/Example/Example.asset` and open it in InspectorWindow. It will show you all capabilities of OneLine library.
+- After importing look at `Assets/OneLine/Example/Overview/Overview.asset` and open it in InspectorWindow. It will show you all capabilities of OneLine library.
 - In your code, add `using OneLine;` and add `[OneLine]` to fields you want to draw into one line. Note that internal fields don't need `OneLine`: they will be processed automatically.
 - If you want to customize onelined fields, use **Width**, **Weight**, **HideLabel**, **Highlight**, **HideButtons** and **ArrayLength** attributes (see **Example.asset**).
 - Use **Separator** attribute to separate different fields.
@@ -139,12 +139,12 @@ public class WeightExample : ScriptableObject {
         private int second;
         [SerializeField] // by default weight == 1
         private int third;
-        [SerializeField, Weight(10)]
-        private NestedField forth;
+        [SerializeField, Weight(100)] // Does not work with complex fields
+        private ComplexField forth;
     }
 
     [Serializable]
-    public class NestedField {
+    public class ComplexField {
         [SerializeField]
         private int first;
     }
@@ -182,12 +182,12 @@ public class WidthExample : ScriptableObject {
         private string second;
         [SerializeField, Weight(2), Width(25)]
         private string third;
-        [SerializeField, Width(10000000)]
-        private NestedField forth;
+        [SerializeField, Width(10000000)] // Does not work with complex fields
+        private ComplexField forth;
     }
 
     [Serializable]
-    public class NestedField {
+    public class ComplexField {
         [SerializeField]
         private string first;
     }
