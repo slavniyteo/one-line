@@ -67,7 +67,7 @@ namespace OneLine.Examples {
         [Separator("[ Width Attribute ]")]
         [SerializeField, OneLine]
         private WidthAndWeight fixedWidth;
-        [SerializeField, OneLine]
+        [SerializeField, OneLine(Header = LineHeader.Short)]
         private WidthOnly onlyFixedWidth;
 
         [Serializable]
@@ -136,6 +136,8 @@ namespace OneLine.Examples {
         private ThreeFields[] array;
         [SerializeField, OneLine(Header = LineHeader.Short)]
         private OneLineArray[] arrayWithArrays;
+        [SerializeField, OneLine(Header = LineHeader.Short)]
+        private OneLineArrayWithHeader[] arrayWithArraysWithHeader;
 
         [Serializable]
         public class OneLineArray {
@@ -145,6 +147,13 @@ namespace OneLine.Examples {
             private OneField[] array;
             [SerializeField]
             private string last;
+        }
+        [Serializable]
+        public class OneLineArrayWithHeader {
+            [SerializeField, Width(50)]
+            private string first;
+            [SerializeField, Width(50)]
+            private string[] array;
         }
         [Serializable]
         public class ComplexArray {

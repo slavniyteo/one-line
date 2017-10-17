@@ -119,7 +119,8 @@ namespace OneLine {
             int rectIndex = 0;
             foreach (var slice in slices){
                 if (slice is MetaSlice){
-                    DrawMetaSlice(slice as MetaSlice, rects, rectIndex, draw);
+                    var rect = CalculateMetaSliceRect(slice as MetaSlice, position, rects, rectIndex);
+                    draw(slice, rect);
                 }
                 else {
                     draw(slice, rects[rectIndex]);
@@ -128,12 +129,16 @@ namespace OneLine {
             }
         }
 
-        private void DrawMetaSlice(MetaSlice slice, Rect[] rects, int currentRect, Action<Slice, Rect> draw){
+        private Rect CalculateMetaSliceRect(MetaSlice slice, Rect wholeRect, Rect[] rects, int currentRect){
             var from = rects[currentRect - slice.Before];
             var to = rects[currentRect + slice.After - 1];
-            var rect = from.Union(to);
+            var result = from.Union(to);
 
-            draw(slice, rect);
+            if (slice.Expand && rects.Length == currentRect) {
+                result.xMax = wholeRect.xMax;
+            }
+
+            return result;
         }
 
 #endregion

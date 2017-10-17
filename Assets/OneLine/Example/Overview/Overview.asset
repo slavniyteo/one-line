@@ -95,11 +95,6 @@ MonoBehaviour:
   - first: 
     array:
     - first: 
-    - first: 
-    - first: 
-    - first: 
-    - first: 
-    - first: 
     last: 
   - first: 
     array: []
@@ -107,3 +102,28 @@ MonoBehaviour:
   - first: 
     array: []
     last: 
+  arrayWithArraysWithHeader:
+  - first: 
+    array:
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 

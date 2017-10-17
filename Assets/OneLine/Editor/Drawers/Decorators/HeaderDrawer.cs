@@ -16,11 +16,15 @@ namespace OneLine {
         }
 
         public override void AddSlices(SerializedProperty property, Slices slices){
-            AddSlices(0, 1, property, slices);
+            throw new InvalidOperationException();
         }
 
-        public void AddSlices(int before, int after, SerializedProperty property, Slices slices){
-            var slice = new MetaSlice(before, after, null, rect => DrawHeader(rect, property.displayName));
+        public void AddSlices(int before, int after, SerializedProperty property, Slices slices, bool isLast){
+            bool expand = isLast && 
+                          property.IsReallyArray() && 
+                          property.GetCustomAttribute<ArrayLengthAttribute>() == null;
+
+            var slice = new MetaSlice(before, after, null, rect => DrawHeader(rect, property.displayName), expand);
             slices.Add(slice);
         }
 
