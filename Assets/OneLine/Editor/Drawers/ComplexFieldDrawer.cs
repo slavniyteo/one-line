@@ -9,6 +9,7 @@ namespace OneLine {
 
         private SeparatorDrawer separatorDrawer = new SeparatorDrawer();
         private SpaceDrawer spaceDrawer = new SpaceDrawer();
+        private HeaderDrawer headerDrawer = new HeaderDrawer();
 
         internal delegate Drawer DrawerProvider(SerializedProperty property);
         protected DrawerProvider getDrawer;
@@ -35,17 +36,31 @@ namespace OneLine {
         private void DrawChildren(SerializedProperty property, Slices slices){
             GetChildren(property)
                 .ForEachExceptLast((child) => {
-                    spaceDrawer.AddSlices(child, slices);
-                    DrawChild(property, child, slices);
+                    DrawChildWithDecorators(property, child, slices);
 
                     if (NeedDrawSeparator(child)){
                         separatorDrawer.AddSlices(child, slices);
                     }
                 }, 
-                child => {
-                    spaceDrawer.AddSlices(child, slices);
-                    DrawChild(property, child, slices);
-                });
+                child => DrawChildWithDecorators(property, child, slices)
+            );
+        }
+
+        private void DrawChildWithDecorators(SerializedProperty parent, SerializedProperty child, Slices slices){
+            int count = slices.CountPayload;
+
+            spaceDrawer.AddSlices(child, slices);
+            DrawChild(parent, child, slices);
+
+            if (NeedDrawHeader(parent, child)){
+                headerDrawer.AddSlices(slices.CountPayload - count, 0, child, slices);
+            }
+        }
+
+        private bool NeedDrawHeader(SerializedProperty parent, SerializedProperty child){
+            bool parentIsRootArray = child.depth == 2 && parent.IsArrayElement();
+            bool parentIsRootField = child.depth == 1;
+            return parentIsRootArray || parentIsRootField;
         }
 
         private bool NeedDrawSeparator(SerializedProperty property){
@@ -53,11 +68,14 @@ namespace OneLine {
 
             bool isArray = property.IsReallyArray();
             bool isComplex = property.CountChildrenAndMoveNext() > 1;
-            bool hasAttribute = property.GetCustomAttribute<SeparatorAttribute>() != null;
+
+            bool nextHasAttribute = property.GetCustomAttribute<SeparatorAttribute>() != null;
             bool nextIsArray = property.IsReallyArray();
             bool nextIsComplex = property.CountChildrenAndMoveNext() > 1;
             
-            return hasAttribute || isComplex || nextIsComplex || isArray || nextIsArray;
+            return nextHasAttribute || 
+                   isComplex || nextIsComplex || 
+                   isArray || nextIsArray;
         }
 
         protected virtual void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
