@@ -18,7 +18,7 @@ MonoBehaviour:
   - first: (2,1)
     second: (2,2)
     third: (2,3)
-  nestedArray:
+  singleNestedArray:
     array:
     - First
     - Second

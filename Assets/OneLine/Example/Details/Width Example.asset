@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31857a9f7779c6647b8c9fe564a1ecd6, type: 3}
   m_Name: Width Example
   m_EditorClassIdentifier: 
-  fixedWidth:
-    first: width=75
-    second: pure
-    third: weight=2 && width=50
+  root:
+    first: 75
+    second: 0
+    third: width = 2 && weight = 25
+    forth:
+      first: 10000000

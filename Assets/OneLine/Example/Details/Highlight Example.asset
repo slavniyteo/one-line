@@ -11,9 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e774d9b45b94902418f10969eda29a4f, type: 3}
   m_Name: Highlight Example
   m_EditorClassIdentifier: 
-  rootField: 
+  rootField: A am red
   nestedFields:
-    first: 
-    second: 
-    third: 
-    fourth: 
+    first: Green
+    second: Blue
+    third: No matter
+    fourth: Yellow
