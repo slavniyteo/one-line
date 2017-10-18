@@ -2,11 +2,11 @@ using System;
 
 namespace OneLine {
     ///<summary>
-    ///Defines additive fixed width (in GUI pixels) on marked field in the line.
+    ///Defines additive fixed width (in GUI units) on marked field in the line.
     ///By default sets weight of field to 0.
-    ///Available only on d1+fields and has no effect on d0.
-    ///If field is marked by WidthAttribute and WeightAttribute, it gets both effects additively.
-    ///Applied to arrays defines width of each element.
+    ///Available only on SIMPLE NESTED FIELDS. Has no effect on ROOT FIELD.
+    ///If field is marked by [WidthAttribute] and [WeightAttribute], it will get both effects additively.
+    ///Applied to nested arrays defines width of each element.
     ///</summary>
     [AttributeUsageAttribute(validOn: AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
     public class WidthAttribute : WeightAttribute {

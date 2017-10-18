@@ -2,7 +2,7 @@ using System;
 
 namespace OneLine {
     ///<summary>
-    ///Make marked array immutable.
+    ///Sets array size to fixed value <b>length</b>.
     ///Marked array misses buttons "+" and "-" and context menu.
     ///</summary>
     [AttributeUsage(validOn: AttributeTargets.Field, AllowMultiple = false, Inherited = false)]

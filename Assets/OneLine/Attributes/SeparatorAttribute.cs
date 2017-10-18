@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace OneLine {
     ///<summary>
-    ///Draws horizontal or vertical separators
+    ///Draws horizontal or vertical separator
     ///</summary>
     [AttributeUsage(validOn: AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
     public class SeparatorAttribute : PropertyAttribute {

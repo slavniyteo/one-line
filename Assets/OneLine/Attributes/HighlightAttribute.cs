@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace OneLine {
     ///<summary>
-    ///Highlights marked field by rgb color with values in range[0..1] (red by default)
-    ///Available on d0 and d1+fields.
-    ///If d0-field is highlighted its label prefix is highlighted too.
+    ///Highlights field by rgb color with values in range[0..1] (red by default)
+    ///Available anywhere (ROOT or NESTED FIELDS).
+    ///If ROOT FIELD is highlighted its label prefix is highlighted too.
     ///</summary>
     [AttributeUsageAttribute(validOn: AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     public class HighlightAttribute : Attribute {

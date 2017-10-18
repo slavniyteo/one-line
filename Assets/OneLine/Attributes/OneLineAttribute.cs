@@ -3,12 +3,14 @@ using UnityEngine;
 
 namespace OneLine {
     ///<summary>
-    ///Draws marked field into one line in InspectorWindow.
-    ///Into one line will be fitted all inner fields (even arrays)
+    ///Draws field into one line in InspectorWindow with  all nested fields (even arrays)
     ///which usual is presented in InspectorWindow in bulky weird view.
-    ///Marked field is called zero-depth field or d0-field.
-    ///Depends on depth, internal fields are called: d1, d2, etc.
-    ///All internal fields in one scope are called d1+fields.
+    ///
+    ///Marked field is called ROOT FIELD.
+    ///All internal fields in one scope are called NESTED FIELDS.
+    ///
+    ///Fields of classes, which have native representation in Inspector are called SIMPLE FIELDS.
+    ///Fields, contains other fields are called COMPLEX FIELDS.
     ///</summary>
     [AttributeUsage(validOn: AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
     public class OneLineAttribute : PropertyAttribute {

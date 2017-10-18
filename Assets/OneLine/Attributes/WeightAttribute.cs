@@ -3,9 +3,9 @@ using System;
 namespace OneLine {
     ///<summary>
     ///Defines weight of marked field in the line.
-    ///Available only on d1+fields and has no effect on d0.
-    ///Fields without WeightAttribute has default weight = 1.
-    ///Applied to arrays defines weight of each element.
+    ///Available only on SIMPLE NESTED FIELDS. Has no effect on ROOT FIELD.
+    ///Fields without [WeightAttribute] has default weight = 1.
+    ///Applied to nested arrays defines weight of each element.
     ///</summary>
     [AttributeUsageAttribute(validOn: AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
     public class WeightAttribute : Attribute {
