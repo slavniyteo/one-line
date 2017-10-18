@@ -32,7 +32,7 @@ namespace OneLine {
             int fittedWidth = (int) Math.Round(rect.width / 6); //units for one litera
             header = header.Substring(0, Math.Min(header.Length, fittedWidth));
 
-            EditorGUI.LabelField(rect, header, tableHeaderStyle);
+            EditorGUI.LabelField(rect, new GUIContent(header, header), tableHeaderStyle);
         }
 
     }
