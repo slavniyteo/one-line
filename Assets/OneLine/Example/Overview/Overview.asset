@@ -51,6 +51,10 @@ MonoBehaviour:
     second: Does'n matter
     third: I'm greely important
     fourth: Does'n matter
+  youCanAlsoDrawFieldsNameAboveLine:
+    first: My name is First
+    second: My name is Second
+    third: I know that you know.
   oneLineArray:
     first: 
     array: []

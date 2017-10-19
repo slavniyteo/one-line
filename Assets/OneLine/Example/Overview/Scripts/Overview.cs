@@ -119,7 +119,10 @@ public class ThreeFields{
         [SerializeField, OneLine, HideLabel]
         private CustomizeHideLabel hideLabel;
         [SerializeField, OneLine]
-        private HighlightedFields highlightAttributeHelpsToPointOnMostImportantThings;
+        private CustomizeHighlightedFields highlightAttributeHelpsToPointOnMostImportantThings;
+        [Space]
+        [SerializeField, OneLine(Header = LineHeader.Short)]
+        private CustomizeHeader youCanAlsoDrawFieldsNameAboveLine;
 
         [Serializable]
         public class CustomizeHideLabel {
@@ -129,7 +132,7 @@ public class ThreeFields{
             private string second;
         }
         [Serializable]
-        public class HighlightedFields {
+        public class CustomizeHighlightedFields {
             [SerializeField]
             private string first;
             [SerializeField]
@@ -138,6 +141,15 @@ public class ThreeFields{
             private string third;
             [SerializeField]
             private string fourth;
+        }
+        [Serializable]
+        public class CustomizeHeader {
+            [SerializeField]
+            private string first;
+            [SerializeField]
+            private string second;
+            [SerializeField]
+            private string third;
         }
 #endregion
 
