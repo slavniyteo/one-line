@@ -79,7 +79,7 @@ public class ThreeFields{
 }
 
 #region Weight and Width
-        [Space, Separator("[ Weight Attribute ]")]
+        [Space, Separator("[ Weight ] and [ Width ]")]
         [SerializeField, OneLine]
         private WidthFirstLine oneLineCalculatesFieldsWidthesBasedOnAttributes;
         [SerializeField, OneLine]
