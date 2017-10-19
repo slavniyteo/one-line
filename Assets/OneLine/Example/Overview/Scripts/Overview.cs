@@ -7,39 +7,79 @@ namespace OneLine.Examples {
     public class Overview : ScriptableObject {
 
 #region One Line
-        [Separator("[ One Line Attribute ]")]
+        [Separator(" Hey There! ")]
         [SerializeField, OneLine]
-        private OneField oneField;
+        private OneLineOneField letMeTellYouAboutTheOneLineAttribute;
         [SerializeField, OneLine]
-        private TwoFields twoFields;
-        [SerializeField, OneLine, Tooltip("Three fields are here!")]
-        private ThreeFields threeFields;
+        private OneLineSecondLine ifWillDrawAllFieldsYouWantIntoOneLineWithAllChildren;
+        [SerializeField, OneLine]
+        private OneLineWithSpace oneLineWillDrawAllSpaceAttributesInYourCode;
+        [SerializeField, OneLine, Tooltip("I'm a tooltip on the ROOT FIELD")]
+        private OneLineWithTooltip tooltipAttribute;
 
         [Serializable]
-        public class OneField {
+        public class OneLineOneField {
             [SerializeField]
             private string first;
         }
         [Serializable]
-        public class TwoFields {
-            [SerializeField]
+        public class OneLineSecondLine {
+            [SerializeField, Width(30)]
             private string first;
-            [SerializeField]
+            [SerializeField, Width(50)]
             private string second;
-        }
-        [Serializable]
-        public class ThreeFields {
-            [SerializeField]
-            private string first;
-            [SerializeField, Space(25), Tooltip("I'm here -- the best second field!")]
-            private string second;
+            [SerializeField, Width(45)]
+            private string third;
+            [SerializeField, Width(30)]
+            private string forth;
+            [SerializeField, Width(40)]
+            private string fifth;
+            [SerializeField, Width(55)]
+            private string sixth;
+            [SerializeField, Width(35)]
+            private string seventh;
+            [SerializeField, Width(35)]
+            private string eighth;
             [SerializeField, Separator]
+            private string ninth;
+        }
+        [Serializable]
+        public class OneLineWithSpace {
+            [SerializeField]
+            private string first;
+            [Space(25)]
+            [SerializeField]
+            private string second;
+        }
+        [Serializable]
+        public class OneLineWithTooltip {
+            [SerializeField, Weight(0.7f)]
+            private string first;
+            [SerializeField, Tooltip("I'm here -- tooltip on the second NESTED FIELD!")]
+            private string second;
+            [SerializeField, Weight(0.9f)]
             private string third;
         }
 #endregion
 
+        [Serializable]
+public class OneField{ 
+    public string first;
+}
+        [Serializable]
+public class TwoFields{
+    public string first;
+    public string second;
+}
+        [Serializable]
+public class ThreeFields{
+    public string first;
+    public string second;
+    public string third;
+}
+
 #region Weights
-        [Separator("[ Weight Attribute ]")]
+        [Space, Separator("[ Weight Attribute ]")]
         [SerializeField, OneLine]
         private Weights1 differentWeights1;
         [SerializeField, OneLine]

@@ -11,21 +11,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f743bd85725f81045b030d3601214577, type: 3}
   m_Name: Overview
   m_EditorClassIdentifier: 
-  oneField:
-    first: Class with one field
-  twoFields:
-    first: First field
-    second: Second field
-  threeFields:
-    first: First
-    second: Second
-    third: Third
+  letMeTellYouAboutTheOneLineAttribute:
+    first: OneLine is a library. In the same time [OneLine] is the attribute too.
+      Feel free to use it.
+  ifWillDrawAllFieldsYouWantIntoOneLineWithAllChildren:
+    first: And
+    second: doesn't
+    third: matter
+    forth: how
+    fifth: many
+    sixth: children
+    seventh: they
+    eighth: have
+    ninth: It is very simple, does it?
+  oneLineWillDrawAllSpaceAttributesInYourCode:
+    first: There is one [Space] around. Where is it?
+    second: <= [Space] is here! Did you find it?
+  tooltipAttribute:
+    first: Root field has a tooltip.
+    second: And nested field has a tooltip too.
+    third: What tooltip will you find here?
   differentWeights1:
     first: 3
     second: 2
     third: 1
   differentWeights2:
-    first: 5
+    first: 0
     second: 1
   fixedWidth:
     first: 50px
@@ -35,13 +46,13 @@ MonoBehaviour:
     first: 50px
     second: 75px
   oneFieldHidesLabel:
-    first: This field is marked by HideLabelAttribute
+    first: 
   twoFieldsHidesLabel:
-    first: Only zero-depth fields may be marked
-    second: by HideLabelAttribute
+    first: 
+    second: 
   highlightedRootField:
-    first: 'HighlightAttribute is useful '
-    second: for pointing on
+    first: 
+    second: 
   highlightAndHideLabel:
     first: 
     second: 
@@ -62,10 +73,7 @@ MonoBehaviour:
     fourth: Yellow
   oneLineArray:
     first: 
-    array:
-    - first: 
-    - first: 
-    - first: 
+    array: []
     last: 
   twoArraysInOneLine:
     first: 01000000020000000300000004000000
@@ -84,17 +92,10 @@ MonoBehaviour:
     - Length of this
     - array is fixed
     - in code
-  array:
-  - first: 
-    second: tfygy
-    third: 
-  - first: 
-    second: tfygy
-    third: 
+  array: []
   arrayWithArrays:
   - first: 
-    array:
-    - first: 
+    array: []
     last: 
   - first: 
     array: []
