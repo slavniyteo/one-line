@@ -154,60 +154,68 @@ public class ThreeFields{
 #endregion
 
 #region Arrays
-        [Separator("Arrays, [Hide Buttons Attribute], [Array Length]")]
+        [Separator("Nested Arrays, [Hide Buttons Attribute], [Array Length]")]
         [SerializeField, OneLine]
-        private OneLineArray oneLineArray;
+        private ArraysOneArray oneLineDrawsAllNestedArraysIntoLine;
         [SerializeField, OneLine]
-        private TwoArrays twoArraysInOneLine;
+        private ArraysTwoArrays arraysHaveToHaveCustomWeightOrWidth;
         [SerializeField, OneLine]
-        private ComplexArray arrayWithComplexFields;
+        private ArraysComplexElements lookAtSeparatorBetweenComplexElementsOfArray;
         [SerializeField, OneLine]
-        private ArrayHidesButtons arrayHidesButtons;
+        private ArraysHideButtons thisArrayWithHideButtonsAttributeHidesItsButtons;
         [SerializeField, OneLine]
-        private ImmutableLengthArray arrayWithImmutableLength;
-        [SerializeField, OneLine(Header = LineHeader.Short)]
-        private ThreeFields[] array;
-        [SerializeField, OneLine(Header = LineHeader.Short)]
-        private OneLineArray[] arrayWithArrays;
-        [SerializeField, OneLine(Header = LineHeader.Short)]
-        private OneLineArrayWithHeader[] arrayWithArraysWithHeader;
+        private ArraysImmutableLength thisArrayHasImmutableLengthByArrayLengthAttribute;
 
         [Serializable]
-        public class OneLineArray {
-            [SerializeField]
-            private string first;
+        public class ArraysOneArray {
             [SerializeField]
             private OneField[] array;
-            [SerializeField]
-            private string last;
         }
+        [Serializable]
+        public class ArraysTwoArrays {
+            [SerializeField, Highlight(1, 0, 0)]
+            private string[] first;
+            [SerializeField, Highlight(0, 1, 0), Width(55)]
+            private string[] second;
+        }
+        [Serializable]
+        public class ArraysComplexElements {
+            [SerializeField]
+            private NestedField[] array;
+            [Serializable]
+            public class NestedField {
+                [SerializeField]
+                private string first;
+                [SerializeField]
+                private string second;
+            }
+        }
+        [Serializable]
+        public class ArraysHideButtons {
+            [SerializeField, HideButtons]
+            private string[] array;
+        }
+        [Serializable]
+        public class ArraysImmutableLength {
+            [SerializeField, ArrayLength(3)]
+            private string[] array;
+        }
+
+
+#endregion
+
+#region Other
+        [Space, Separator("Other ways")]
+        [SerializeField, OneLine(Header = LineHeader.Short)]
+        private ThreeFields[] youCanDoSomethingLikeThis;
+        [SerializeField, OneLine(Header = LineHeader.Short)]
+        private OneLineArrayWithHeader[] orThisButIDoNotKnowWhyDoYouNeetId;
+
         [Serializable]
         public class OneLineArrayWithHeader {
             [SerializeField, Width(50)]
             private string first;
             [SerializeField, Width(50)]
-            private string[] array;
-        }
-        [Serializable]
-        public class ComplexArray {
-            [SerializeField]
-            private TwoFields[] array;
-        }
-        [Serializable]
-        public class TwoArrays {
-            [SerializeField, Highlight(1, 0, 0)]
-            private int[] first;
-            [SerializeField, Highlight(0, 1, 0), Width(50)]
-            private string[] second;
-        }
-        [Serializable]
-        public class ArrayHidesButtons {
-            [SerializeField, HideButtons]
-            private string[] array;
-        }
-        [Serializable]
-        public class ImmutableLengthArray {
-            [SerializeField, ArrayLength(3)]
             private string[] array;
         }
 #endregion

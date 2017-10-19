@@ -9,6 +9,8 @@ OneLine improves your databases and makes it more readable by people. It draws o
 - If you want to customize onelined fields, use **Width**, **Weight**, **HideLabel**, **Highlight**, **HideButtons** and **ArrayLength** attributes (see **Example.asset**).
 - Use **Separator** attribute to separate different fields.
 
+![Overview](mdsrc/one-line-overview.png)
+
 # Details
 
 ## OneLinePropertyDrawer

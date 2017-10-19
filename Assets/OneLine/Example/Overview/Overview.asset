@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Name: Overview
   m_EditorClassIdentifier: 
   letMeTellYouAboutTheOneLineAttribute:
-    first: OneLine is a library. In the same time [OneLine] is the attribute too.
-      Feel free to use it.
+    first: OneLine is a library. In the same time [OneLine] is an attribute. Feel
+      free to use it.
   ifWillDrawAllFieldsYouWantIntoOneLineWithAllChildren:
     first: And
     second: doesn't
@@ -23,7 +23,7 @@ MonoBehaviour:
     sixth: children
     seventh: they
     eighth: have
-    ninth: Very simple, does it?
+    ninth: Very simple, I think.
   oneLineWillDrawAllSpaceAttributesInYourCode:
     first: There is one [Space] around. Where is it?
     second: <= [Space] is here! Didn't you find it?
@@ -54,40 +54,226 @@ MonoBehaviour:
   youCanAlsoDrawFieldsNameAboveLine:
     first: My name is First
     second: My name is Second
-    third: I know that you know.
-  oneLineArray:
-    first: 
-    array: []
-    last: 
-  twoArraysInOneLine:
-    first: 01000000020000000300000004000000
+    third: Yes, you know.
+  oneLineDrawsAllNestedArraysIntoLine:
+    array:
+    - first: Use "+" to add new
+    - first: Use "-" to remove last
+    - first: Or use right-click
+  arraysHaveToHaveCustomWeightOrWidth:
+    first:
+    - Default
+    - Weight = 1
     second:
-    - First
-    - Second
-  arrayWithComplexFields:
+    - Elements
+    - Have
+    - Fixed
+    - Width
+  lookAtSeparatorBetweenComplexElementsOfArray:
+    array:
+    - first: First Field
+      second: Second Field
+    - first: First Field
+      second: Second Field
+  thisArrayWithHideButtonsAttributeHidesItsButtons:
+    array:
+    - Dublicate or delete elements
+    - by right-click context menu
+    - Looks nice, doesn't it?
+  thisArrayHasImmutableLengthByArrayLengthAttribute:
+    array:
+    - Length of this array is fixed
+    - inside code. Try to change it
+    - No, you can't.
+  youCanDoSomethingLikeThis:
+  - first: 
+    second: 
+    third: 
+  - first: 
+    second: 
+    third: 
+  - first: 
+    second: 
+    third: 
+  - first: 
+    second: 
+    third: 
+  - first: 
+    second: 
+    third: 
+  - first: 
+    second: 
+    third: 
+  - first: 
+    second: 
+    third: 
+  - first: 
+    second: 
+    third: 
+  - first: 
+    second: 
+    third: 
+  - first: 
+    second: 
+    third: 
+  orThisButIDoNotKnowWhyDoYouNeetId:
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+  - first: 
+    array:
+    - 
+  - first: 
     array: []
-  arrayHidesButtons:
+  - first: 
     array:
-    - Dublicate
-    - Or delete
-    - By right-click
-  arrayWithImmutableLength:
+    - 
+  - first: 
     array:
-    - Length of this
-    - array is fixed
-    - in code
-  array: []
-  arrayWithArrays:
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+  - first: 
+    array:
+    - 
   - first: 
     array: []
-    last: 
+  - first: 
+    array:
+    - 
+  - first: 
+    array:
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+  - first: 
+    array:
+    - 
   - first: 
     array: []
-    last: 
   - first: 
-    array: []
-    last: 
-  arrayWithArraysWithHeader:
+    array:
+    - 
   - first: 
     array:
     - 
@@ -102,13 +288,18 @@ MonoBehaviour:
     - 
     - 
     - 
+    - 
+  - first: 
+    array:
+    - 
+    - 
+    - 
+    - 
+    - 
   - first: 
     array:
     - 
     - 
-    - 
-  - first: 
-    array:
     - 
     - 
     - 
