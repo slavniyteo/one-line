@@ -23,54 +23,34 @@ MonoBehaviour:
     sixth: children
     seventh: they
     eighth: have
-    ninth: It is very simple, does it?
+    ninth: Very simple, does it?
   oneLineWillDrawAllSpaceAttributesInYourCode:
     first: There is one [Space] around. Where is it?
-    second: <= [Space] is here! Did you find it?
+    second: <= [Space] is here! Didn't you find it?
   tooltipAttribute:
     first: Root field has a tooltip.
-    second: And nested field has a tooltip too.
+    second: This field has it's own tooltip.
     third: What tooltip will you find here?
-  differentWeights1:
-    first: 3
-    second: 2
-    third: 1
-  differentWeights2:
-    first: 0
-    second: 1
-  fixedWidth:
-    first: 50px
-    second: Has no WidthAttribute
-    third: 75px
-  onlyFixedWidth:
-    first: 50px
-    second: 75px
-  oneFieldHidesLabel:
-    first: 
-  twoFieldsHidesLabel:
-    first: 
-    second: 
-  highlightedRootField:
-    first: 
-    second: 
-  highlightAndHideLabel:
-    first: 
-    second: 
-    third: 
-  highlightedFields:
-    first: Green
-    second: Blue
-    third: No matter
-    fourth: Yellow
-  arrayWithHighlightedFields:
-  - first: Green
-    second: Blue
-    third: No matter
-    fourth: Yellow
-  - first: Green
-    second: Blue
-    third: No matter
-    fourth: Yellow
+  oneLineCalculatesFieldsWidthesBasedOnAttributes:
+    first: '[WeightAttribute] and [WidthAttribute]. You can use them both or separately.'
+  weightAttributeDeterminesRelativeWidth:
+    first: This field has Weight == 3 (Default is 1)
+    second: Weight == 2
+    third: Default
+  widthAttributeDeterminesAdditionalFixedWidth:
+    first: 75 units
+    second: This field doesn't have any attributes and has default Weight=1
+    third: 50 units
+  youCanCustomizeYouDatabaseByAttributes: Use [Highlight], [HideLabel], and [OneLine(Header=LineHeader.Short)].
+  hideLabel:
+    first: '[HideLabel] helps you to expand line and get some more width for your
+      db.'
+    second: You can use it with arrays too.
+  highlightAttributeHelpsToPointOnMostImportantThings:
+    first: Does'n matter
+    second: Does'n matter
+    third: I'm greely important
+    fourth: Does'n matter
   oneLineArray:
     first: 
     array: []
