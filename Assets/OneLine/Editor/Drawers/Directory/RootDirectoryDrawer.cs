@@ -12,12 +12,15 @@ namespace OneLine {
         }
 
         public override void AddSlices(SerializedProperty property, Slices slices){
+            getDrawer(property).AddSlices(property, slices);
+        }
+
+        public Rect DrawPrefixLabel(Rect rect, SerializedProperty property){
             var hideLabel = property.GetCustomAttribute<HideLabelAttribute>();
             if (hideLabel == null) {
-                slices.Add(new Slice(0, EditorGUIUtility.labelWidth - 5, 
-                                     rect => IndentWithLabel(rect, property.Copy(), true) ));
+                rect = IndentWithLabel(rect, property, true);
             }
-            getDrawer(property).AddSlices(property, slices);
+            return rect;
         }
 
         private static Rect IndentWithLabel(Rect rect, SerializedProperty property, bool drawLabel) {

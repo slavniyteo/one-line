@@ -93,6 +93,8 @@ namespace OneLine {
             if (arraysSizeObserver.IsArraySizeChanged(property)){ ResetCache(); }
 
             Profiler.BeginSample("OneLine.OnGUI");
+            position = rootDirectoryDrawer.DrawPrefixLabel(position, property);
+
             int indentLevel = EditorGUI.indentLevel;
             EditorGUI.indentLevel = 0;
 
