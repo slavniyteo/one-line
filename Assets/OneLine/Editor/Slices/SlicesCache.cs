@@ -16,16 +16,18 @@ namespace OneLine {
 			this.calculate = calculate;
 		}
 
+		private string lastId = null;
+
 		public Slices this[SerializedProperty property] {
 			get {
-				var id = GetId(property);
-				if (cache.ContainsKey(id)){
-					return cache[id];
+				lastId = GetId(property);
+				if (cache.ContainsKey(lastId)){
+					return cache[lastId];
 				}
 				else {
 					var slices = new Slices();
 					calculate(property, slices);
-					cache.Add(id, slices);
+					cache.Add(lastId, slices);
 					IsDirty = true;
 					return slices;
 				}
@@ -36,9 +38,8 @@ namespace OneLine {
 			return property.propertyPath;
 		}
 
-		public void Invalidate(SerializedProperty property){
-			var id = GetId(property);
-			cache.Remove(id);
+		public void InvalidateLastUsedId(){
+			cache.Remove(lastId);
 		}
 
 	}

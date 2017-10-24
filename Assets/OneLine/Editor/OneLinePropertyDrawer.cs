@@ -62,7 +62,7 @@ namespace OneLine {
         }
 
         private void InvalidateCache(SerializedProperty property){
-            cache.Invalidate(property);
+            cache.InvalidateLastUsedId();
         }
 
 #region Height
