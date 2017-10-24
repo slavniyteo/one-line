@@ -33,12 +33,7 @@ namespace OneLine {
 		}
 
 		private string GetId(SerializedProperty property){
-			var paths = property.propertyPath.Split('.');
-			string path = paths[0];
-			if (paths.Length > 1 && paths[1] == "Array") {
-				path = paths[0] + "." + paths[2];
-			}
-			return property.serializedObject.targetObject.GetInstanceID() + "->" + path;
+			return property.propertyPath;
 		}
 
 		public void Invalidate(SerializedProperty property){
