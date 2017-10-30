@@ -126,7 +126,7 @@ namespace OneLine {
 
         public static Rect[] SplitV(this Rect rect, IEnumerable<float> weights, IEnumerable<float> fixedWidthes = null, float space = 5){
             return rect.Invert()
-                       .Split(weights, fixedWidthes, 5)
+                       .Split(weights, fixedWidthes, space)
                        .Select(Invert)
                        .ToArray();
         }

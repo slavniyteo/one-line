@@ -20,6 +20,7 @@ namespace OneLine {
         private ArraysSizeObserver arraysSizeObserver;
 
         private new OneLineAttribute attribute { get { return base.attribute as OneLineAttribute; } }
+        protected virtual LineHeader Header { get { return attribute != null ? attribute.Header : LineHeader.None; } }
 
         public OneLinePropertyDrawer(){
             simpleDrawer = new SimpleFieldDrawer();
@@ -69,18 +70,17 @@ namespace OneLine {
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
             var lineHeight = 16;
-            var headerHeight = NeedDrawHeader(property) ? lineHeight + 5 : 0;
+            var headerHeight = NeedDrawHeader(property) ? lineHeight + 2 : 0;
 
             return lineHeight + headerHeight;
         }
 
         private bool NeedDrawHeader(SerializedProperty property){
-            if (attribute == null) { return false; }
-            if (attribute.Header == LineHeader.None){ return false; }
+            if (Header == LineHeader.None){ return false; }
 
             bool notArray = ! property.IsArrayElement();
             bool firstElement = property.IsArrayElement() && property.IsArrayFirstElement();
-            return attribute.Header == LineHeader.Short && (notArray || firstElement);
+            return (notArray || firstElement);
         }
 
 #endregion
@@ -108,7 +108,7 @@ namespace OneLine {
         private Rect DrawHeaderIfNeed(Rect position, SerializedProperty property){
             if (! NeedDrawHeader(property)) return position;
 
-            var rects = position.SplitV(2);
+            var rects = position.SplitV(2, 2);
             DrawLine(rects[0], property, (slice, rect) => slice.DrawHeader(rect));
             
             return rects[1];
