@@ -4,10 +4,11 @@ OneLine improves your databases and makes it more readable by people. It draws o
 
 # TL;DR
 
-- After importing look at `Assets/OneLine/Example/Overview/Overview.asset` and open it in InspectorWindow. It will show you all capabilities of OneLine library.
-- In your code, add `using OneLine;` and add `[OneLine]` to fields you want to draw into one line. Note that internal fields don't need `OneLine`: they will be processed automatically.
-- If you want to customize onelined fields, use **Width**, **Weight**, **HideLabel**, **Highlight**, **HideButtons** and **ArrayLength** attributes (see **Example.asset**).
-- Use **Separator** attribute to separate different fields.
+- After importing look at `Assets/OneLine/Example/Overview/Overview.asset` and open it in InspectorWindow. It will show you all capabilities of OneLine library;
+- In your code, add `using OneLine;` and add `[OneLine]` to fields you want to draw into one line. Note that internal fields don't need `OneLine`: they will be processed automatically;
+- If you want to customize onelined fields, use **Width**, **Weight**, **HideLabel**, **Highlight**, **HideButtons** and **ArrayLength** attributes (see **Example.asset**);
+- Use **Separator** attribute to separate different fields;
+- OneLine uses [RectEx](https://github.com/slavniyteo/rect-ex), so fell free to try it.
 
 ![Overview](mdsrc/one-line-overview.png)
 
@@ -66,6 +67,8 @@ public class OneLineDrawerExampleEditor : OneLinePropertyDrawer {
 
 ![One Line Attribute Example](mdsrc/one-line-property-drawer-example.png)
 
+You can also override protected property `Header` and return `LineHeader.Short` to add a table-like header. Sometimes I'll add example with headers.
+
 ## Attributes
 
 It is not nice to create additional classes for every data class you want one-linify in Inspector. There is a couple of attributes created for make your life better.
@@ -113,6 +116,8 @@ public class OneLineExample : ScriptableObject {
 **Result:**
 
 ![One Line Attribute Example](mdsrc/one-line-attribute-example.png)
+
+You can add `[OneLine(Header = LineHeader.Short)]` to add table-like header (see above).
 
 ---
 
