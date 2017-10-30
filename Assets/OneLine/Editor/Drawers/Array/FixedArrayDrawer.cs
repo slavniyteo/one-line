@@ -23,7 +23,7 @@ namespace OneLine {
         protected virtual int ModifyLength(SerializedProperty property) {
             var attribute = property.GetCustomAttribute<ArrayLengthAttribute>();
             if (attribute == null) {
-                var message = string.Format("Can not find ArrayLengthAttribute at property {1)", property.propertyPath);
+                var message = string.Format("Can not find ArrayLengthAttribute at property {0)", property.propertyPath);
                 throw new InvalidOperationException(message);
             }
             property.arraySize = attribute.Length;

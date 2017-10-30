@@ -23,7 +23,7 @@ namespace OneLine {
 
                 if (copy.propertyPath != lastPath) {
                     var message =
-                        string.Format("Property path'd been changed while iteration. Last iteration path: {1}, current path: {2}", lastPath, copy.propertyPath);
+                        string.Format("Property path'd been changed while iteration. Last iteration path: {0}, current path: {1}", lastPath, copy.propertyPath);
                     throw new InvalidOperationException(message);
                 }
             }
@@ -45,7 +45,7 @@ namespace OneLine {
 
         public static IEnumerable<SerializedProperty> GetArrayElements(this SerializedProperty property) {
             if (!property.IsReallyArray()) {
-                string message = string.Format("Property {1} is not array or list", property.displayName);
+                string message = string.Format("Property {0} is not array or list", property.displayName);
                 throw new InvalidOperationException(message);
             }
 
@@ -55,7 +55,7 @@ namespace OneLine {
             int size = property.arraySize;
             for (int i = 0; i < size; i++) {
                 if (property.propertyPath != path) {
-                    string message = string.Format("Property path {1} is changed during iteration", property.displayName);
+                    string message = string.Format("Property path {0} is changed during iteration", property.displayName);
                     throw new InvalidOperationException(message);
                 }
                 yield return property.GetArrayElementAtIndex(i).Copy();
