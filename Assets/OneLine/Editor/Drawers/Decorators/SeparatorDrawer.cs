@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace OneLine {
     internal class SeparatorDrawer : Drawer {
-        private const float width = 2;
+        private const float width = 8;
+        private const float lineWidth = 2;
 
         public override void AddSlices(SerializedProperty property, Slices slices){
             Slice slice;
@@ -21,6 +22,8 @@ namespace OneLine {
 
 
         public void Draw (Rect rect){
+            rect.x += (rect.width - lineWidth) / 2;
+            rect.width = lineWidth;
             GuiUtil.DrawRect(rect, GuiUtil.GrayColor);
         }
 

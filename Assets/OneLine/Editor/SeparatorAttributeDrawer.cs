@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using OneLine;
+using RectEx;
 
 namespace OneLine {
     [CustomPropertyDrawer(typeof(SeparatorAttribute))]
@@ -29,7 +30,7 @@ namespace OneLine {
             }
             else {
                 var textSize = textStyle.CalcSize(new GUIContent(text));
-                var rects = rect.Split(new float[]{1,0,1}, new float[]{0, textSize.x, 0});
+                var rects = rect.Row(new float[]{1,0,1}, new float[]{0, textSize.x, 0});
 
                 DrawLine(rects[0], thickness);
                 DrawText(rects[1], text);

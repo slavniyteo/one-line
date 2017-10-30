@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using OneLine;
 using UnityEditor;
+using RectEx;
 
 namespace OneLine.Example {
 	[CreateAssetMenu]
@@ -43,12 +44,12 @@ namespace OneLine.Example {
 			public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label){
 				rect = EditorGUI.PrefixLabel(rect, label);
 
-				var separatorWidth = 2;
+				var separatorWidth = 8;
 				var buttonWidth = 20;
-				var rects = rect.Split(
+				var rects = rect.Row(
 					new float[]{1,1,0,1,1,0,0,0,1}, 
 					new float[]{0,0,separatorWidth,0,0,buttonWidth,buttonWidth,separatorWidth,0}, 
-					5);
+					2);
 
 				int i = 0;
 				EditorGUI.TextField(rects[i++], "");

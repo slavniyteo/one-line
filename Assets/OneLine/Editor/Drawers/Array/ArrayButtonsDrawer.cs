@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using RectEx;
 
 namespace OneLine {
     internal class ArrayButtonsDrawer : Drawer {
@@ -37,7 +38,7 @@ namespace OneLine {
         #endregion
 
         public void DrawLabel(Rect rect, SerializedProperty array) {
-            var rects = rect.Split(new float[] { 1, 0 }, new float[] { 0, 20 });
+            var rects = rect.Row(new float[] { 1, 0 }, new float[] { 0, 20 });
 
             EditorGUI.LabelField(rects[0], array.displayName);
             if (GUI.Button(rects[1], "+")) {

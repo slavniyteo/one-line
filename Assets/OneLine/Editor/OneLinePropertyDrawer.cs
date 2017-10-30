@@ -4,6 +4,7 @@ using UnityEngine.Profiling;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using RectEx;
 
 namespace OneLine {
     [CustomPropertyDrawer(typeof(OneLineAttribute), true)]
@@ -108,7 +109,7 @@ namespace OneLine {
         private Rect DrawHeaderIfNeed(Rect position, SerializedProperty property){
             if (! NeedDrawHeader(property)) return position;
 
-            var rects = position.SplitV(2, 2);
+            var rects = position.Column(2, 2);
             DrawLine(rects[0], property, (slice, rect) => slice.DrawHeader(rect));
             
             return rects[1];
@@ -116,7 +117,7 @@ namespace OneLine {
 
         private void DrawLine(Rect position, SerializedProperty property, Action<Slice, Rect> draw){
             var slices = cache[property];
-            var rects = position.Split(slices.Weights, slices.Widthes, 5);
+            var rects = position.Row(slices.Weights, slices.Widthes, 2);
 
             int rectIndex = 0;
             foreach (var slice in slices){

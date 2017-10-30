@@ -8,9 +8,9 @@ namespace OneLine {
 
 		private List<Slice> slices = new List<Slice>();
 		
-		public IEnumerable<float> Weights { get { return slices.Select(x => x.Weight); } }
+		public float[] Weights { get { return slices.Select(x => x.Weight).ToArray(); } }
 
-		public IEnumerable<float> Widthes { get { return slices.Select(x => x.Width); } }
+		public float[] Widthes { get { return slices.Select(x => x.Width).ToArray(); } }
 
 		public Slice this[int i] { get {return slices[i];} }
 

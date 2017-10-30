@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using RectEx;
 
 namespace OneLine {
     internal abstract class Drawer {
@@ -15,7 +16,7 @@ namespace OneLine {
             if (attribute == null) return null;
 
             var slice = new MetaSlice(before, after, 
-                                      rect => GuiUtil.DrawRect(rect.Expand(1), attribute.Color));
+                                      rect => GuiUtil.DrawRect(rect.Extend(1), attribute.Color));
             slices.Add(slice);
             return slice;
         }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using RectEx;
 
 namespace OneLine {
     internal class RootDirectoryDrawer : DirectoryDrawer {
@@ -24,7 +25,7 @@ namespace OneLine {
         }
 
         private static Rect IndentWithLabel(Rect rect, SerializedProperty property, bool drawLabel) {
-            var rects = rect.CutFromLeft(EditorGUIUtility.labelWidth);
+            var rects = rect.CutFromLeft(EditorGUIUtility.labelWidth, 0);
 
             if (drawLabel) {
                 DrawLabel(rects[0], property);
