@@ -83,9 +83,9 @@ namespace OneLine {
             Type type = property.serializedObject.targetObject.GetType();
             FieldInfo field = null;
             for (int i = 0; i < path.Length; i++) {
-                field = type.GetField(path[i], BindingFlags.Public | BindingFlags.NonPublic
-                                      | BindingFlags.DeclaredOnly | BindingFlags.FlattenHierarchy
-                                      | BindingFlags.Instance);
+                field = type.GetField(path[i], BindingFlags.Public 
+                                               | BindingFlags.NonPublic
+                                               | BindingFlags.Instance);
 
                 if (field != null) {
                     type = field.FieldType;
