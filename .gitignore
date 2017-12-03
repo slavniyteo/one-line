@@ -7,3 +7,6 @@
 /obj/
 /out/
 /Assets/scene.unity*
+/Assets/VSCode*
+/.vscode/
+
