@@ -8,7 +8,7 @@ OneLine improves your databases and makes it more readable by people. It draws o
 - In your code, add `using OneLine;` and add `[OneLine]` to fields you want to draw into one line. Note that internal fields don't need `OneLine`: they will be processed automatically;
 - If you want to customize onelined fields, use **Width**, **Weight**, **HideLabel**, **Highlight**, **HideButtons** and **ArrayLength** attributes (see **Example.asset**);
 - Use **Separator** attribute to separate different fields;
-- OneLine uses [RectEx](https://github.com/slavniyteo/rect-ex), so fell free to try it.
+- OneLine uses [RectEx](https://github.com/slavniyteo/rect-ex), so feel free to try it.
 
 ![Overview](mdsrc/one-line-overview.png)
 
