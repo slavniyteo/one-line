@@ -89,8 +89,8 @@ namespace OneLine {
 #region OnGUI
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
-            if (inspectorUtil.IsOutOfScreen(position)){ return; }
-            if (inspectorUtil.IsWindowWidthChanged()){ ResetCache(); }
+            if (inspectorUtil.IsOutOfScreen(position)){ return; } // Culling
+
             if (arraysSizeObserver.IsArraySizeChanged(property)){ ResetCache(); }
 
             Profiler.BeginSample("OneLine.OnGUI");

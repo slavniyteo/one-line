@@ -25,8 +25,6 @@ Please create an issue on https://github.com/slavniyteo/one-line/ and we will re
         private FieldInfo scrollPositionInfo;
         private object window;
 
-        private float lastWindowWidth;
-
         public InspectorUtil() {
             try {
                 Initialize();
@@ -61,12 +59,6 @@ Please create an issue on https://github.com/slavniyteo/one-line/ and we will re
             bool below = position.y > (ScrollPosition.y + WindowPosition.height);
 
             return above || below;
-        }
-
-        public bool IsWindowWidthChanged(){
-            bool result = Math.Abs(WindowPosition.width - lastWindowWidth) > 0.1f;
-            lastWindowWidth = WindowPosition.width;
-            return result;
         }
 
     }
