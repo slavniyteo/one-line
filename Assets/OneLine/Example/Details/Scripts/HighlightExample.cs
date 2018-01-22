@@ -2,6 +2,7 @@
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/HighlightExample")]
 public class HighlightExample : ScriptableObject {
     [SerializeField, OneLine, Highlight]
@@ -20,4 +21,5 @@ public class HighlightExample : ScriptableObject {
         [SerializeField, Highlight(1, 1, 0)]
         private string fourth;
     }
+}
 }

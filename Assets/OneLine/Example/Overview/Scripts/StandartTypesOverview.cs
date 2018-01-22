@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace OneLine {
+namespace OneLine.Examples {
 [CreateAssetMenu]
 public class StandartTypesOverview : ScriptableObject {
 

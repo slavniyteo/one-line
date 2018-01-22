@@ -2,6 +2,7 @@
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/RootArrayExample")]
 public class RootArrayExample : ScriptableObject {
     [SerializeField, OneLine]
@@ -33,4 +34,5 @@ public class RootArrayExample : ScriptableObject {
         [SerializeField, Highlight(0, 1, 0), Width(125)]
         private string[] second;
     }
+}
 }

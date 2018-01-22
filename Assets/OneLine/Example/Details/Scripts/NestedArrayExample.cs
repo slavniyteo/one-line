@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/NestedArrayExample")]
 public class NestedArrayExample : ScriptableObject {
     [SerializeField, OneLine]
@@ -12,4 +13,5 @@ public class NestedArrayExample : ScriptableObject {
         [SerializeField]
         private string[] array;
     }
+}
 }

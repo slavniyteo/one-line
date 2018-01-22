@@ -2,6 +2,7 @@
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/WidthExample")]
 public class WidthExample : ScriptableObject {
     [SerializeField, OneLine]
@@ -24,4 +25,5 @@ public class WidthExample : ScriptableObject {
         [SerializeField]
         private string first;
     }
+}
 }

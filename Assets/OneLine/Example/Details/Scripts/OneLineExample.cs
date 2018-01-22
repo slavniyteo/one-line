@@ -2,6 +2,7 @@
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/OneLineExample")]
 public class OneLineExample : ScriptableObject {
 
@@ -28,4 +29,5 @@ public class OneLineExample : ScriptableObject {
         [SerializeField]
         private Vector2 second;
     }
+}
 }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/WeightExample")]
 public class WeightExample : ScriptableObject {
     [SerializeField, OneLine]
@@ -24,4 +25,5 @@ public class WeightExample : ScriptableObject {
         [SerializeField]
         private int first;
     }
+}
 }

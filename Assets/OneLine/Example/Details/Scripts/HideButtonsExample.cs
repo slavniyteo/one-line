@@ -2,6 +2,7 @@
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/HideButtonsExample")]
 public class HideButtonsExample : ScriptableObject {
     [SerializeField, OneLine]
@@ -14,4 +15,5 @@ public class HideButtonsExample : ScriptableObject {
         [SerializeField, HideButtons]
         private string[] array;
     }
+}
 }

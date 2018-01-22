@@ -2,6 +2,7 @@
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/HideLabelExample")]
 public class HideLabelExample : ScriptableObject {
     [SerializeField, OneLine, HideLabel]
@@ -16,4 +17,5 @@ public class HideLabelExample : ScriptableObject {
         [SerializeField]
         private string third;
     }
+}
 }

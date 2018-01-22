@@ -2,6 +2,7 @@
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/SeparatorExample")]
 public class SeparatorExample : ScriptableObject {
     [SerializeField, OneLine]
@@ -18,4 +19,5 @@ public class SeparatorExample : ScriptableObject {
         [SerializeField]
         private string second;
     }
+}
 }

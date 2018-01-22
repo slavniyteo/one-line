@@ -2,6 +2,7 @@
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/OneLineDrawerExample")]
 public class OneLineDrawerExample : ScriptableObject {
 
@@ -28,4 +29,5 @@ public class OneLineDrawerExample : ScriptableObject {
         [SerializeField]
         private Vector2 second;
     }
+}
 }

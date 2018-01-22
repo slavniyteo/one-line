@@ -2,6 +2,7 @@
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/FixedLengthExample")]
 public class FixedLengthExample : ScriptableObject {
     [SerializeField, OneLine]
@@ -12,4 +13,5 @@ public class FixedLengthExample : ScriptableObject {
         [SerializeField, ArrayLength(7)]
         private string[] array;
     }
+}
 }

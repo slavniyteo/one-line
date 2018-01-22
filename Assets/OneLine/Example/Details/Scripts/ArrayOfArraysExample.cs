@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using OneLine;
 
+namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/ArrayOfArraysExample")]
 public class ArrayOfArraysExample : ScriptableObject {
     [SerializeField, OneLine]
@@ -12,4 +13,5 @@ public class ArrayOfArraysExample : ScriptableObject {
         [SerializeField, Width(50)]
         private string[] array;
     }
+}
 }
