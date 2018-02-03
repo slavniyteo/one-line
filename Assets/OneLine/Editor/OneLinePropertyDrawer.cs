@@ -13,7 +13,7 @@ namespace OneLine {
         private Drawer simpleDrawer;
         private Drawer fixedArrayDrawer;
         private Drawer dynamicArrayDrawer;
-        private Drawer directoryDrawer;
+        private ComplexFieldDrawer directoryDrawer;
         private RootDirectoryDrawer rootDirectoryDrawer;
 
         private SlicesCache cache;
@@ -94,6 +94,8 @@ namespace OneLine {
             if (arraysSizeObserver.IsArraySizeChanged(property)){ ResetCache(); }
 
             Profiler.BeginSample("OneLine.OnGUI");
+            rootDirectoryDrawer.RootDepth = property.depth;
+            directoryDrawer.RootDepth = property.depth;
             position = rootDirectoryDrawer.DrawPrefixLabel(position, property);
 
             int indentLevel = EditorGUI.indentLevel;

@@ -5,14 +5,17 @@ using UnityEditor;
 using UnityEngine;
 
 namespace OneLine {
+
+    internal delegate Drawer DrawerProvider(SerializedProperty property);
+
     internal abstract class ComplexFieldDrawer : Drawer {
 
         private SeparatorDrawer separatorDrawer = new SeparatorDrawer();
         private SpaceDrawer spaceDrawer = new SpaceDrawer();
         private HeaderDrawer headerDrawer = new HeaderDrawer();
 
-        internal delegate Drawer DrawerProvider(SerializedProperty property);
         protected DrawerProvider getDrawer;
+        public int RootDepth { get; set; }
 
         public ComplexFieldDrawer(DrawerProvider getDrawer){
             this.getDrawer = getDrawer;
@@ -58,8 +61,8 @@ namespace OneLine {
         }
 
         private bool NeedDrawHeader(SerializedProperty parent, SerializedProperty child){
-            bool parentIsRootArray = child.depth == 2 && parent.IsArrayElement();
-            bool parentIsRootField = child.depth == 1;
+            bool parentIsRootArray = child.depth == RootDepth + 2 && parent.IsArrayElement();
+            bool parentIsRootField = child.depth == RootDepth + 1;
             return parentIsRootArray || parentIsRootField;
         }
 
