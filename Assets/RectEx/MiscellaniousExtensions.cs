@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 namespace RectEx {
-	public static class MiscellaniousExtensions {
+    public static class MiscellaniousExtensions {
         public static Rect Abs(this Rect rect){
             if (rect.width < 0) {
                 rect.x += rect.width;
@@ -77,5 +77,5 @@ namespace RectEx {
             );
         }
 
-	}
+    }
 }

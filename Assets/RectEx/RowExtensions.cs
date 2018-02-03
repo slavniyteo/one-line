@@ -6,9 +6,11 @@ using System.Linq;
 using RectEx.Internal;
 
 namespace RectEx {
-	public static class RowExtensions {
+    public static class RowExtensions {
 
-        public static Rect[] Row(this Rect rect, int count, float space = 5){
+        private const float SPACE = 2f;
+
+        public static Rect[] Row(this Rect rect, int count, float space = SPACE){
             rect = rect.Abs();
             switch (count) {
                 case 1: {
@@ -28,11 +30,11 @@ namespace RectEx {
             }
         }
 
-		public static Rect[] Row(this Rect rect, float[] weights, float space = 5){
-			return Row(rect, weights, null, space);
-		}
+        public static Rect[] Row(this Rect rect, float[] weights, float space = SPACE){
+            return Row(rect, weights, null, space);
+        }
 
-		public static Rect[] Row(this Rect rect, float[] weights, float[] widthes, float space = 5) {
+        public static Rect[] Row(this Rect rect, float[] weights, float[] widthes, float space = SPACE) {
             if (weights == null){
                 throw new ArgumentException("Weights is null. You must specify it");
             }
@@ -45,7 +47,7 @@ namespace RectEx {
             return RowSafe(rect, weights, widthes, space);
         }
 
-        private static Rect[] RowTwoSlices(Rect rect, float space = 5) {
+        private static Rect[] RowTwoSlices(Rect rect, float space) {
             var first = new Rect(
                 x: rect.x,
                 y: rect.y,
@@ -61,7 +63,7 @@ namespace RectEx {
             return new Rect[] {first, second};
         }
 
-        private static Rect[] RowThreeSlices(Rect rect, float space = 5) {
+        private static Rect[] RowThreeSlices(Rect rect, float space) {
             var first = new Rect(
                 x: rect.x,
                 y: rect.y,
@@ -83,7 +85,7 @@ namespace RectEx {
             return new Rect[] {first, second, third};
         }
 
-        private static Rect[] RowSafe(Rect rect, float[] weights, float[] widthes, float space = 5) {
+        private static Rect[] RowSafe(Rect rect, float[] weights, float[] widthes, float space) {
             var cells = weights.Merge(widthes, (weight, width) => new Cell(weight, width)).Where( cell => cell.HasWidth);
 
             float weightUnit = GetWeightUnit(rect.width, cells, space);
@@ -133,5 +135,5 @@ namespace RectEx {
             }
         }
 
-	}
+    }
 }

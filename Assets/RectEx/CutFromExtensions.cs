@@ -4,7 +4,9 @@ using UnityEngine;
 namespace RectEx {
     public static class CutFromExtensions {
 
-        public static Rect[] CutFromRight(this Rect rect, float width, float space = 5){
+        private const float SPACE = 2;
+
+        public static Rect[] CutFromRight(this Rect rect, float width, float space = SPACE){
             var second = Rect.MinMaxRect(
                 xmin:rect.xMax - width,
                 xmax:rect.xMax,
@@ -21,7 +23,7 @@ namespace RectEx {
             return new Rect[]{first, second};
         }
 
-        public static Rect[] CutFromBottom(this Rect rect, float height, float space = 5){
+        public static Rect[] CutFromBottom(this Rect rect, float height, float space = SPACE){
             var second = Rect.MinMaxRect(
                 xmin:rect.xMin,
                 xmax:rect.xMax,
@@ -38,7 +40,7 @@ namespace RectEx {
             return new Rect[]{first, second};
         }
 
-        public static Rect[] CutFromLeft(this Rect rect, float width, float space = 5){
+        public static Rect[] CutFromLeft(this Rect rect, float width, float space = SPACE){
             var first = Rect.MinMaxRect(
                 xmin:rect.xMin,
                 xmax:rect.xMin + width,
@@ -55,7 +57,7 @@ namespace RectEx {
             return new Rect[]{first, second};
         }
 
-        public static Rect[] CutFromTop(this Rect rect, float height, float space = 5){
+        public static Rect[] CutFromTop(this Rect rect, float height, float space = SPACE){
             var first = Rect.MinMaxRect(
                 xmin:rect.xMin,
                 xmax:rect.xMax,

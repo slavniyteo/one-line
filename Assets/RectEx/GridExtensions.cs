@@ -6,9 +6,11 @@ using System.Linq;
 using RectEx.Internal;
 
 namespace RectEx {
-	public static class GridExtensions {
+    public static class GridExtensions {
 
-        public static Rect[,] Grid(this Rect rect, int rows, int columns, float space = 5){
+        private const float SPACE = 2f;
+
+        public static Rect[,] Grid(this Rect rect, int rows, int columns, float space = SPACE){
             return Grid(rect, rows, columns, space, space);
         }
 
@@ -26,9 +28,9 @@ namespace RectEx {
             return result;
         }
 
-        public static Rect[,] Grid(this Rect rect, int size, float space = 5){
+        public static Rect[,] Grid(this Rect rect, int size, float space = SPACE){
             return Grid(rect, size, size, space, space);
         }
 
-	}
+    }
 }

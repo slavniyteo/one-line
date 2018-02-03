@@ -2,7 +2,7 @@
 using System;
 
 namespace RectEx.Internal {
-	public static class IEnumerableExtension {
+    public static class IEnumerableExtension {
         public static IEnumerable<TResult> Merge<TFirst, TSecond, TResult> (this IEnumerable<TFirst> first,
                                                                             IEnumerable<TSecond> second,
                                                                             Func<TFirst, TSecond, TResult> selector){
@@ -12,5 +12,5 @@ namespace RectEx.Internal {
                 yield return selector(firstEnumerator.Current, secondEnumerator.Current);
             }
         }
-	}
+    }
 }
