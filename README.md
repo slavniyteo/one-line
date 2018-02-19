@@ -2,6 +2,10 @@
 
 OneLine improves your databases and makes it more readable by people. It draws objects in Inspector into one line instead default line-by-line style. Also it provides a few features like fields highlightning, locking array size, etc...
 
+# News
+
+- **2018.02.18**: Available on the [Asset Store](https://www.assetstore.unity3d.com/en/#!/content/110758) for free.
+
 # TL;DR
 
 - After importing look at `Assets/OneLine/Example/Overview/Overview.asset` and open it in InspectorWindow. It will show you all capabilities of OneLine library;
@@ -9,10 +13,24 @@ OneLine improves your databases and makes it more readable by people. It draws o
 - If you want to customize onelined fields, use **Width**, **Weight**, **HideLabel**, **Highlight**, **HideButtons** and **ArrayLength** attributes (see **Example.asset**);
 - Use **Separator** attribute to separate different fields;
 - OneLine uses [RectEx](https://github.com/slavniyteo/rect-ex), so feel free to try it.
+- Compatible with either **.Net 2.0** or **.Net 4.5** backends.
 
 ![Overview](mdsrc/one-line-overview.png)
 
 # Details
+
+Table of contents:
+* [One Line Property Drawer](#onelinepropertydrawer)
+* [One Line Attribute](#onelineattribute)
+* Customization with attributes:
+    * [Weight Attribute](#weightattribute)
+    * [Width Attribute](#widthattribute)
+    * [Hide Label Attribute](#hidelabelattribute)
+    * [Highlight Attribute](#highlightattribute)
+    * [One Line with in arrays-context:](#root-arrays-with-oneline)
+        - [Hide Buttons Attribute](#hidebuttonsattribute)
+        - [Fixed Length Attribute](#fixedlengthattribute)
+* [Separator Attribute](#separatorattribute)
 
 ## OneLinePropertyDrawer
 
