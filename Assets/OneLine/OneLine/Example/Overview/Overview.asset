@@ -14,7 +14,7 @@ MonoBehaviour:
   letMeTellYouAboutTheOneLineAttribute:
     first: OneLine is a library. In the same time [OneLine] is an attribute. Feel
       free to use it.
-  ifWillDrawAllFieldsYouWantIntoOneLineWithAllChildren:
+  itWillDrawAnyFieldYouWantIntoOneLineWithAllChildren:
     first: And
     second: doesn't
     third: matter
@@ -24,19 +24,19 @@ MonoBehaviour:
     seventh: they
     eighth: have
     ninth: Very simple, I think.
-  oneLineWillDrawAllSpaceAttributesInYourCode:
+  oneLineDrawsAllSpaceAttributesInYourCode:
     first: There is one [Space] around. Where is it?
     second: <= [Space] is here! Didn't you find it?
   tooltipAttribute:
     first: Root field has a tooltip.
     second: This field has it's own tooltip.
     third: What tooltip will you find here?
-  oneLineCalculatesFieldsWidthesBasedOnAttributes:
+  oneLineCalculatesFieldWidthesBasedOnAttributes:
     first: '[WeightAttribute] and [WidthAttribute]. You can use them both or separately.'
   weightAttributeDeterminesRelativeWidth:
-    first: This field has Weight == 3 (Default is 1)
+    first: This field's Weight is 3
     second: Weight == 2
-    third: Default
+    third: Default (1)
   widthAttributeDeterminesAdditionalFixedWidth:
     first: 75 units
     second: This field doesn't have any attributes and has default Weight=1
@@ -57,9 +57,9 @@ MonoBehaviour:
     third: Yes, you know.
   oneLineDrawsAllNestedArraysIntoLine:
     array:
-    - first: Use "+" to add new
-    - first: Use "-" to remove last
-    - first: Or use right-click
+    - Use "+" to add new
+    - Use "-" to remove last
+    - Or use right-click
   arraysHaveToHaveCustomWeightOrWidth:
     first:
     - Default

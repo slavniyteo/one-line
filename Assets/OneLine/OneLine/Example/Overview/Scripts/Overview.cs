@@ -11,9 +11,9 @@ namespace OneLine.Examples {
         [SerializeField, OneLine]
         private OneLineOneField letMeTellYouAboutTheOneLineAttribute;
         [SerializeField, OneLine]
-        private OneLineSecondLine ifWillDrawAllFieldsYouWantIntoOneLineWithAllChildren;
+        private OneLineSecondLine itWillDrawAnyFieldYouWantIntoOneLineWithAllChildren;
         [SerializeField, OneLine]
-        private OneLineWithSpace oneLineWillDrawAllSpaceAttributesInYourCode;
+        private OneLineWithSpace oneLineDrawsAllSpaceAttributesInYourCode;
         [SerializeField, OneLine, Tooltip("I'm a tooltip on the ROOT FIELD")]
         private OneLineWithTooltip tooltipAttribute;
 
@@ -62,26 +62,10 @@ namespace OneLine.Examples {
         }
 #endregion
 
-        [Serializable]
-public class OneField{ 
-    public string first;
-}
-        [Serializable]
-public class TwoFields{
-    public string first;
-    public string second;
-}
-        [Serializable]
-public class ThreeFields{
-    public string first;
-    public string second;
-    public string third;
-}
-
 #region Weight and Width
         [Space, Separator("[ Weight ] and [ Width ]")]
         [SerializeField, OneLine]
-        private WidthFirstLine oneLineCalculatesFieldsWidthesBasedOnAttributes;
+        private WidthFirstLine oneLineCalculatesFieldWidthesBasedOnAttributes;
         [SerializeField, OneLine]
         private WidthWeightAttribute weightAttributeDeterminesRelativeWidth;
         [SerializeField, OneLine]
@@ -169,7 +153,7 @@ public class ThreeFields{
         [Serializable]
         public class ArraysOneArray {
             [SerializeField]
-            private OneField[] array;
+            private string[] array;
         }
         [Serializable]
         public class ArraysTwoArrays {
@@ -207,9 +191,19 @@ public class ThreeFields{
 #region Other
         [Space, Separator("Other ways")]
         [SerializeField, OneLine(Header = LineHeader.Short)]
-        private ThreeFields[] youCanDoSomethingLikeThis;
+        private OneLineArrayThreeFields[] youCanDoSomethingLikeThis;
         [SerializeField, OneLine(Header = LineHeader.Short)]
         private OneLineArrayWithHeader[] orThisButIDoNotKnowWhyDoYouNeetId;
+
+        [Serializable]
+        public class OneLineArrayThreeFields {
+            [SerializeField]
+            private string first;
+            [SerializeField]
+            private string second;
+            [SerializeField]
+            private string third;
+        }
 
         [Serializable]
         public class OneLineArrayWithHeader {
