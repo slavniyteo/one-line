@@ -28,7 +28,9 @@ namespace OneLine {
             var rects = rect.CutFromLeft(EditorGUIUtility.labelWidth, 0);
 
             if (drawLabel) {
-                DrawLabel(rects[0], property);
+                var labelRect = rects[0]
+                                    .CutFromBottom(EditorGUIUtility.singleLineHeight)[1];
+                DrawLabel(labelRect, property);
             }
             return rects[1];
         }
