@@ -8,11 +8,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18402f1f530694fca9b039a3d5252d8b, type: 3}
-  m_Name: Range Example
+  m_Script: {fileID: 11500000, guid: df9cda7dbd5e943a38c44d0a82e6cd6e, type: 3}
+  m_Name: Custom Property Drawer Example
   m_EditorClassIdentifier: 
   someFloats:
     first: 0
     second: 0
     third: 0
-  justFloat: 0
+  rootRange: 0
