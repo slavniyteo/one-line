@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEditor;
+using UnityEngine;
 
 namespace OneLine {
     internal static class SerializedPropertyExtension {
@@ -108,7 +109,13 @@ namespace OneLine {
                     type = field.FieldType;
                 }
                 else {
+                    if (type != typeof(Matrix4x4)){
+                        var message = "[OneLine] Part `{0}` of property path `{1}` doesn't match field definitions of type `{2}`";
+                        Debug.LogWarning(String.Format(message, path[i], property.propertyPath, type.FullName));
+                    }
+
                     failed = true;
+                    break;
                 }
 
                 int next = i + 1;
