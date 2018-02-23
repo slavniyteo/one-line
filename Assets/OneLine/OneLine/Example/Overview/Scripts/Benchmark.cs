@@ -14,6 +14,7 @@ public class Benchmark : ScriptableObject {
         public int integerField;
         public long longField;
         public float floatField;
+        [Range(0,1)]
         public double doubleField;
         public bool booleanField;
         public string stringField;

@@ -45,9 +45,7 @@ namespace OneLine {
         }
 
         public virtual void Draw(Rect rect, SerializedProperty property) {
-            EditorGUI.BeginProperty(rect, GUIContent.none, property);
             DrawProperty(rect, property);
-            EditorGUI.EndProperty();
         }
 
         /*

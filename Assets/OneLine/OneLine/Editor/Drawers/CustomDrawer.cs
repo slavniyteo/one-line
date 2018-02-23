@@ -5,77 +5,74 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using System.Text.RegularExpressions;
 
 namespace OneLine {
     internal class CustomDrawer : SimpleFieldDrawer {
 
+        private readonly Dictionary<string, PropertyDrawer> drawers = new Dictionary<string, PropertyDrawer>();
+        private static Dictionary<Type, Type> customDrawers;
+
+        public bool HasCustomDrawer(SerializedProperty property){
+            return GetCustomPropertyDrawerFor(property) != null;
+        }
+
         public override void Draw(Rect rect, SerializedProperty property) {
-            EditorGUI.BeginProperty(rect, GUIContent.none, property);
             DrawProperty(rect, property);
-            EditorGUI.EndProperty();
         }
 
         private void DrawProperty(Rect rect, SerializedProperty property){
-            if (customDrawers == null){
-                customDrawers = findAllCustomDrawers();
+            var drawer = GetCustomPropertyDrawerFor(property);
+            if (drawer != null) {
+                drawer.OnGUI(rect, property, GUIContent.none);
             }
-
-            var isDrown = TryDrawCustomPropertyDrawer(rect, property);
-
-            if (!isDrown) {
+            else {
                 var message = "[OneLine] Can not draw CustomPropertyDrawer for `{0}` at property path `{1}";
                 throw new Exception(string.Format(message, property.type, property.propertyPath));
             }
         }
 
-        public bool HasCustomDrawer(SerializedProperty property){
+        private static readonly Regex REGEXP_ARRAY_INDEX = new Regex(".data\\[\\d+\\]");
+
+        private PropertyDrawer GetCustomPropertyDrawerFor(SerializedProperty property){
+            var key = REGEXP_ARRAY_INDEX.Replace(property.propertyPath, "");
+            PropertyDrawer result = null;
+
+            if (! drawers.TryGetValue(key, out result)){
+                result = CreatePropertyDrawerFor(property);
+                drawers[key] = result;
+            }
+
+            return result;
+        }
+
+        private PropertyDrawer CreatePropertyDrawerFor(SerializedProperty property){
             if (customDrawers == null){
                 customDrawers = findAllCustomDrawers();
             }
 
             var propertyType = property.GetRealType();
-            if (propertyType != null && customDrawers.ContainsKey(propertyType)){
-                return true;
-            }
-            else {
+            if (propertyType == null) return null;
+
+            Type drawerType = null;
+            Attribute drawerAttribute = null;
+            if (! customDrawers.TryGetValue(propertyType, out drawerType)) {
                 var attributes = property.GetCustomAttributes();
                 foreach (var attribute in attributes){
-                    if (customDrawers.ContainsKey(attribute.GetType())){
-                        return true;
-                    }
-                }
-
-            }
-
-            return false;
-        }
-
-        private bool TryDrawCustomPropertyDrawer(Rect rect, SerializedProperty property){
-            var propertyType = property.GetRealType();
-            if (propertyType != null && customDrawers.ContainsKey(propertyType)){
-                DrawCustomPropertyDrawer(rect, propertyType, property);
-                return true;
-            }
-            else {
-                var attributes = property.GetCustomAttributes();
-                foreach (var attribute in attributes){
-                    if (customDrawers.ContainsKey(attribute.GetType())){
-                        DrawCustomPropertyDrawer(rect, attribute.GetType(), property, attribute);
-                        return true;
+                    if (customDrawers.TryGetValue(attribute.GetType(), out drawerType)){
+                        drawerAttribute = attribute;
+                        break;
                     }
                 }
             }
 
-            return false;
+            if (drawerType == null) return null;
+
+            var drawer = Activator.CreateInstance(drawerType) as PropertyDrawer;
+            drawer.SetAttribute(drawerAttribute);
+            return drawer;
         }
 
-        private void DrawCustomPropertyDrawer(Rect rect, Type targetType, SerializedProperty property, Attribute attribute = null){
-            var drawer = Activator.CreateInstance(customDrawers[targetType]) as PropertyDrawer;
-            drawer.SetAttribute(attribute);
-            drawer.OnGUI(rect, property, GUIContent.none);
-        }
-
-        private Dictionary<Type, Type> customDrawers;
 
         private static Dictionary<Type, Type> findAllCustomDrawers(){
             var result = new Dictionary<Type, Type>();
@@ -87,35 +84,12 @@ namespace OneLine {
                           from attribute in type.GetCustomAttributes(typeof(CustomPropertyDrawer), true)
                           select new {drawer = type, target = (attribute as CustomPropertyDrawer).GetTargetType()};
 
-            // Debug.Log("Entries count is " + entries.Count());
-
             foreach (var entry in entries){
-                // Debug.Log(String.Format("Type is {0}, Drawer is {1}", entry.target.Name, entry.drawer.Name));
                 result[entry.target] = entry.drawer;
             }
 
             return result;
         }
 
-    }
-
-    public static class CustomPropertyDrawerExtension {
-        public static Type GetTargetType(this CustomPropertyDrawer drawer){
-            return typeof(CustomPropertyDrawer)
-                    .GetField("m_Type", BindingFlags.NonPublic | BindingFlags.Instance)
-                    .GetValue(drawer) as Type;
-        }
-
-        public static bool IsForChildre(this CustomPropertyDrawer drawer){
-            return (bool) typeof(CustomPropertyDrawer)
-                    .GetField("m_UseForChildren", BindingFlags.NonPublic | BindingFlags.Instance)
-                    .GetValue(drawer);
-        }
-
-        public static void SetAttribute(this PropertyDrawer drawer, Attribute attribute){
-            typeof(PropertyDrawer)
-                .GetField("m_Attribute", BindingFlags.NonPublic | BindingFlags.Instance)
-                .SetValue(drawer, attribute);
-        }
     }
 }

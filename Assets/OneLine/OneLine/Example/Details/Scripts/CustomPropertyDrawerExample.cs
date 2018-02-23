@@ -21,7 +21,7 @@ public class CustomPropertyDrawerExample : ScriptableObject {
         private int first;
         [SerializeField]
         private float second;
-        [SerializeField, Range(100, 255)]
+        [SerializeField]
         private CustomField third;
     }
 
