@@ -78,7 +78,7 @@ namespace OneLine {
 
         private bool TryDrawCustomPropertyDrawer(Rect rect, SerializedProperty property){
             var propertyType = property.GetRealType();
-            if (customDrawers.ContainsKey(propertyType)){
+            if (propertyType != null && customDrawers.ContainsKey(propertyType)){
                 DrawCustomPropertyDrawer(rect, propertyType, property);
                 return true;
             }
