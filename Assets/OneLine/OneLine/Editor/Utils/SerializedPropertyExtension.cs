@@ -77,6 +77,23 @@ namespace OneLine {
                 attributeType = typeof(Attribute);
             }
 
+
+            var fieldInfo = GetFieldInfo(property);
+            if (fieldInfo == null) {
+                return new Attribute[0];
+            }
+            else {
+                return fieldInfo.GetCustomAttributes(attributeType, false).Cast<Attribute>().ToArray();
+            }
+        }
+
+        public static Type GetRealType(this SerializedProperty property){
+            var fieldInfo = GetFieldInfo(property);
+
+            return fieldInfo == null ? null : fieldInfo.FieldType;
+        }
+
+        public static FieldInfo GetFieldInfo(this SerializedProperty property) {
             string[] path = property.propertyPath.Split('.');
 
             bool failed = false;
@@ -106,12 +123,7 @@ namespace OneLine {
                 }
             }
 
-            if (failed) {
-                return new Attribute[0];
-            }
-            else {
-                return field.GetCustomAttributes(attributeType, false).Cast<Attribute>().ToArray();
-            }
+            return failed ? null : field;
         }
 
         public static bool IsArrayElement(this SerializedProperty property){
