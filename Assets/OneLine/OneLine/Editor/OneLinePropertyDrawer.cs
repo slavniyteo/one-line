@@ -13,6 +13,7 @@ namespace OneLine {
         private Drawer simpleDrawer;
         private Drawer fixedArrayDrawer;
         private Drawer dynamicArrayDrawer;
+        private CustomDrawer customPropertyDrawer;
         private ComplexFieldDrawer directoryDrawer;
         private RootDirectoryDrawer rootDirectoryDrawer;
 
@@ -27,6 +28,7 @@ namespace OneLine {
             simpleDrawer = new SimpleFieldDrawer();
             fixedArrayDrawer = new FixedArrayDrawer(GetDrawer);
             dynamicArrayDrawer = new DynamicArrayDrawer(GetDrawer, InvalidateCache);
+            customPropertyDrawer = new CustomDrawer();
             directoryDrawer = new DirectoryDrawer(GetDrawer);
             rootDirectoryDrawer = new RootDirectoryDrawer(GetDrawer);
 
@@ -48,6 +50,9 @@ namespace OneLine {
                 else {
                     return fixedArrayDrawer;
                 }
+            }
+            else if (customPropertyDrawer.HasCustomDrawer(property)){
+                return customPropertyDrawer;
             }
             else if (property.hasVisibleChildren) {
                 return directoryDrawer;

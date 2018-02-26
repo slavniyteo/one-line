@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using UnityEditor;
+using UnityEngine;
 
 namespace OneLine {
     internal static class SerializedPropertyExtension {
@@ -59,58 +60,6 @@ namespace OneLine {
                     throw new InvalidOperationException(message);
                 }
                 yield return property.GetArrayElementAtIndex(i).Copy();
-            }
-        }
-
-        public static T GetCustomAttribute<T>(this SerializedProperty property) where T : Attribute {
-            return GetCustomAttributes<T>(property).FirstOrDefault();
-        }
-
-        public static T[] GetCustomAttributes<T>(this SerializedProperty property) where T : Attribute {
-            return GetCustomAttributes(property, typeof(T))
-                   .Cast<T>()
-                   .ToArray();
-        }
-
-        public static Attribute[] GetCustomAttributes(this SerializedProperty property, Type attributeType = null) {
-            if (attributeType == null) {
-                attributeType = typeof(Attribute);
-            }
-
-            string[] path = property.propertyPath.Split('.');
-
-            bool failed = false;
-            Type type = property.serializedObject.targetObject.GetType();
-            FieldInfo field = null;
-            for (int i = 0; i < path.Length; i++) {
-                field = type.GetField(path[i], BindingFlags.Public 
-                                               | BindingFlags.NonPublic
-                                               | BindingFlags.Instance);
-
-                if (field != null) {
-                    type = field.FieldType;
-                }
-                else {
-                    failed = true;
-                }
-
-                int next = i + 1;
-                if (next < path.Length && path[next] == "Array") {
-                    i += 2;
-                    if (type.IsArray) {
-                        type = type.GetElementType();
-                    }
-                    else {
-                        type = type.GetGenericArguments()[0];
-                    }
-                }
-            }
-
-            if (failed) {
-                return new Attribute[0];
-            }
-            else {
-                return field.GetCustomAttributes(attributeType, false).Cast<Attribute>().ToArray();
             }
         }
 

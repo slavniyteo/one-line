@@ -44,10 +44,8 @@ namespace OneLine {
             DrawTooltip(property, slices, 1, 0);
         }
 
-        public void Draw(Rect rect, SerializedProperty property) {
-            EditorGUI.BeginProperty(rect, GUIContent.none, property);
+        public virtual void Draw(Rect rect, SerializedProperty property) {
             DrawProperty(rect, property);
-            EditorGUI.EndProperty();
         }
 
         /*
@@ -62,6 +60,7 @@ namespace OneLine {
          */
         private void DrawProperty(Rect rect, SerializedProperty property){
             //EditorGUI.PropertyField(rect, property, GUIContent.none);
+
             typeof(EditorGUI)
                 .GetMethod("DefaultPropertyField", BindingFlags.NonPublic | BindingFlags.Static)
                 .Invoke(null, new object[]{rect, property, GUIContent.none});
