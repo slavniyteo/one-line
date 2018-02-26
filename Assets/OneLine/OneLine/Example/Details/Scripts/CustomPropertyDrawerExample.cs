@@ -9,9 +9,9 @@ namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/CustomPropertyDrawerExample")]
 public class CustomPropertyDrawerExample : ScriptableObject {
     [SerializeField, OneLine]
-    private DirectDrawer someFloats;
+    private DirectDrawer directDrawer;
     [SerializeField, OneLine]
-    private AttributeDrawer customDrawer;
+    private AttributeDrawer attributeDrawer;
 
     #region Direct Custom Drawer
 
