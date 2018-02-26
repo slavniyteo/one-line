@@ -18,7 +18,6 @@ MonoBehaviour:
       first: Default drawer
       second: Default drawer
   attributeDrawer:
-    pureRange: 42
     parent:
       first: Default drawer
     child:
@@ -29,8 +28,12 @@ MonoBehaviour:
     child:
       first: Default drawer
   attributeWithoutChildren:
-    pureRange: 42
+    pureRange: 17.7
     parent:
       first: Default drawer
     child:
       first: Default drawer
+  builtInAttributes:
+    first: 0
+    second: 
+    third: 0

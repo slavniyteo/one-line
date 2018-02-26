@@ -10,6 +10,7 @@ using UnityEditor;
 namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/CustomPropertyDrawerExample")]
 public class CustomPropertyDrawerExample : ScriptableObject {
+
     [Separator("Use With Children = True")]
     [SerializeField, OneLine]
     private DirectDrawer directDrawer;
@@ -21,6 +22,10 @@ public class CustomPropertyDrawerExample : ScriptableObject {
     private DirectWithoutChildren directWithoutChildren;
     [SerializeField, OneLine]
     private AttributeWithoutChildren attributeWithoutChildren;
+
+    [Separator("BuiltIn Attributes Drawer")]
+    [SerializeField, OneLine]
+    private BuiltinDrawer builtInAttributes;
 
     #region Direct Custom Drawer
 
@@ -50,8 +55,6 @@ public class CustomPropertyDrawerExample : ScriptableObject {
 
     [Serializable]
     public class AttributeDrawer {
-        [SerializeField, Range(0, 100)]
-        private float pureRange;
         [SerializeField, Parent]
         private AttributeExample parent;
         [SerializeField, Child]
@@ -116,6 +119,20 @@ public class CustomPropertyDrawerExample : ScriptableObject {
         public class Child : Parent {
 
         }
+    }
+
+    #endregion
+
+    #region Range
+
+    [Serializable]
+    public class BuiltinDrawer {
+        [SerializeField, Range(0, 100)]
+        private float first;
+        [SerializeField, Multiline]
+        private string second;
+        [SerializeField, Range(0, 100)]
+        private float third;
     }
 
     #endregion
