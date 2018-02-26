@@ -15,21 +15,22 @@ namespace OneLine {
             typeof(Bounds)
         };
 
-        public static T GetCustomAttribute<T>(this SerializedProperty property) where T : Attribute {
-            return GetCustomAttributes<T>(property).FirstOrDefault();
+        public static T GetCustomAttribute<T>(this SerializedProperty property, FieldInfo fieldInfo = null) where T : Attribute {
+            return GetCustomAttributes<T>(property, fieldInfo).FirstOrDefault();
         }
 
-        public static T[] GetCustomAttributes<T>(this SerializedProperty property) where T : Attribute {
-            return GetCustomAttributes(property, typeof(T))
+        public static T[] GetCustomAttributes<T>(this SerializedProperty property, FieldInfo fieldInfo = null) where T : Attribute {
+            return GetCustomAttributes(property, fieldInfo, typeof(T))
                    .Cast<T>()
                    .ToArray();
         }
 
-        public static Attribute[] GetCustomAttributes(this SerializedProperty property, Type attributeType = null) {
+        public static Attribute[] GetCustomAttributes(this SerializedProperty property, FieldInfo fieldInfo = null, Type attributeType = null) {
             if (property == null) throw new ArgumentNullException();
             if (attributeType == null) attributeType = typeof(Attribute); 
 
-            var fieldInfo = GetFieldInfo(property);
+            if (fieldInfo == null) fieldInfo = GetFieldInfo(property);
+
             if (fieldInfo == null) {
                 return new Attribute[0];
             }

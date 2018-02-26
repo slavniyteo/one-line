@@ -25,5 +25,11 @@ namespace OneLine {
                 .GetField("m_Attribute", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(drawer, attribute);
         }
+    
+        public static void SetFieldInfo(this PropertyDrawer drawer, FieldInfo fieldInfo){
+            typeof(PropertyDrawer)
+                .GetField("m_FieldInfo", BindingFlags.NonPublic | BindingFlags.Instance)
+                .SetValue(drawer, fieldInfo);
+        }
     }
 }
