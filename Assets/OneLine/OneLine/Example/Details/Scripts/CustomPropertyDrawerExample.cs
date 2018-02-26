@@ -8,12 +8,13 @@ using UnityEditor;
 namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/CustomPropertyDrawerExample")]
 public class CustomPropertyDrawerExample : ScriptableObject {
+    [Separator("Use With Children = True")]
     [SerializeField, OneLine]
     private DirectDrawer directDrawer;
     [SerializeField, OneLine]
     private AttributeDrawer attributeDrawer;
 
-    [Separator("Without children")]
+    [Separator("Use With Children = False")]
     [SerializeField, OneLine]
     private DirectWithoutChildren directWithoutChildren;
     [SerializeField, OneLine]
@@ -31,13 +32,13 @@ public class CustomPropertyDrawerExample : ScriptableObject {
         [Serializable]
         public class Parent {
             [SerializeField]
-            private string first;
+            private string first = "Default drawer";
         }
 
         [Serializable]
         public class Child : Parent {
             [SerializeField]
-            private string second; //Will not be drown
+            private string second = "Default drawer"; // Shall not be drown
         }
     }
 
@@ -57,7 +58,7 @@ public class CustomPropertyDrawerExample : ScriptableObject {
         [Serializable]
         public class AttributeExample {
             [SerializeField]
-            private string first;
+            private string first = "Default drawer";
         }
 
         public class Parent : PropertyAttribute {
@@ -83,13 +84,11 @@ public class CustomPropertyDrawerExample : ScriptableObject {
         [Serializable]
         public class Parent {
             [SerializeField]
-            private string first;
+            private string first = "Default drawer";
         }
 
         [Serializable]
         public class Child : Parent {
-            [SerializeField]
-            private string second; 
         }
     }
 
@@ -105,7 +104,7 @@ public class CustomPropertyDrawerExample : ScriptableObject {
         [Serializable]
         public class AttributeExample {
             [SerializeField]
-            private string first;
+            private string first = "Default drawer";
         }
 
         public class Parent : PropertyAttribute {

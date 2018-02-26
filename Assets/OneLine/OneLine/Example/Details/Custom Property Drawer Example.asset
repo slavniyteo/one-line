@@ -13,25 +13,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   directDrawer:
     parent:
-      first: 
+      first: Default drawer
     child:
-      first: 
-      second: 
+      first: Default drawer
+      second: Default drawer
   attributeDrawer:
-    pureRange: 55
+    pureRange: 42
     parent:
-      first: 
+      first: Default drawer
     child:
-      first: 
+      first: Default drawer
   directWithoutChildren:
     parent:
-      first: 
+      first: Default drawer
     child:
-      first: 
-      second: 
+      first: Default drawer
   attributeWithoutChildren:
-    pureRange: 0
+    pureRange: 42
     parent:
-      first: 
+      first: Default drawer
     child:
-      first: 
+      first: Default drawer
