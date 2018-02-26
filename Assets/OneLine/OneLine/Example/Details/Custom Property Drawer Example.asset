@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Name: Custom Property Drawer Example
   m_EditorClassIdentifier: 
   someFloats:
-    first: 0
-    second: 0
-    third: 0
-  rootRange: 0
+    parent:
+      first: 
+    child:
+      first: 
+      second: 
+  customDrawer:
+    pureRange: 17.8
+    parent:
+      first: 
+    child:
+      first: 

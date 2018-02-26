@@ -9,38 +9,72 @@ namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/CustomPropertyDrawerExample")]
 public class CustomPropertyDrawerExample : ScriptableObject {
     [SerializeField, OneLine]
-    private ThreeFields someFloats;
-    [SerializeField, OneLine, Range(0, 1)]
-    private float rootRange;
+    private DirectDrawer someFloats;
     [SerializeField, OneLine]
-    private CustomField customDrawer;
+    private AttributeDrawer customDrawer;
+
+    #region Direct Custom Drawer
 
     [Serializable]
-    public class ThreeFields {
-        [SerializeField, Range(-50, 50)]
-        private int first;
+    public class DirectDrawer {
         [SerializeField]
-        private float second;
+        private Parent parent;
         [SerializeField]
-        private CustomField third;
+        private Child child;
     }
 
     [Serializable]
-    public class CustomField {
+    public class Parent {
         [SerializeField]
-        private int first;
+        private string first;
     }
+
+    [Serializable]
+    public class Child : Parent {
+        [SerializeField]
+        private string second; //Will not be drown
+    }
+
+    #endregion
+
+    #region Custom Drawer on the Attribute
+
+    [Serializable]
+    public class AttributeDrawer {
+        [SerializeField, Range(0, 100)]
+        private float pureRange;
+        [SerializeField, DrawerAttribute]
+        private AttributeExample parent;
+        [SerializeField, DrawerAttributeChild]
+        private AttributeExample child;
+    }
+
+    [Serializable]
+    public class AttributeExample {
+        [SerializeField]
+        private string first;
+    }
+
+    public class DrawerAttribute : PropertyAttribute {
+
+    }
+    public class DrawerAttributeChild : DrawerAttribute {
+
+    }
+
+    #endregion
 
 #if UNITY_EDITOR
-    [CustomPropertyDrawer(typeof(CustomField))]
+    [CustomPropertyDrawer(typeof(Parent), true)]
+    [CustomPropertyDrawer(typeof(DrawerAttribute), true)]
     public class CustomFieldDrawer : PropertyDrawer {
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label) {
             rect = EditorGUI.PrefixLabel(rect, label);
 
-            property = property.FindPropertyRelative("first");
+            // property = property.FindPropertyRelative("first");
 
             label = EditorGUI.BeginProperty(rect, label, property);
-            property.intValue = EditorGUI.IntSlider(rect, property.intValue, 1000, 2000);
+            EditorGUI.LabelField(rect, property.displayName + " is drown");
             EditorGUI.EndProperty();
         }
     }
