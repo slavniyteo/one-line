@@ -5,6 +5,8 @@ using OneLine;
 using UnityEditor;
 #endif
 
+#pragma warning disable 0414
+
 namespace OneLine.Examples {
 [CreateAssetMenu(menuName = "OneLine/CustomPropertyDrawerExample")]
 public class CustomPropertyDrawerExample : ScriptableObject {
