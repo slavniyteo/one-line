@@ -13,7 +13,7 @@ namespace OneLine {
         private static readonly Regex REGEXP_ARRAY_INDEX = new Regex(".data\\[\\d+\\]");
 
         private readonly Dictionary<string, PropertyDrawer> drawers = new Dictionary<string, PropertyDrawer>();
-        private static Dictionary<Type, Type> customDrawers;
+        private static IEnumerable<TypeForDrawing> customDrawers;
 
         public bool HasCustomDrawer(SerializedProperty property){
             return GetCustomPropertyDrawerFor(property) != null;
@@ -54,50 +54,63 @@ namespace OneLine {
             var propertyType = property.GetRealType();
             if (propertyType == null) return null;
             
-            bool found = false;
-            Type drawerType = null;
+            TypeForDrawing typeDrawer = null;
             Attribute drawerAttribute = null;
-            
+
             var attributes = property.GetCustomAttributes<PropertyAttribute>();
-            foreach (var key in customDrawers.Keys){
+
+            foreach (var td in customDrawers){
                 foreach (var attribute in attributes){
-                    var attributeType = attribute.GetType();
-                    if (attributeType == key || attributeType.IsSubclassOf(key)){
-                        drawerType = customDrawers[key];
+                    if (td.IsMatch(attribute.GetType())) {
+                        typeDrawer = td;
                         drawerAttribute = attribute;
-                        found = true;
                         break;
                     }
                 }
             }
 
-            while (!found && propertyType != null) {
-                found = customDrawers.TryGetValue(propertyType, out drawerType);
-                propertyType = propertyType.BaseType;
+            if (typeDrawer == null) {
+                typeDrawer = customDrawers.FirstOrDefault(x => x.IsMatch(propertyType));
             }
-            if (drawerType == null) return null;
 
-            var drawer = Activator.CreateInstance(drawerType) as PropertyDrawer;
+            if (typeDrawer == null) return null;
+
+            var drawer = Activator.CreateInstance(typeDrawer.DrawerType) as PropertyDrawer;
             drawer.SetAttribute(drawerAttribute);
             return drawer;
         }
 
-
-        private static Dictionary<Type, Type> findAllCustomDrawers(){
-            var result = new Dictionary<Type, Type>();
-
-            var entries = from assembly in AppDomain.CurrentDomain.GetAssemblies()
+        private static IEnumerable<TypeForDrawing> findAllCustomDrawers(){
+            return from assembly in AppDomain.CurrentDomain.GetAssemblies()
                           from type in assembly.GetTypes()
                           where type.IsSubclassOf(typeof(PropertyDrawer))
                           where type != typeof(OneLinePropertyDrawer) && ! type.IsSubclassOf(typeof(OneLinePropertyDrawer))
                           from attribute in type.GetCustomAttributes(typeof(CustomPropertyDrawer), true)
-                          select new {drawer = type, target = (attribute as CustomPropertyDrawer).GetTargetType()};
+                          select new TypeForDrawing(attribute as CustomPropertyDrawer, type);
+        }
 
-            foreach (var entry in entries){
-                result[entry.target] = entry.drawer;
+        public class TypeForDrawing {
+            private Type Type {get; set;}
+            private bool UseForChildren {get; set;}
+            public Type DrawerType {get; private set;}
+
+            public TypeForDrawing(CustomPropertyDrawer attribute, Type drawerType) {
+                Type = attribute.GetTargetType();
+                UseForChildren = attribute.IsForChildren();
+
+                DrawerType = drawerType;
             }
 
-            return result;
+            public bool IsMatch(Type target){
+                if (target == null) return false;
+
+                if (UseForChildren){
+                    return Type == target || target.IsSubclassOf(Type);
+                }
+                else {
+                    return Type == target;
+                }
+            }
         }
 
     }

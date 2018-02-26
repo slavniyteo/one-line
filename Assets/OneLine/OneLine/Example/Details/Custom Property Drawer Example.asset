@@ -11,14 +11,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9cda7dbd5e943a38c44d0a82e6cd6e, type: 3}
   m_Name: Custom Property Drawer Example
   m_EditorClassIdentifier: 
-  someFloats:
+  directDrawer:
     parent:
       first: 
     child:
       first: 
       second: 
-  customDrawer:
-    pureRange: 17.8
+  attributeDrawer:
+    pureRange: 55
+    parent:
+      first: 
+    child:
+      first: 
+  directWithoutChildren:
+    parent:
+      first: 
+    child:
+      first: 
+      second: 
+  attributeWithoutChildren:
+    pureRange: 0
     parent:
       first: 
     child:
