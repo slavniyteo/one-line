@@ -53,19 +53,27 @@ namespace OneLine {
 
             var propertyType = property.GetRealType();
             if (propertyType == null) return null;
-
+            
+            bool found = false;
             Type drawerType = null;
             Attribute drawerAttribute = null;
-            if (! customDrawers.TryGetValue(propertyType, out drawerType)) {
-                var attributes = property.GetCustomAttributes();
+            
+            var attributes = property.GetCustomAttributes();
+            foreach (var key in customDrawers.Keys){
                 foreach (var attribute in attributes){
-                    if (customDrawers.TryGetValue(attribute.GetType(), out drawerType)){
+                    var attributeType = attribute.GetType();
+                    if (attributeType == key || attributeType.IsSubclassOf(key)){
+                        drawerType = customDrawers[key];
                         drawerAttribute = attribute;
+                        found = true;
                         break;
                     }
                 }
             }
 
+            if (!found ) {
+                customDrawers.TryGetValue(propertyType, out drawerType);
+            }
             if (drawerType == null) return null;
 
             var drawer = Activator.CreateInstance(drawerType) as PropertyDrawer;
