@@ -58,7 +58,7 @@ namespace OneLine {
             Type drawerType = null;
             Attribute drawerAttribute = null;
             
-            var attributes = property.GetCustomAttributes();
+            var attributes = property.GetCustomAttributes<PropertyAttribute>();
             foreach (var key in customDrawers.Keys){
                 foreach (var attribute in attributes){
                     var attributeType = attribute.GetType();
@@ -71,8 +71,9 @@ namespace OneLine {
                 }
             }
 
-            if (!found ) {
-                customDrawers.TryGetValue(propertyType, out drawerType);
+            while (!found && propertyType != null) {
+                found = customDrawers.TryGetValue(propertyType, out drawerType);
+                propertyType = propertyType.BaseType;
             }
             if (drawerType == null) return null;
 

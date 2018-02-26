@@ -48,14 +48,21 @@ namespace OneLine {
             string[] path = property.propertyPath.Split('.');
 
             Type type = property.serializedObject.targetObject.GetType();
+            Type lastType = type;
             FieldInfo field = null;
             for (int i = 0; i < path.Length; i++) {
-                field = type.GetField(path[i], BindingFlags.Public 
-                                               | BindingFlags.NonPublic
-                                               | BindingFlags.Instance);
+                lastType = type;
+                field = null;
+
+                do {
+                    field = type.GetField(path[i], BindingFlags.Public 
+                                                | BindingFlags.NonPublic
+                                                | BindingFlags.Instance);
+                }
+                while (field == null && (type = type.BaseType) != null);
 
                 if (field == null) {
-                    NotifyMisspelledPropertyPath(type, property.propertyPath, path[i]);
+                    NotifyMisspelledPropertyPath(lastType, property.propertyPath, path[i]);
                     return null;
                 }
 
