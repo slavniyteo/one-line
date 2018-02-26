@@ -10,6 +10,8 @@ using System.Text.RegularExpressions;
 namespace OneLine {
     internal class CustomDrawer : SimpleFieldDrawer {
 
+        private static readonly Regex REGEXP_ARRAY_INDEX = new Regex(".data\\[\\d+\\]");
+
         private readonly Dictionary<string, PropertyDrawer> drawers = new Dictionary<string, PropertyDrawer>();
         private static Dictionary<Type, Type> customDrawers;
 
@@ -31,8 +33,6 @@ namespace OneLine {
                 throw new Exception(string.Format(message, property.type, property.propertyPath));
             }
         }
-
-        private static readonly Regex REGEXP_ARRAY_INDEX = new Regex(".data\\[\\d+\\]");
 
         private PropertyDrawer GetCustomPropertyDrawerFor(SerializedProperty property){
             var key = REGEXP_ARRAY_INDEX.Replace(property.propertyPath, "");
