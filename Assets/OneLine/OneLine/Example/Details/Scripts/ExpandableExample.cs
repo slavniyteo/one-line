@@ -7,22 +7,17 @@ namespace OneLine.Examples {
 public class ExpandableExample : ScriptableObject {
 
     [SerializeField, Expandable]
-    private ExpandableExample first;
-
-    [SerializeField, Expandable]
-    private UnityEngine.Object second;
+    private UnityEngine.Object withoutOneLine;
 
     [SerializeField, OneLine]
-    private TwoFields third;
+    private TwoFields withOneLine;
 
     [Serializable]
     public class TwoFields {
-        [SerializeField]
-        private string first;
         [SerializeField, Expandable]
-        private ScriptableObject second;
+        private ScriptableObject first;
         [SerializeField, Expandable]
-        private UnityEngine.Object third;
+        private UnityEngine.Object second;
     }
 }
 }
