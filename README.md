@@ -35,6 +35,7 @@ Table of contents:
         - [Hide Buttons Attribute](#hidebuttonsattribute)
         - [Fixed Length Attribute](#fixedlengthattribute)
 * [Separator Attribute](#separatorattribute)
+* [Expandable Attribute](#expandableattribute)
 
 ## OneLinePropertyDrawer
 
