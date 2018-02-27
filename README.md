@@ -4,6 +4,10 @@ OneLine improves your databases and makes it more readable by people. It draws o
 
 # News
 
+- **2018.02.27**: Added `[Expandable]` attribute. See [below](#expandableattribute)
+- **2018.02.26**: Added custom property drawers support.  
+Now any custom drawer, which returns height < 20, is drown. 
+Acceptable for custom drawers of either types or attributes.
 - **2018.02.18**: Available on the [Asset Store](https://www.assetstore.unity3d.com/en/#!/content/110758) for free.
 
 # TL;DR
@@ -444,4 +448,34 @@ public class SeparatorExample : ScriptableObject {
 
 **Result:**
 
-![Fixed Length Attribute Example](mdsrc/separator-attribute-example.png)
+![Separator Attribute Example](mdsrc/separator-attribute-example.png)
+
+### [ExpandableAttribute]
+
+`[Expandable]` allows you to follow object references without switching Inspector Window focus. Added to any object field (of type extends UnityEngine.Object), creates a foldout-like button near object field. See below:
+
+```csharp
+using System;
+using UnityEngine;
+using OneLine;
+
+[CreateAssetMenu(menuName = "OneLine/ExpandableExample")]
+public class ExpandableExample : ScriptableObject {
+
+    [SerializeField, Expandable]
+    private UnityEngine.Object withoutOneLine;
+
+    [SerializeField, OneLine]
+    private TwoFields withOneLine;
+
+    [Serializable]
+    public class TwoFields {
+        [SerializeField, Expandable]
+        private ScriptableObject first;
+        [SerializeField, Expandable]
+        private UnityEngine.Object second;
+    }
+}
+```
+
+![Expandable Attribute Example](mdsrc/expandable-attribute-example.png)
