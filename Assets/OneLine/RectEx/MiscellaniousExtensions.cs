@@ -76,6 +76,12 @@ namespace RectEx {
                 height: rect.height + 2*border
             );
         }
+        
+        public static Rect FirstLine(this Rect rect, float height = 18){
+            rect = rect.Abs();
+            rect.height = height;
+            return rect.Abs();
+        }
 
     }
 }
