@@ -10,14 +10,19 @@ public class ExpandableExample : ScriptableObject {
     private SeparatorExample first;
 
     [SerializeField, Expandable]
-    private Transform second;
+    private Camera second;
+
+    [SerializeField, OneLine]
+    private TwoFields third;
 
     [Serializable]
     public class TwoFields {
         [SerializeField]
         private string first;
-        [SerializeField]
-        private string second;
+        [SerializeField, Expandable]
+        private Transform second;
+        [SerializeField, Expandable]
+        private Camera third;
     }
 }
 }
