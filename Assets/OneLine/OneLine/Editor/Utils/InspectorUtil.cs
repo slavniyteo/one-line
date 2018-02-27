@@ -26,12 +26,14 @@ Please create an issue on https://github.com/slavniyteo/one-line/ and we will re
         private object window;
 
         public InspectorUtil() {
+            enabled = false;
+            if (PopupWindow.focusedWindow != null) return; // Detect is it [Expandable] popup
+
             try {
                 Initialize();
                 enabled = true;
             }
             catch (Exception ex){
-                enabled = false;
                 Debug.LogError(INITIALIZATION_ERROR_MESSAGE + ex.ToString());
             }
         }
@@ -46,6 +48,8 @@ Please create an issue on https://github.com/slavniyteo/one-line/ and we will re
             scrollPositionInfo = inspectorWindowType.GetField("m_ScrollPosition");
             getWindowPositionInfo = inspectorWindowType.GetProperty("position", typeof(Rect))
                                                         .GetGetMethod();
+            
+            var test = ScrollPosition;
         }
 
         private Vector2 ScrollPosition { get { return (Vector2) scrollPositionInfo.GetValue(window); } }

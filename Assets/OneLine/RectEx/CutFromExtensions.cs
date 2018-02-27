@@ -62,7 +62,7 @@ namespace RectEx {
                 xmin:rect.xMin,
                 xmax:rect.xMax,
                 ymin:rect.yMin,
-                ymax:height
+                ymax:rect.yMin + height
             );
             float max = Math.Max(rect.yMax, first.yMax + space);
             var second = Rect.MinMaxRect(
