@@ -32,7 +32,8 @@ namespace OneLine {
             }
 
             if (GUI.Button(foldoutRect, "", foldoutStyle)){
-                PopupWindow.Show(propertyRect.MoveDownFor(0), new ExpandedObjectWindow(propertyRect, property));
+                var content = new ExpandedObjectWindow(propertyRect, property);
+                PopupWindow.Show(propertyRect.MoveDownFor(0), content);
             }
         }
 
@@ -63,8 +64,42 @@ namespace OneLine {
 
             public override void OnGUI(Rect rect) {
                 EditorGUI.DrawRect(rect, Color.gray);
-                DrawExpandedObject(rect, new SerializedObject(property.objectReferenceValue));
+
+                Editor editor = null;
+                Editor.CreateCachedEditor(property.objectReferenceValue, null, ref editor);
+
+                if (editor != null){
+                    DrawCustomEditor(editor);
+                }
+                else {
+                    var message = "Can not find editor for type {0}. Drawing manually.\nPlease create an issue at https://github.com/slavniyteo/one-line and we will repair it.";
+                    Debug.LogWarning(String.Format(message, property.objectReferenceValue.GetType()));
+
+                    DrawExpandedObject(rect, new SerializedObject(property.objectReferenceValue));
+                }
             }
+
+            #region Draw Custom Editor
+
+            private void DrawCustomEditor(Editor editor) {
+                scrollPosition = GUILayout.BeginScrollView(scrollPosition);
+
+                var layoutRect = EditorGUILayout.BeginVertical();
+                EditorGUI.BeginChangeCheck();
+                editor.OnInspectorGUI();
+                if (EditorGUI.EndChangeCheck()) EditorUtility.SetDirty(property.objectReferenceValue);
+                EditorGUILayout.EndVertical();
+
+                GUILayout.EndScrollView();
+
+                if (Event.current.type != EventType.Layout) {
+                    windowRect.height = layoutRect.height + 4;
+                }
+            }
+
+            #endregion
+
+            #region Draw Manually
 
             private void DrawExpandedObject(Rect rect, SerializedObject target) {
                 if (target == null) return; 
@@ -93,16 +128,9 @@ namespace OneLine {
                 }
                 
                 do {
-                    try {
-                        rect.height = EditorGUI.GetPropertyHeight(property, true);
-                        EditorGUI.PropertyField (rect, property, true);
-                        rect.y += rect.height;
-                    }
-                    catch (StackOverflowException) {
-                        property.objectReferenceValue = null;
-                        Debug.LogError ("Detected self-nesting cauisng a StackOverflowException, avoid using the same " +
-                            "object iside a nested structure.");
-                    }
+                    rect.height = EditorGUI.GetPropertyHeight(property, true);
+                    EditorGUI.PropertyField (rect, property, true);
+                    rect.y += rect.height;
                 }
                 while (property.NextVisible (false));
 
@@ -115,6 +143,8 @@ namespace OneLine {
                 EditorGUI.PropertyField (rect, property, false);
                 EditorGUI.EndDisabledGroup ();
             }
+
+            #endregion
         }
     }
 }

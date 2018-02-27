@@ -7,10 +7,10 @@ namespace OneLine.Examples {
 public class ExpandableExample : ScriptableObject {
 
     [SerializeField, Expandable]
-    private SeparatorExample first;
+    private ExpandableExample first;
 
     [SerializeField, Expandable]
-    private Camera second;
+    private UnityEngine.Object second;
 
     [SerializeField, OneLine]
     private TwoFields third;
@@ -20,9 +20,9 @@ public class ExpandableExample : ScriptableObject {
         [SerializeField]
         private string first;
         [SerializeField, Expandable]
-        private Transform second;
+        private ScriptableObject second;
         [SerializeField, Expandable]
-        private Camera third;
+        private UnityEngine.Object third;
     }
 }
 }
