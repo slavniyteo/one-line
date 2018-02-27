@@ -13,7 +13,9 @@ namespace OneLine {
         private CustomPropertyDrawers drawers = new CustomPropertyDrawers();
 
         public bool HasCustomDrawer(SerializedProperty property){
-            return drawers.GetCustomPropertyDrawerFor(property) != null;
+            var drawer = drawers.GetCustomPropertyDrawerFor(property);
+
+            return drawer != null && drawer.GetPropertyHeight(property, GUIContent.none) < 20;
         }
 
         public override void Draw(Rect rect, SerializedProperty property) {
