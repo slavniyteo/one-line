@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace OneLine.Examples {
-[CreateAssetMenu]
-public class Benchmark : ScriptableObject {
+[CreateAssetMenu(menuName = "OneLine/Benchmarks/Array")]
+public class ArrayBenchmark : ScriptableObject {
 
     [OneLine, HideLabel]
     public PureClasses[] pure;

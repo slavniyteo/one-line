@@ -32,23 +32,23 @@ namespace OneLine {
         }
 
         private PropertyDrawer CreatePropertyDrawerFor(SerializedProperty property){
-            var propertyType = property.GetRealType();
-            if (propertyType == null) return null;
+            var field = property.GetFieldInfo();
+            if (field == null) return null;
             
-            var result = FindAttributeDrawer(property);
+            var result = FindAttributeDrawer(property, field);
 
             if (result == null) {
-                result = FindDirectDrawer(propertyType);
+                result = FindDirectDrawer(property, field);
             }
 
             return result;
         }
 
-        private PropertyDrawer FindAttributeDrawer(SerializedProperty property){
+        private PropertyDrawer FindAttributeDrawer(SerializedProperty property, FieldInfo field){
             TypeForDrawing typeDrawer = null;
             Attribute drawerAttribute = null;
 
-            var attributes = property.GetCustomAttributes<PropertyAttribute>();
+            var attributes = property.GetCustomAttributes<PropertyAttribute>(field);
 
             foreach (var type in types){
                 foreach (var attribute in attributes){
@@ -62,17 +62,23 @@ namespace OneLine {
 
             if (typeDrawer == null) return null;
 
-            var drawer = Activator.CreateInstance(typeDrawer.DrawerType) as PropertyDrawer;
+            var drawer = CreateDrawer(field, typeDrawer.DrawerType);
             drawer.SetAttribute(drawerAttribute);
             return drawer;
         }
 
-        private PropertyDrawer FindDirectDrawer(Type propertyType){
-            var typeDrawer = types.FirstOrDefault(x => x.IsMatch(propertyType));
+        private PropertyDrawer FindDirectDrawer(SerializedProperty property, FieldInfo field){
+            var typeDrawer = types.FirstOrDefault(x => x.IsMatch(field.FieldType));
 
             if (typeDrawer == null) return null;
 
-            return Activator.CreateInstance(typeDrawer.DrawerType) as PropertyDrawer;
+            return CreateDrawer(field, typeDrawer.DrawerType);
+        }
+
+        private PropertyDrawer CreateDrawer(FieldInfo field, Type type){
+            var result = Activator.CreateInstance(type) as PropertyDrawer;
+            result.SetFieldInfo(field);
+            return result;
         }
     }
 }
