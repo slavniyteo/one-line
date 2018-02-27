@@ -46,6 +46,8 @@ Please create an issue on https://github.com/slavniyteo/one-line/ and we will re
             scrollPositionInfo = inspectorWindowType.GetField("m_ScrollPosition");
             getWindowPositionInfo = inspectorWindowType.GetProperty("position", typeof(Rect))
                                                         .GetGetMethod();
+            
+            var test = ScrollPosition;
         }
 
         private Vector2 ScrollPosition { get { return (Vector2) scrollPositionInfo.GetValue(window); } }
