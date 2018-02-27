@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace OneLine {
     internal static class SerializedPropertyReflectionExtension {
@@ -14,28 +15,22 @@ namespace OneLine {
             typeof(Rect),
             typeof(Bounds)
         };
+        private static Dictionary<string, FieldInfo> FIELDS_CACHE = new Dictionary<string, FieldInfo>();
 
         public static T GetCustomAttribute<T>(this SerializedProperty property, FieldInfo fieldInfo = null) where T : Attribute {
             return GetCustomAttributes<T>(property, fieldInfo).FirstOrDefault();
         }
 
         public static T[] GetCustomAttributes<T>(this SerializedProperty property, FieldInfo fieldInfo = null) where T : Attribute {
-            return GetCustomAttributes(property, fieldInfo, typeof(T))
-                   .Cast<T>()
-                   .ToArray();
-        }
-
-        public static Attribute[] GetCustomAttributes(this SerializedProperty property, FieldInfo fieldInfo = null, Type attributeType = null) {
             if (property == null) throw new ArgumentNullException();
-            if (attributeType == null) attributeType = typeof(Attribute); 
 
             if (fieldInfo == null) fieldInfo = GetFieldInfo(property);
 
             if (fieldInfo == null) {
-                return new Attribute[0];
+                return new T[0];
             }
             else {
-                return fieldInfo.GetCustomAttributes(attributeType, false).Cast<Attribute>().ToArray();
+                return fieldInfo.GetCustomAttributes(typeof(T), false).Cast<T>().ToArray();
             }
         }
 
@@ -46,9 +41,21 @@ namespace OneLine {
         }
 
         public static FieldInfo GetFieldInfo(this SerializedProperty property) {
-            string[] path = property.propertyPath.Split('.');
+            FieldInfo result = null;
 
             Type type = property.serializedObject.targetObject.GetType();
+            string key = String.Format("{0}->{1}", type.FullName, property.propertyPath);
+            if (!FIELDS_CACHE.TryGetValue(key, out result)){
+                result = FindFieldInfo(property, type);
+                FIELDS_CACHE[key] = result;
+            }
+
+            return result;
+        }
+
+        private static FieldInfo FindFieldInfo(SerializedProperty property, Type type){
+            string[] path = property.propertyPath.Split('.');
+
             Type lastType = type;
             FieldInfo field = null;
             for (int i = 0; i < path.Length; i++) {
