@@ -94,6 +94,7 @@ namespace OneLine {
 #region OnGUI
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+            if (Event.current.type == EventType.Layout){ return; } // In [Expandable] popup it happens
             if (inspectorUtil.IsOutOfScreen(position)){ return; } // Culling
 
             if (arraysSizeObserver.IsArraySizeChanged(property)){ ResetCache(); }
