@@ -4,7 +4,7 @@ OneLine improves your databases and makes it more readable by people. It draws o
 
 # News
 
-- **2018.02.27**: Added `[Expandable]` attribute. See [below](#expandableattribute)
+- **2018.02.27**: Added `[Expandable]` attribute. See [description below](#expandableattribute) and [#22](https://github.com/slavniyteo/one-line/issues/22)
 - **2018.02.26**: Added custom property drawers support.  
 Now any custom drawer, which returns height < 20, is drown. 
 Acceptable for custom drawers of either types or attributes.
@@ -16,6 +16,7 @@ Acceptable for custom drawers of either types or attributes.
 - In your code, add `using OneLine;` and add `[OneLine]` to fields you want to draw into one line. Note that internal fields don't need `OneLine`: they will be processed automatically;
 - If you want to customize onelined fields, use **Width**, **Weight**, **HideLabel**, **Highlight**, **HideButtons** and **ArrayLength** attributes (see **Example.asset**);
 - Use **Separator** attribute to separate different fields;
+- Use **Expandable** attribute to follow object references;
 - OneLine uses [RectEx](https://github.com/slavniyteo/rect-ex), so feel free to try it.
 - Compatible with either **.Net 2.0** or **.Net 4.5** backends.
 
@@ -453,7 +454,12 @@ public class SeparatorExample : ScriptableObject {
 
 ### [ExpandableAttribute]
 
-`[Expandable]` allows you to follow object references without switching Inspector Window focus. Added to any object field (of type extends UnityEngine.Object), creates a foldout-like button near object field. See below:
+`[Expandable]` allows you to follow object references without switching Inspector Window focus. Added to any object field (of type extends UnityEngine.Object), creates a foldout-like button near object field.
+
+Known issues: [#22](https://github.com/slavniyteo/one-line/issues/22)  
+Due to Unity's bug, you can't edit expanded object with keyboard, only with mouse.
+I don't know how to resolve this issue (direct forwarding keyboard events doesn't work) and I'm going to keep this as well.
+If you really need resolving this issue, let me know at [#22](https://github.com/slavniyteo/one-line/issues/22).
 
 ```csharp
 using System;
