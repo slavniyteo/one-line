@@ -456,6 +456,8 @@ public class SeparatorExample : ScriptableObject {
 
 `[Expandable]` allows you to follow object references without switching Inspector Window focus. Added to any object field (of type extends UnityEngine.Object), creates a foldout-like button near object field.
 
+Use `[ReadOnlyExpandable]` to make opened popup readonly.
+
 Known issues: [#22](https://github.com/slavniyteo/one-line/issues/22)  
 Due to Unity's bug, you can't edit expanded object with keyboard, only with mouse.
 I don't know how to resolve this issue (direct forwarding keyboard events doesn't work) and I'm going to keep this as well.
