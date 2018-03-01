@@ -3,13 +3,26 @@ using UnityEngine;
 
 namespace OneLine {
     ///<summary>
-    ///Draws horizontal or vertical separator
+    /// Foolows object reference and draw it in the popup
     ///</summary>
     [AttributeUsage(validOn: AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
-    public sealed class ExpandableAttribute : PropertyAttribute {
+    public class ExpandableAttribute : PropertyAttribute {
 
-        public ExpandableAttribute() {
+        public bool ReadOnly { get; private set; }
+
+        public ExpandableAttribute(bool readOnly = false) {
+            ReadOnly = readOnly;
         }
 
     }
+
+    [AttributeUsage(validOn: AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
+    public class ReadOnlyExpandableAttribute : ExpandableAttribute {
+
+        public ReadOnlyExpandableAttribute() :base(true) {
+        }
+
+    }
+
+    
 }

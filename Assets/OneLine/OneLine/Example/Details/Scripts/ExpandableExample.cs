@@ -14,7 +14,7 @@ public class ExpandableExample : ScriptableObject {
 
     [Serializable]
     public class TwoFields {
-        [SerializeField, Expandable]
+        [SerializeField, ReadOnlyExpandable]
         private ScriptableObject first;
         [SerializeField, Expandable]
         private UnityEngine.Object second;

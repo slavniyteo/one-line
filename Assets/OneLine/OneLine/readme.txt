@@ -20,6 +20,9 @@ to draw into one line. Note that internal fields don't need to be marked with
     - To separate lines use `[Separator]` instead built-in `[Header]`. 
 `[Separator]` is just a nice-looked [Header].
 
+    - To follow object references in inspector use `[Expandable]` and 
+`[ReadOnlyExpandable]`. 
+
 # RectEx
 
 One more thing: RectEx.

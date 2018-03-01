@@ -6,10 +6,12 @@ using RectEx;
 using System;
 
 namespace OneLine {
-    [CustomPropertyDrawer(typeof(ExpandableAttribute))]
+    [CustomPropertyDrawer(typeof(ExpandableAttribute), true)]
     public class ExpandableAttributeDrawer : PropertyDrawer {
 
         private static readonly float FOLDOUT_WIDTH = 14;
+
+        private new ExpandableAttribute attribute { get {return base.attribute as ExpandableAttribute; } }
 
         private GUIStyle foldoutStyle;
     
@@ -32,7 +34,7 @@ namespace OneLine {
             }
 
             if (GUI.Button(foldoutRect, "", foldoutStyle)){
-                var content = new ExpandedObjectWindow(propertyRect, property);
+                var content = new ExpandedObjectWindow(propertyRect, property, attribute.ReadOnly);
                 PopupWindow.Show(propertyRect.MoveDownFor(0), content);
             }
         }
@@ -43,13 +45,15 @@ namespace OneLine {
             private float max_window_height;
 
             private SerializedProperty property;
+            private bool isReadOnly;
 
             private Rect contentRect;
             private Vector2 scrollPosition;
             private Rect windowRect;
 
-            public ExpandedObjectWindow(Rect rect, SerializedProperty property){
+            public ExpandedObjectWindow(Rect rect, SerializedProperty property, bool isReadOnly){
                 this.property = property;
+                this.isReadOnly = isReadOnly;
 
                 this.scrollPosition = Vector2.zero;
                 this.windowRect = new Rect(0,0, Math.Max(rect.width, MIN_WINDOW_WIDTH), 100);
@@ -68,6 +72,7 @@ namespace OneLine {
                 Editor editor = null;
                 Editor.CreateCachedEditor(property.objectReferenceValue, null, ref editor);
 
+                EditorGUI.BeginDisabledGroup(isReadOnly);
                 if (editor != null){
                     DrawCustomEditor(editor);
                 }
@@ -77,6 +82,7 @@ namespace OneLine {
 
                     DrawExpandedObject(rect, new SerializedObject(property.objectReferenceValue));
                 }
+                EditorGUI.EndDisabledGroup();
             }
 
             #region Draw Custom Editor
