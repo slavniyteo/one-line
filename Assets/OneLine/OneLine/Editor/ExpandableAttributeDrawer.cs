@@ -134,7 +134,7 @@ namespace OneLine {
                 }
                 
                 do {
-                    rect.height = EditorGUI.GetPropertyHeight(property, true);
+                    rect.height = EditorGUI.GetPropertyHeight(property, GUIContent.none, true);
                     EditorGUI.PropertyField (rect, property, true);
                     rect.y += rect.height;
                 }

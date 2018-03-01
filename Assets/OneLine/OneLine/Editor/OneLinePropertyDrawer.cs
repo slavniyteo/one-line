@@ -1,6 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using UnityEngine.Profiling;
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -99,7 +98,6 @@ namespace OneLine {
 
             if (arraysSizeObserver.IsArraySizeChanged(property)){ ResetCache(); }
 
-            Profiler.BeginSample("OneLine.OnGUI");
             rootDirectoryDrawer.RootDepth = property.depth;
             directoryDrawer.RootDepth = property.depth;
             position = rootDirectoryDrawer.DrawPrefixLabel(position, property);
@@ -111,7 +109,6 @@ namespace OneLine {
             DrawLine(position, property, (slice,rect) => slice.Draw(rect));
 
             EditorGUI.indentLevel = indentLevel;
-            Profiler.EndSample();
         }
 
         private Rect DrawHeaderIfNeed(Rect position, SerializedProperty property){

@@ -5,7 +5,6 @@ using System.Reflection;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Profiling;
 
 namespace OneLine {
     internal static class SerializedPropertyReflectionExtension {
