@@ -4,6 +4,7 @@ OneLine improves your databases and makes it more readable by people. It draws o
 
 # News
 
+- **2018.03.01**: [v0.3.0](https://github.com/slavniyteo/one-line/releases/tag/v0.3.0) released!
 - **2018.02.27**: Added `[Expandable]` attribute. See [description below](#expandableattribute) and [#22](https://github.com/slavniyteo/one-line/issues/22)
 - **2018.02.26**: Added custom property drawers support.  
 Now any custom drawer, which returns height < 20, is drown. 
