@@ -149,6 +149,6 @@ public class CustomPropertyDrawerExample : ScriptableObject {
             EditorGUI.LabelField(rect, property.displayName + " is drown");
         }
     }
-}
 #endif
+}
 }
