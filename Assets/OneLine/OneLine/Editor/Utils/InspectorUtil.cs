@@ -27,7 +27,7 @@ Please create an issue on https://github.com/slavniyteo/one-line/ and we will re
 
         public InspectorUtil() {
             enabled = false;
-            if (PopupWindow.focusedWindow != null) return; // Detect is it [Expandable] popup
+            if (EditorWindow.focusedWindow is PopupWindow) return; // Detect is it [Expandable] popup
 
             try {
                 Initialize();
