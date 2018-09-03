@@ -2,6 +2,7 @@
 
 OneLine improves your databases and makes it more readable by people. It draws objects in Inspector into one line instead default line-by-line style. Also it provides a few features like fields highlightning, locking array size, etc...
 
+Read about `OneLine` on habr: [1](https://habr.com/post/340536/), [2](https://habr.com/post/341064/) (ru).
 # News
 
 - **2018.03.01**: [v0.3.0](https://github.com/slavniyteo/one-line/releases/tag/v0.3.0) released!
