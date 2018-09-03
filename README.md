@@ -100,7 +100,7 @@ It's not nice to write additional classes for every data class. There is a coupl
 
 ### [OneLineAttribute]
 
-`[OneLine]` is the core of all library. Add it to any field drawn in Inspector and its view will be chanded: with all children it will be drawn into one line (and arrays with all elements and their children). It works fully recursive and automatic. You don't need to add `[OneLine]` to every field -- just to root. `[OneLine]` uses all other attributes to customize view. But other attributes is just markers and containers for settings (for example, `[Weight]` tells to `[OneLine]` that this field must me wery long, but it is not draws anything be itself). Except `[Separator]`: it is used as marker and as drawer depends on context.
+`[OneLine]` is the core of all library. Add it to any field drawn in Inspector and it's view will be chanded: with all children it will be drawn into one line (and arrays with all elements and their children). It works completely recursive and automatic. You don't need to add `[OneLine]` to every field -- just to root. `[OneLine]` uses all other attributes to customize view. But other attributes is just markers and containers for settings (for example, `[Weight]` tells to `[OneLine]` that this field must me wery long, but it is not draws anything be itself). Except `[Separator]`: it is used as marker and as drawer depends on context.
 
 **Example:**
 
