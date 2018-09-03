@@ -14,11 +14,11 @@ Acceptable for custom drawers of either types or attributes.
 
 # TL;DR
 
-- After importing look at `Assets/OneLine/Example/Overview/Overview.asset` and open it in InspectorWindow. It will show you all capabilities of OneLine library;
-- In your code, add `using OneLine;` and add `[OneLine]` to fields you want to draw into one line. Note that internal fields don't need `OneLine`: they will be processed automatically;
-- If you want to customize onelined fields, use **Width**, **Weight**, **HideLabel**, **Highlight**, **HideButtons** and **ArrayLength** attributes (see **Example.asset**);
+- After importing look at `Assets/OneLine/Example/Overview/Overview.asset` and open it in InspectorWindow. It'll show you all capabilities of the library;
+- In your code, add `using OneLine;` and `[OneLine]` to fields you want to draw into one line. Note that internal fields don't need `[OneLine]`: they are processed automatically;
+- IToo customize onelined fields, use **Width**, **Weight**, **HideLabel**, **Highlight**, **HideButtons** and **ArrayLength** attributes (see **Example.asset**);
 - Use **Separator** attribute to separate different fields;
-- Use **Expandable** attribute to follow object references;
+- Use **Expandable** attribute to follow object references (real street magic is here) (idea is stolen from [here](https://forum.unity.com/threads/editor-tool-better-scriptableobject-inspector-editing.484393/);
 - OneLine uses [RectEx](https://github.com/slavniyteo/rect-ex), so feel free to try it.
 - Compatible with either **.Net 2.0** or **.Net 4.5** backends.
 
@@ -42,8 +42,7 @@ Table of contents:
 
 ## OneLinePropertyDrawer
 
-`OneLinePropertyDrawer` is a custom property drawer. It draws any property into single line. To nicely draw your custom data class into one line, just extend `OneLinePropertyDrawer`. Every time your class will be drawn in single line without any additional attributes.
-
+`OneLinePropertyDrawer` is a custom property drawer. It draws any property into a single line. To nicely draw your custom data class into one line, just extend `OneLinePropertyDrawer`. 
 **Example:**
 
 ```csharp
@@ -93,11 +92,11 @@ public class OneLineDrawerExampleEditor : OneLinePropertyDrawer {
 
 ![One Line Attribute Example](mdsrc/one-line-property-drawer-example.png)
 
-You can also override protected property `Header` and return `LineHeader.Short` to add a table-like header. Sometimes I'll add example with headers.
+You can also override protected property `Header` and return `LineHeader.Short` to add a table-like header. I wanted to add an example with headers but I didn't.
 
 ## Attributes
 
-It is not nice to create additional classes for every data class you want one-linify in Inspector. There is a couple of attributes created for make your life better.
+It's not nice to write additional classes for every data class. There is a couple of attributes created to make your life better.
 
 ### [OneLineAttribute]
 
