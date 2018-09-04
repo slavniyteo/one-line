@@ -37,16 +37,20 @@ namespace OneLine {
         }
 
         private void DrawChildren(SerializedProperty property, Slices slices){
+            var childSlices = new SlicesImpl();
             GetChildren(property)
                 .ForEachExceptLast((child) => {
-                    DrawChildWithDecorators(property, child, slices, false);
+                    DrawChildWithDecorators(property, child, childSlices, false);
 
-                    if (NeedDrawSeparator(child)){
-                        separatorDrawer.AddSlices(child, slices);
+                    if (childSlices.CountPayload > 0 && NeedDrawSeparator(child)){
+                        separatorDrawer.AddSlices(child, childSlices);
                     }
                 }, 
-                child => DrawChildWithDecorators(property, child, slices, true)
+                child => DrawChildWithDecorators(property, child, childSlices, true) 
             );
+            if (childSlices.CountPayload > 0){
+                slices.Add(childSlices);
+            }
         }
 
         private void DrawChildWithDecorators(SerializedProperty parent, SerializedProperty child, Slices slices, bool isLast){

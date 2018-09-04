@@ -6,12 +6,14 @@ using UnityEditor;
 namespace OneLine {
 	internal class Slice {
 
-		public float Weight { get; private set; }
-		public float Width { get; private set; }
+		public virtual float Weight { get; private set; }
+		public virtual float Width { get; private set; }
 
 		private Action<Rect> draw;
 		private Action<Rect> drawHeader;
 		private string header;
+
+		protected Slice(){}
 
 		public Slice (float weight, float width, Action<Rect> draw)
 		: this(weight, width, draw, null){
