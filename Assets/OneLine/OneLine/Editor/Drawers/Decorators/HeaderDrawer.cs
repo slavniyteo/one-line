@@ -24,8 +24,8 @@ namespace OneLine {
                           property.IsReallyArray() && 
                           property.GetCustomAttribute<ArrayLengthAttribute>() == null;
 
-            var slice = new MetaSlice(before, after, null, rect => DrawHeader(rect, property.displayName), expand);
-            slices.Add(slice);
+            var slice = new Drawable(null, rect => DrawHeader(rect, property.displayName));
+            slices.AddBefore(slice);
         }
 
         public void DrawHeader (Rect rect, string header){

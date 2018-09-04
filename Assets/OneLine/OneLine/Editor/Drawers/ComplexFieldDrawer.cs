@@ -26,14 +26,9 @@ namespace OneLine {
         #region Weights
 
         public override void AddSlices(SerializedProperty property, Slices slices){
-            var count = slices.CountPayload;
-            var highlight = DrawHighlight(property, slices, 0, 0);
-
+            DrawHighlight(property, slices);
             DrawChildren(property, slices);
-            
-            count = slices.CountPayload - count;
-            highlight.IfPresent(it => it.After = count);
-            DrawTooltip(property, slices, count, 0);
+            DrawTooltip(property, slices);
         }
 
         private void DrawChildren(SerializedProperty property, Slices slices){

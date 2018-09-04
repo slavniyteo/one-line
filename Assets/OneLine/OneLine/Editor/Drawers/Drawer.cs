@@ -11,23 +11,20 @@ namespace OneLine {
 
         public abstract void AddSlices(SerializedProperty property, Slices slices);
 
-        protected MetaSlice DrawHighlight(SerializedProperty property, Slices slices, int before, int after) {
+        protected void DrawHighlight(SerializedProperty property, Slices slices) {
             var attribute = property.GetCustomAttribute<HighlightAttribute>();
-            if (attribute == null) return null;
+            if (attribute == null) return;
 
-            var slice = new MetaSlice(before, after, 
-                                      rect => GuiUtil.DrawRect(rect.Extend(1), attribute.Color));
-            slices.Add(slice);
-            return slice;
+            var slice = new Drawable(rect => GuiUtil.DrawRect(rect.Extend(1), attribute.Color));
+            slices.AddBefore(slice);
         }
 
-        protected void DrawTooltip(SerializedProperty property, Slices slices, int before, int after) {
+        protected void DrawTooltip(SerializedProperty property, Slices slices) {
             var attribute = property.GetCustomAttribute<TooltipAttribute>();
             if (attribute == null) return;
 
-            var slice = new MetaSlice(before, after,
-                                      rect => EditorGUI.LabelField(rect, new GUIContent("", attribute.tooltip)));
-            slices.Add(slice);
+            var slice = new Drawable(rect => EditorGUI.LabelField(rect, new GUIContent("", attribute.tooltip)));
+            slices.AddAfter(slice);
         }
     }
 }

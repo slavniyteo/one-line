@@ -15,7 +15,7 @@ namespace OneLine {
         }
 
         public override void AddSlices(SerializedProperty property, Slices slices){
-            DrawHighlight(property, slices, 0, 1);
+            DrawHighlight(property, slices);
             base.AddSlices(property, slices);
         }
 
