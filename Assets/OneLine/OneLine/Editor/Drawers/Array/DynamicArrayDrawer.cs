@@ -25,13 +25,12 @@ namespace OneLine {
         }
 
         protected override void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
-            var count = slices.CountPayload;
-            var contextMenu = new MetaSlice(0, 0, rect => DrawElementContextMenu(rect, parent, child));
-            slices.Add(contextMenu);
+            var childSlices = new SlicesImpl();
 
-            base.DrawChild(parent, child, slices);
+            childSlices.AddBefore(new DrawableImpl(rect => DrawElementContextMenu(rect, parent, child)));
+            base.DrawChild(parent, child, childSlices);
 
-            contextMenu.After = slices.CountPayload - count;
+            slices.Add(childSlices);
         }
 
         private void DrawElementContextMenu(Rect rect, SerializedProperty parent, SerializedProperty element) {

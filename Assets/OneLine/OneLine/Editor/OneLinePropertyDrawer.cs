@@ -106,7 +106,7 @@ namespace OneLine {
             EditorGUI.indentLevel = 0;
 
             position = DrawHeaderIfNeed(position, property);
-            DrawLine(position, property, (slice,rect) => slice.Draw(rect));
+            cache[property].Draw(position);
 
             EditorGUI.indentLevel = indentLevel;
         }
@@ -115,38 +115,9 @@ namespace OneLine {
             if (! NeedDrawHeader(property)) return position;
 
             var rects = position.Column(2, 2);
-            DrawLine(rects[0], property, (slice, rect) => slice.DrawHeader(rect));
+            cache[property].DrawHeader(rects[0]);
             
             return rects[1];
-        }
-
-        private void DrawLine(Rect position, SerializedProperty property, Action<Slice, Rect> draw){
-            var slices = cache[property];
-            var rects = position.Row(slices.Weights, slices.Widthes, 2);
-
-            int rectIndex = 0;
-            foreach (var slice in slices){
-                if (slice is MetaSlice){
-                    var rect = CalculateMetaSliceRect(slice as MetaSlice, position, rects, rectIndex);
-                    draw(slice, rect);
-                }
-                else {
-                    draw(slice, rects[rectIndex]);
-                    rectIndex++;
-                }
-            }
-        }
-
-        private Rect CalculateMetaSliceRect(MetaSlice slice, Rect wholeRect, Rect[] rects, int currentRect){
-            var from = rects[currentRect - slice.Before];
-            var to = rects[currentRect + slice.After - 1];
-            var result = from.Union(to);
-
-            if (slice.Expand && rects.Length == currentRect) {
-                result.xMax = wholeRect.xMax;
-            }
-
-            return result;
         }
 
 #endregion

@@ -25,7 +25,7 @@ namespace OneLine {
 					return cache[lastId];
 				}
 				else {
-					var slices = new Slices();
+					var slices = new SlicesImpl();
 					calculate(property, slices);
 					cache.Add(lastId, slices);
 					IsDirty = true;

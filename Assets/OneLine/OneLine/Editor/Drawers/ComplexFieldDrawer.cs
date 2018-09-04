@@ -10,10 +10,6 @@ namespace OneLine {
 
     internal abstract class ComplexFieldDrawer : Drawer {
 
-        private SeparatorDrawer separatorDrawer = new SeparatorDrawer();
-        private SpaceDrawer spaceDrawer = new SpaceDrawer();
-        private HeaderDrawer headerDrawer = new HeaderDrawer();
-
         protected DrawerProvider getDrawer;
         public int RootDepth { get; set; }
 
@@ -26,38 +22,37 @@ namespace OneLine {
         #region Weights
 
         public override void AddSlices(SerializedProperty property, Slices slices){
-            var count = slices.CountPayload;
-            var highlight = DrawHighlight(property, slices, 0, 0);
-
+            highlight.Draw(property, slices);
             DrawChildren(property, slices);
-            
-            count = slices.CountPayload - count;
-            highlight.IfPresent(it => it.After = count);
-            DrawTooltip(property, slices, count, 0);
+            tooltip.Draw(property, slices);
         }
 
         private void DrawChildren(SerializedProperty property, Slices slices){
+            var childSlices = new SlicesImpl();
             GetChildren(property)
                 .ForEachExceptLast((child) => {
-                    DrawChildWithDecorators(property, child, slices, false);
+                    DrawChildWithDecorators(property, child, childSlices, false);
 
-                    if (NeedDrawSeparator(child)){
-                        separatorDrawer.AddSlices(child, slices);
+                    if (childSlices.CountPayload > 0 && NeedDrawSeparator(child)){
+                        separator.Draw(child, childSlices);
                     }
                 }, 
-                child => DrawChildWithDecorators(property, child, slices, true)
+                child => DrawChildWithDecorators(property, child, childSlices, true) 
             );
+            if (childSlices.CountPayload > 0){
+                slices.Add(childSlices);
+            }
         }
 
         private void DrawChildWithDecorators(SerializedProperty parent, SerializedProperty child, Slices slices, bool isLast){
-            int count = slices.CountPayload;
+            space.Draw(child, slices);
 
-            spaceDrawer.AddSlices(child, slices);
-            DrawChild(parent, child, slices);
-
+            var childSlices = new SlicesImpl();
+            DrawChild(parent, child, childSlices);
             if (NeedDrawHeader(parent, child)){
-                headerDrawer.AddSlices(slices.CountPayload - count, 0, child, slices, isLast);
+                header.Draw(child, childSlices);
             }
+            slices.Add(childSlices);
         }
 
         private bool NeedDrawHeader(SerializedProperty parent, SerializedProperty child){
