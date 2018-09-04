@@ -106,7 +106,7 @@ namespace OneLine {
             EditorGUI.indentLevel = 0;
 
             position = DrawHeaderIfNeed(position, property);
-            DrawLine(position, property, (slice,rect) => slice.Draw(rect));
+            cache[property].Draw(position);
 
             EditorGUI.indentLevel = indentLevel;
         }
@@ -115,14 +115,9 @@ namespace OneLine {
             if (! NeedDrawHeader(property)) return position;
 
             var rects = position.Column(2, 2);
-            DrawLine(rects[0], property, (slice, rect) => slice.DrawHeader(rect));
+            cache[property].DrawHeader(rects[0]);
             
             return rects[1];
-        }
-
-        private void DrawLine(Rect position, SerializedProperty property, Action<Slice, Rect> draw){
-            var slices = cache[property];
-            slices.Draw(position);
         }
 
 #endregion

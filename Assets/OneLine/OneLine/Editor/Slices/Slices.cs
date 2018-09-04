@@ -3,6 +3,7 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 using RectEx;
+using System;
 
 namespace OneLine {
 	internal interface Slices : IEnumerable<Slice> {
@@ -10,10 +11,12 @@ namespace OneLine {
 		float[] Widthes { get; }
 		int CountPayload { get; }
 
+		void Draw(Rect rect);
+		void DrawHeader(Rect rect);
+
 		void Add(Slice slice);
 		void AddBefore(Drawable drawable);
 		void AddAfter(Drawable drawable);
-		void Draw(Rect rect);
 	}
 
 	internal class SlicesImpl : Slice, Slices, IEnumerable<Slice> {
@@ -71,20 +74,28 @@ namespace OneLine {
 		}
 
 		public override void Draw(Rect rect) {
+			ForEach(rect, (r, x) => x.Draw(r));
+		}
+
+		public override void DrawHeader(Rect rect) {
+			ForEach(rect, (r, x) => x.DrawHeader(r));
+		}
+
+		private void ForEach(Rect rect, Action<Rect, Drawable> action) {
             var rects = rect.Row(Weights, Widthes, 2);
 
 			foreach (var drawable in before) {
-				drawable.Draw(rect);
+				action(rect, drawable);
 			}
 
             int rectIndex = 0;
             foreach (var slice in slices){
-				slice.Draw(rects[rectIndex]);
+				action(rects[rectIndex], slice);
 				rectIndex++;
             }
 
 			foreach (var drawable in after) {
-				drawable.Draw(rect);
+				action(rect, drawable);
 			}
 		}
 	}

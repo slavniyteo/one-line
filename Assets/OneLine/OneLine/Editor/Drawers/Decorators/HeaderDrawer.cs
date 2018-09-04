@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 
 namespace OneLine {
-    internal class HeaderDrawer : Drawer {
+    internal class HeaderDrawer {
 
         private GUIStyle tableHeaderStyle;
 
@@ -15,20 +15,15 @@ namespace OneLine {
             tableHeaderStyle.normal.textColor = GuiUtil.GrayColor;
         }
 
-        public override void AddSlices(SerializedProperty property, Slices slices){
-            throw new InvalidOperationException();
-        }
-
-        public void AddSlices(int before, int after, SerializedProperty property, Slices slices, bool isLast){
+        public void Draw(SerializedProperty property, Slices slices, bool isLast){
             bool expand = isLast && 
                           property.IsReallyArray() && 
                           property.GetCustomAttribute<ArrayLengthAttribute>() == null;
 
-            var slice = new Drawable(null, rect => DrawHeader(rect, property.displayName));
-            slices.AddBefore(slice);
+            slices.AddBefore(new Drawable(null, rect => DrawHeaderInternal(rect, property.displayName)));
         }
 
-        public void DrawHeader (Rect rect, string header){
+        private void DrawHeaderInternal (Rect rect, string header){
             int fittedWidth = (int) Math.Round(rect.width / 6); //units for one litera
             header = header.Substring(0, Math.Min(header.Length, fittedWidth));
 

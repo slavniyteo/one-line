@@ -27,7 +27,7 @@ namespace OneLine {
 			}
 		}
 
-		public void DrawHeader(Rect rect){
+		public virtual void DrawHeader(Rect rect){
 			if (drawHeader != null) {
 				drawHeader(rect);
 			}
