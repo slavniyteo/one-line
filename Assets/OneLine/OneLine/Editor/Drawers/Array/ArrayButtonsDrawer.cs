@@ -18,11 +18,11 @@ namespace OneLine {
 
         public override void AddSlices(SerializedProperty property, Slices slices){
             if (NeedDrawButtons(property)){
-                slices.Add(new Slice(0, 20, rect => DrawPlusButton(rect, property.Copy())));
-                slices.Add(new Slice(0, 20, rect => DrawMinusButton(rect, property.Copy())));
+                slices.Add(new SliceImpl(0, 20, rect => DrawPlusButton(rect, property.Copy())));
+                slices.Add(new SliceImpl(0, 20, rect => DrawMinusButton(rect, property.Copy())));
             }
             else if (NeedDrawLabel(property)){
-                slices.Add(new Slice(1,0, rect => DrawLabel(rect, property.Copy())));
+                slices.Add(new SliceImpl(1,0, rect => DrawLabel(rect, property.Copy())));
             }
         }
 

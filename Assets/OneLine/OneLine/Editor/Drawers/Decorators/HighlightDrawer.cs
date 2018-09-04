@@ -12,7 +12,7 @@ namespace OneLine {
             var attribute = property.GetCustomAttribute<HighlightAttribute>();
             if (attribute == null) return;
 
-            var slice = new Drawable(rect => GuiUtil.DrawRect(rect.Extend(1), attribute.Color));
+            var slice = new DrawableImpl(rect => GuiUtil.DrawRect(rect.Extend(1), attribute.Color));
             slices.AddBefore(slice);
         }
 

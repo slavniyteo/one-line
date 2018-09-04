@@ -6,20 +6,17 @@ using RectEx;
 using System;
 
 namespace OneLine {
-	internal interface Slices : IEnumerable<Slice> {
+	internal interface Slices : Slice, Drawable, IEnumerable<Slice> {
 		float[] Weights { get; }
 		float[] Widthes { get; }
 		int CountPayload { get; }
-
-		void Draw(Rect rect);
-		void DrawHeader(Rect rect);
 
 		void Add(Slice slice);
 		void AddBefore(Drawable drawable);
 		void AddAfter(Drawable drawable);
 	}
 
-	internal class SlicesImpl : Slice, Slices, IEnumerable<Slice> {
+	internal class SlicesImpl: SliceImpl, Slices, IEnumerable<Slice> {
 
 		private List<Slice> slices = new List<Slice>();
 		private List<Drawable> before = new List<Drawable>();
@@ -32,16 +29,22 @@ namespace OneLine {
 
 		public float[] Widthes { get { return slices.Select(x => x.Width).ToArray(); } }
 
-		public int CountPayload { get { return this.Sum(x => {
-			if (x is Slices) {
-				return (x as Slices).CountPayload;
-			}
-			else return 1;
-		}); } }
+		public int CountPayload { 
+			get { 
+				return this.Sum(x => {
+					if (x is Slices) {
+						return (x as Slices).CountPayload;
+					}
+					else return 1;
+				}); 
+			} 
+		}
 
 		public SlicesImpl(){
 
 		}
+
+		#region Add
 
 		public void Add(Slice slice){
 			slices.Add(slice);
@@ -54,6 +57,10 @@ namespace OneLine {
 		public void AddAfter(Drawable drawable) {
 			after.Add(drawable);
 		}
+
+		#endregion
+
+		#region Enumerable
 
 		public IEnumerator<Slice> GetEnumerator(){
 			foreach (var slice in slices) {
@@ -72,6 +79,10 @@ namespace OneLine {
 		IEnumerator IEnumerable.GetEnumerator(){
 			return GetEnumerator();
 		}
+
+		#endregion
+
+		#region Draw
 
 		public override void Draw(Rect rect) {
 			ForEach(rect, (r, x) => x.Draw(r));
@@ -98,5 +109,6 @@ namespace OneLine {
 				action(rect, drawable);
 			}
 		}
+		#endregion
 	}
 }

@@ -15,12 +15,8 @@ namespace OneLine {
             tableHeaderStyle.normal.textColor = GuiUtil.GrayColor;
         }
 
-        public void Draw(SerializedProperty property, Slices slices, bool isLast){
-            bool expand = isLast && 
-                          property.IsReallyArray() && 
-                          property.GetCustomAttribute<ArrayLengthAttribute>() == null;
-
-            slices.AddBefore(new Drawable(null, rect => DrawHeaderInternal(rect, property.displayName)));
+        public void Draw(SerializedProperty property, Slices slices){
+            slices.AddBefore(new DrawableImpl(null, rect => DrawHeaderInternal(rect, property.displayName)));
         }
 
         private void DrawHeaderInternal (Rect rect, string header){

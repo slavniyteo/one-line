@@ -27,7 +27,7 @@ namespace OneLine {
         protected override void DrawChild(SerializedProperty parent, SerializedProperty child, Slices slices){
             var childSlices = new SlicesImpl();
 
-            childSlices.AddBefore(new Drawable(rect => DrawElementContextMenu(rect, parent, child)));
+            childSlices.AddBefore(new DrawableImpl(rect => DrawElementContextMenu(rect, parent, child)));
             base.DrawChild(parent, child, childSlices);
 
             slices.Add(childSlices);

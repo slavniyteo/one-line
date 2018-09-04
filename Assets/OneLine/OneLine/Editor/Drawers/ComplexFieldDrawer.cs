@@ -50,7 +50,7 @@ namespace OneLine {
             var childSlices = new SlicesImpl();
             DrawChild(parent, child, childSlices);
             if (NeedDrawHeader(parent, child)){
-                header.Draw(child, childSlices, isLast);
+                header.Draw(child, childSlices);
             }
             slices.Add(childSlices);
         }

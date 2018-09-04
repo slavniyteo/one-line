@@ -12,10 +12,10 @@ namespace OneLine {
         public void Draw(SerializedProperty property, Slices slices){
             Slice slice;
             if (property.IsArrayElement()){
-                slice = new Slice(0, width, DrawInternal);
+                slice = new SliceImpl(0, width, DrawInternal);
             }
             else {
-                slice = new Slice(0, width, DrawInternal, DrawInternal);
+                slice = new SliceImpl(0, width, DrawInternal, DrawInternal);
             }
             slices.Add(slice);
         }

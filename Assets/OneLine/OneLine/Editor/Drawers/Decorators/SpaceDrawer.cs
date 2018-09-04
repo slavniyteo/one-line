@@ -9,7 +9,7 @@ namespace OneLine {
 
         public void Draw(SerializedProperty property, Slices slices){
             property.GetCustomAttribute<SpaceAttribute>()
-                    .IfPresent(x => slices.Add(new Slice(0, x.height, rect => {})));
+                    .IfPresent(x => slices.Add(new SliceImpl(0, x.height, rect => {})));
         }
 
     }

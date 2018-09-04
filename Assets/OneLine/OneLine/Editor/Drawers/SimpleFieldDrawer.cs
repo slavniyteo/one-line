@@ -38,7 +38,7 @@ namespace OneLine {
 
         public override void AddSlices(SerializedProperty property, Slices slices){
             highlight.Draw(property, slices);
-            slices.Add(new Slice(GetWeight(property), GetFixedWidth(property), rect => Draw(rect, property.Copy())));
+            slices.Add(new SliceImpl(GetWeight(property), GetFixedWidth(property), rect => Draw(rect, property.Copy())));
             tooltip.Draw(property, slices);
         }
 

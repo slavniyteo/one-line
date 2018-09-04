@@ -11,7 +11,7 @@ namespace OneLine {
             var attribute = property.GetCustomAttribute<TooltipAttribute>();
             if (attribute == null) return;
 
-            var slice = new Drawable(rect => EditorGUI.LabelField(rect, new GUIContent("", attribute.tooltip)));
+            var slice = new DrawableImpl(rect => EditorGUI.LabelField(rect, new GUIContent("", attribute.tooltip)));
             slices.AddAfter(slice);
         }
 
