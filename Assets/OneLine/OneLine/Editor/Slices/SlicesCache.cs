@@ -38,8 +38,17 @@ namespace OneLine {
 			return property.propertyPath;
 		}
 
-		public void InvalidateLastUsedId(){
-			cache.Remove(lastId);
+		public void InvalidateLastUsedId(SerializedProperty property){
+			var id = GetId(property);
+			var list = new List<string>();
+			foreach (var key in cache.Keys) {
+				if (id.StartsWith(key + ".")) {
+					list.Add(key);
+				}
+			}
+			foreach(var key in list) {
+				cache.Remove(key);
+			}
 		}
 
 	}
