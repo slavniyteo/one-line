@@ -1,8 +1,15 @@
 # Overview
 
-OneLine improves your databases and makes it more readable by people. It draws objects in Inspector into one line instead default line-by-line style. Also it provides a few features like field highlightning, locking array size, etc...
+OneLine provides a simple way to organize your databases without writing dozens of boilerplate code. It draws objects in Inspector into one line instead default line-by-line style. Also it provides a few features like field highlightning, locking array size, etc...
 
 Read about `OneLine` on habr: [1](https://habr.com/post/340536/), [2](https://habr.com/post/341064/) (ru).
+
+![Unity Asset Store](https://img.shields.io/badge/Unity%20Asset%20Store-Free-green.svg)
+![GitHub release](https://img.shields.io/github/release/slavniyteo/one-line.svg)
+![GitHub Release Date](https://img.shields.io/github/release-date/slavniyteo/one-line.svg)
+![Github commits (since latest release)](https://img.shields.io/github/commits-since/slavniyteo/one-line/latest.svg)
+![GitHub last commit](https://img.shields.io/github/last-commit/slavniyteo/one-line.svg)
+
 # News
 
 - **2018.03.01**: [v0.3.0](https://github.com/slavniyteo/one-line/releases/tag/v0.3.0) released!
