@@ -36,6 +36,19 @@ namespace OneLine.Settings {
             }
         }
 
+        public TernaryBoolean DrawVerticalSeparator {
+            get {
+                var result = Defaults.DrawVerticalSeparator;
+                if (layer.DrawVerticalSeparator.HasValue) {
+                    result = layer.DrawVerticalSeparator;
+                }
+                if (Local.DrawVerticalSeparator.HasValue) {
+                    result = Local.DrawVerticalSeparator;
+                }
+                return result;
+            }
+        }
+
         public void ApplyDirectivesInOrderToCurrentSettings(){
             var allDefines = new HashSet<string>();
             var defines = new List<string>();
@@ -43,6 +56,11 @@ namespace OneLine.Settings {
             allDefines.Add("ONE_LINE_DISABLED");
             if (Enabled.HasValue && ! Enabled.BoolValue) {
                 defines.Add("ONE_LINE_DISABLED");
+            }
+
+            allDefines.Add("ONE_LINE_VERTICAL_SEPARATOR_DISABLE");
+            if (DrawVerticalSeparator.HasValue && ! DrawVerticalSeparator.BoolValue) {
+                defines.Add("ONE_LINE_VERTICAL_SEPARATOR_DISABLE");
             }
 
             BuildTargetGroup target = EditorUserBuildSettings.selectedBuildTargetGroup;

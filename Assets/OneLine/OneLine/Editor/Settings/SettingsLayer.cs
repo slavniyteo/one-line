@@ -10,7 +10,12 @@ namespace OneLine.Settings {
         private TernaryBoolean enabled;
         public TernaryBoolean Enabled { 
             get { return enabled; } 
-            set { enabled = value; }
+        }
+
+        [SerializeField]
+        private TernaryBoolean drawVerticalSeparator;
+        public TernaryBoolean DrawVerticalSeparator {
+            get { return drawVerticalSeparator; }
         }
     }
 }

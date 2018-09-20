@@ -8,5 +8,9 @@ namespace OneLine.Settings {
         public TernaryBoolean Enabled { 
             get { return TernaryBoolean.TRUE; } 
         }
+
+        public TernaryBoolean DrawVerticalSeparator {
+            get { return TernaryBoolean.TRUE; }
+        }
     }
 }

@@ -31,6 +31,7 @@ namespace OneLine.Settings {
             var rects = Row(rect);
 
             EditorGUI.LabelField(rects[1], "Enabled");
+            EditorGUI.LabelField(rects[2], "V Separator");
         }
 
         private void DrawReadOnlyLayer(Rect rect, string label, ISettings layer) {
@@ -47,10 +48,14 @@ namespace OneLine.Settings {
             if (GUI.Button(rects[1], content)){
                 layer.Enabled.SwitchToNext();
             }
+            content = new GUIContent(layer.DrawVerticalSeparator.ToString(), "Draw Vertical Sepatator"); 
+            if (GUI.Button(rects[2], content)){
+                layer.DrawVerticalSeparator.SwitchToNext();
+            }
         }
 
         private Rect[] Row(Rect rect) {
-            return rect.Row(new float[]{0,0}, new float[]{100, 50});
+            return rect.Row(new float[]{0,0,0}, new float[]{100, 50, 50});
         }
 
         private void DrawSaveButton(Rect rect) {
