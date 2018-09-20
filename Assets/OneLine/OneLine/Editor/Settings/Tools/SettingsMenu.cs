@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEditor;
 
 namespace OneLine.Settings {
+    [InitializeOnLoad]
     public class SettingsMenu {
 
         private const string PATH = "Assets/Editor/Resources/OneLine";
@@ -12,13 +13,21 @@ namespace OneLine.Settings {
         private const string SETTINGS_FILE_NAME_WITH_EXTENSION = SETTINGS_FILE_NAME + ".asset";
         private const string SETTINGS_RESOURCES_PATH = "OneLine/" + SETTINGS_FILE_NAME;
 
+        static SettingsMenu() {
+            LoadSettings();
+        }
+
         [MenuItem(itemName: "Window/OneLine Settings")]
         public static void OpenSettings(){
+            Selection.activeObject = LoadSettings();
+        }
+
+        private static Settings LoadSettings() {
             var settings = Resources.Load<Settings>(SETTINGS_RESOURCES_PATH);
             if (settings == null) {
                 settings = CreateSettings();
             }
-            Selection.activeObject = settings;
+            return settings;
         }
 
         private static Settings CreateSettings() {
