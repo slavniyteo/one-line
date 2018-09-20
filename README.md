@@ -4,7 +4,7 @@ OneLine provides a simple way to organize your databases without writing dozens 
 
 Read about `OneLine` on habr: [1](https://habr.com/post/340536/), [2](https://habr.com/post/341064/) (ru).
 
-![Unity Asset Store](https://img.shields.io/badge/Unity%20Asset%20Store-Free-green.svg)
+[![Unity Asset Store](https://img.shields.io/badge/Unity%20Asset%20Store-Free-green.svg)](https://assetstore.unity.com/packages/tools/gui/oneline-110758)
 ![GitHub release](https://img.shields.io/github/release/slavniyteo/one-line.svg)
 ![GitHub Release Date](https://img.shields.io/github/release-date/slavniyteo/one-line.svg)
 ![Github commits (since latest release)](https://img.shields.io/github/commits-since/slavniyteo/one-line/latest.svg)
