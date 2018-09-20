@@ -33,6 +33,8 @@ namespace OneLine.Settings {
             EditorGUI.LabelField(rects[1], "Enabled");
             EditorGUI.LabelField(rects[2], "V Separator");
             EditorGUI.LabelField(rects[3], "H Separator");
+
+            EditorGUI.LabelField(rects[4], "Expandable");
         }
 
         private void DrawReadOnlyLayer(Rect rect, string label, ISettings layer) {
@@ -57,12 +59,16 @@ namespace OneLine.Settings {
             if (GUI.Button(rects[3], content)){
                 layer.DrawHorizontalSeparator.SwitchToNext();
             }
+            content = new GUIContent(layer.Expandable.ToString(), "Expand Object references via [Expandable]"); 
+            if (GUI.Button(rects[4], content)){
+                layer.Expandable.SwitchToNext();
+            }
         }
 
         private Rect[] Row(Rect rect) {
             return rect.Row(
-                new float[]{0,   0,  0,  0}, 
-                new float[]{100, 50, 50, 50}
+                new float[]{0,   0,  0,  0, 0}, 
+                new float[]{100, 50, 50, 50, 50}
             );
         }
 

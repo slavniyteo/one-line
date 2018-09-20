@@ -23,5 +23,11 @@ namespace OneLine.Settings {
         public TernaryBoolean DrawHorizontalSeparator {
             get { return drawHorizontalSeparator; }
         }
+
+        [SerializeField]
+        private TernaryBoolean expandable;
+        public TernaryBoolean Expandable {
+            get { return expandable; }
+        }
     }
 }

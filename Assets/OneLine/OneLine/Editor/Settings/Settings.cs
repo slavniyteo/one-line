@@ -28,6 +28,7 @@ namespace OneLine.Settings {
         public TernaryBoolean DrawVerticalSeparator { get { return GetBoolean(x => x.DrawVerticalSeparator); } }
 
         public TernaryBoolean DrawHorizontalSeparator { get { return GetBoolean(x => x.DrawHorizontalSeparator); } }
+        public TernaryBoolean Expandable { get { return GetBoolean(x => x.Expandable); } }
 
         private TernaryBoolean GetBoolean(Func<ISettings, TernaryBoolean> get) {
                 var result = get(Defaults);
@@ -57,6 +58,11 @@ namespace OneLine.Settings {
             allDefines.Add("ONE_LINE_HORIZONTAL_SEPARATOR_DISABLE");
             if (DrawHorizontalSeparator.HasValue && ! DrawHorizontalSeparator.BoolValue) {
                 defines.Add("ONE_LINE_HORIZONTAL_SEPARATOR_DISABLE");
+            }
+
+            allDefines.Add("ONE_LINE_EXPANDABLE_DISABLE");
+            if (Expandable.HasValue && ! Expandable.BoolValue) {
+                defines.Add("ONE_LINE_EXPANDABLE_DISABLE");
             }
 
             BuildTargetGroup target = EditorUserBuildSettings.selectedBuildTargetGroup;
