@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace OneLine.Settings {
     [Serializable]
-    public class SettingsLayer : ISettings {
+    public class GlobalSettingsLayer : ISettings {
         [SerializeField]
         private TernaryBoolean enabled;
         public TernaryBoolean Enabled { 

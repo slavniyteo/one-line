@@ -70,9 +70,7 @@ namespace OneLine.Settings {
 
         private void DrawSaveButton(Rect rect) {
             if (GUI.Button(rect.CutFromLeft(50)[0], "Save")){
-                EditorUtility.SetDirty(target);
-                target.Local.Save();
-                target.ApplyDirectivesInOrderToCurrentSettings();
+                target.SaveAndApply();
             }
         }
 

@@ -7,18 +7,19 @@ using UnityEditor;
 
 namespace OneLine.Settings {
     public class Settings : ScriptableObject, ISettings {
-        public DefaultSettingsLayer Defaults { get; private set; }
-        public LocalSettingsLayer Local { get; private set; }
+        public ISettings Defaults { get; private set; }
+
+        private LocalSettingsLayer local = new LocalSettingsLayer();
+        public ISettings Local { get { return local; } }
 
         [SerializeField]
-        private SettingsLayer layer = new SettingsLayer();
-        public SettingsLayer Layer { 
+        private GlobalSettingsLayer layer = new GlobalSettingsLayer();
+        public ISettings Layer { 
             get { return layer; } 
         }
 
         private void OnEnable() {
             Defaults = new DefaultSettingsLayer();
-            Local = new LocalSettingsLayer();
 
             ApplyDirectivesInOrderToCurrentSettings();
         }
@@ -40,11 +41,10 @@ namespace OneLine.Settings {
                 return result;
         }
 
-        private static void define(HashSet<string> allDefines, List<string> defines, TernaryBoolean value, string key) {
-            allDefines.Add(key);
-            if (value.HasValue && ! value.BoolValue) {
-                defines.Add(key);
-            }
+        public void SaveAndApply() {
+            local.Save();
+            EditorUtility.SetDirty(this);
+            ApplyDirectivesInOrderToCurrentSettings();
         }
 
         public void ApplyDirectivesInOrderToCurrentSettings(){
@@ -75,6 +75,13 @@ namespace OneLine.Settings {
 
             resultDefines.AddRange(defines);
             PlayerSettings.SetScriptingDefineSymbolsForGroup(target, string.Join(";", resultDefines.ToArray()));
+        }
+
+        private static void define(HashSet<string> allDefines, List<string> defines, TernaryBoolean value, string key) {
+            allDefines.Add(key);
+            if (value.HasValue && ! value.BoolValue) {
+                defines.Add(key);
+            }
         }
 
     }
