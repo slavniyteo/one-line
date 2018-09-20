@@ -7,31 +7,31 @@ namespace OneLine.Settings {
     [Serializable]
     public class GlobalSettingsLayer : ISettings {
         [SerializeField]
-        private TernaryBoolean enabled;
+        private TernaryBoolean enabled = TernaryBoolean.NULL;
         public TernaryBoolean Enabled { 
             get { return enabled; } 
         }
 
         [SerializeField]
-        private TernaryBoolean drawVerticalSeparator;
+        private TernaryBoolean drawVerticalSeparator = TernaryBoolean.NULL;
         public TernaryBoolean DrawVerticalSeparator {
             get { return drawVerticalSeparator; }
         }
 
         [SerializeField]
-        private TernaryBoolean drawHorizontalSeparator;
+        private TernaryBoolean drawHorizontalSeparator = TernaryBoolean.NULL;
         public TernaryBoolean DrawHorizontalSeparator {
             get { return drawHorizontalSeparator; }
         }
 
         [SerializeField]
-        private TernaryBoolean expandable;
+        private TernaryBoolean expandable = TernaryBoolean.NULL;
         public TernaryBoolean Expandable {
             get { return expandable; }
         }
 
         [SerializeField]
-        private TernaryBoolean customDrawer;
+        private TernaryBoolean customDrawer = TernaryBoolean.NULL;
         public TernaryBoolean CustomDrawer {
             get { return customDrawer; }
         }
