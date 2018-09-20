@@ -1,12 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace OneLine.Settings {
-    public class SettingsLayer : ScriptableObject, ISettings {
+    [Serializable]
+    public class SettingsLayer : ISettings {
         [SerializeField]
-        private Boolean enabled;
-        public Boolean Enabled { 
+        private TernaryBoolean enabled;
+        public TernaryBoolean Enabled { 
             get { return enabled; } 
             set { enabled = value; }
         }

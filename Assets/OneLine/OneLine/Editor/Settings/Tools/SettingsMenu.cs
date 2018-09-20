@@ -48,24 +48,5 @@ namespace OneLine.Settings {
             }
         }
 
-        public static SettingsLayer CreateSettingsLayer() {
-            PrepareResourcesDirectory();
-
-            var result = Settings.CreateInstance<SettingsLayer>();
-
-            int i = 0;
-            string path = "";
-            while (++i < 100) {
-                path = PATH + "/SettingsLayer " + i + ".asset";
-                if (AssetDatabase.LoadAssetAtPath<SettingsLayer>(path) == null) {
-                    break;
-                }
-            }
-            AssetDatabase.CreateAsset(result, path);
-            AssetDatabase.SaveAssets();
-            return result;
-        }
-
-
     }
 }

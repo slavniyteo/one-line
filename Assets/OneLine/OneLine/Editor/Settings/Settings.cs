@@ -3,55 +3,45 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-#if UNITY_EDITOR
 using UnityEditor;
-#endif
 
 namespace OneLine.Settings {
-    public enum Boolean {
-        None,
-        True,
-        False
-    }
-
-    public interface ISettings {
-        Boolean Enabled { get; }
-    }
-
     public class Settings : ScriptableObject, ISettings {
         public DefaultSettingsLayer Defaults { get; private set; }
+        public LocalSettingsLayer Local { get; private set; }
 
         [SerializeField]
-        private List<SettingsLayer> layers;
-
-        public List<SettingsLayer> Layers {
-            get {return layers;}
-            set {layers = value;}
+        private SettingsLayer layer = new SettingsLayer();
+        public SettingsLayer Layer { 
+            get { return layer; } 
         }
 
         private void OnEnable() {
             Defaults = new DefaultSettingsLayer();
+            Local = new LocalSettingsLayer();
 
             ApplyDirectivesInOrderToCurrentSettings();
         }
 
-        public Boolean Enabled {
+        public TernaryBoolean Enabled {
             get {
-                var result = layers.Select( x => x.Enabled).Where(x => x != Boolean.None).LastOrDefault();
-                if (result == Boolean.None) {
-                    result = Defaults.Enabled;
+                var result = Defaults.Enabled;
+                if (layer.Enabled.HasValue) {
+                    result = layer.Enabled;
+                }
+                if (Local.Enabled.HasValue) {
+                    result = Local.Enabled;
                 }
                 return result;
             }
         }
 
         public void ApplyDirectivesInOrderToCurrentSettings(){
-#if UNITY_EDITOR
             var allDefines = new HashSet<string>();
             var defines = new List<string>();
 
             allDefines.Add("ONE_LINE_DISABLED");
-            if (! (Enabled == Boolean.True)) {
+            if (Enabled.HasValue && ! Enabled.BoolValue) {
                 defines.Add("ONE_LINE_DISABLED");
             }
 
@@ -73,9 +63,6 @@ namespace OneLine.Settings {
 
             resultDefines.AddRange(defines);
             PlayerSettings.SetScriptingDefineSymbolsForGroup(target, string.Join(";", resultDefines.ToArray()));
-           
-
-#endif
         }
 
     }
