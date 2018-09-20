@@ -40,34 +40,22 @@ namespace OneLine.Settings {
                 return result;
         }
 
+        private static void define(HashSet<string> allDefines, List<string> defines, TernaryBoolean value, string key) {
+            allDefines.Add(key);
+            if (value.HasValue && ! value.BoolValue) {
+                defines.Add(key);
+            }
+        }
+
         public void ApplyDirectivesInOrderToCurrentSettings(){
             var allDefines = new HashSet<string>();
             var defines = new List<string>();
 
-            allDefines.Add("ONE_LINE_DISABLED");
-            if (Enabled.HasValue && ! Enabled.BoolValue) {
-                defines.Add("ONE_LINE_DISABLED");
-            }
-
-            allDefines.Add("ONE_LINE_VERTICAL_SEPARATOR_DISABLE");
-            if (DrawVerticalSeparator.HasValue && ! DrawVerticalSeparator.BoolValue) {
-                defines.Add("ONE_LINE_VERTICAL_SEPARATOR_DISABLE");
-            }
-
-            allDefines.Add("ONE_LINE_HORIZONTAL_SEPARATOR_DISABLE");
-            if (DrawHorizontalSeparator.HasValue && ! DrawHorizontalSeparator.BoolValue) {
-                defines.Add("ONE_LINE_HORIZONTAL_SEPARATOR_DISABLE");
-            }
-
-            allDefines.Add("ONE_LINE_EXPANDABLE_DISABLE");
-            if (Expandable.HasValue && ! Expandable.BoolValue) {
-                defines.Add("ONE_LINE_EXPANDABLE_DISABLE");
-            }
-
-            allDefines.Add("ONE_LINE_CUSTOM_DRAWER_DISABLE");
-            if (CustomDrawer.HasValue && ! CustomDrawer.BoolValue) {
-                defines.Add("ONE_LINE_CUSTOM_DRAWER_DISABLE");
-            }
+            define(allDefines, defines, Enabled, "ONE_LINE_DISABLED");
+            define(allDefines, defines, DrawVerticalSeparator, "ONE_LINE_VERTICAL_SEPARATOR_DISABLE");
+            define(allDefines, defines, DrawHorizontalSeparator, "ONE_LINE_HORIZONTAL_SEPARATOR_DISABLE");
+            define(allDefines, defines, Expandable, "ONE_LINE_EXPANDABLE_DISABLE");
+            define(allDefines, defines, CustomDrawer, "ONE_LINE_CUSTOM_DRAWER_DISABLE");
 
             BuildTargetGroup target = EditorUserBuildSettings.selectedBuildTargetGroup;
             if (target == BuildTargetGroup.Unknown) {

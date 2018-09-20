@@ -47,25 +47,17 @@ namespace OneLine.Settings {
             var rects = Row(rect);
 
             EditorGUI.LabelField(rects[0], label);
-            var content = new GUIContent(layer.Enabled.ToString(), "Enable OneLine"); 
-            if (GUI.Button(rects[1], content)){
-                layer.Enabled.SwitchToNext();
-            }
-            content = new GUIContent(layer.DrawVerticalSeparator.ToString(), "Draw Vertical Sepatator"); 
-            if (GUI.Button(rects[2], content)){
-                layer.DrawVerticalSeparator.SwitchToNext();
-            }
-            content = new GUIContent(layer.DrawHorizontalSeparator.ToString(), "Draw Horizontal Sepatator"); 
-            if (GUI.Button(rects[3], content)){
-                layer.DrawHorizontalSeparator.SwitchToNext();
-            }
-            content = new GUIContent(layer.Expandable.ToString(), "Expand Object references via [Expandable]"); 
-            if (GUI.Button(rects[4], content)){
-                layer.Expandable.SwitchToNext();
-            }
-            content = new GUIContent(layer.CustomDrawer.ToString(), "Draw custom property drawers"); 
-            if (GUI.Button(rects[5], content)){
-                layer.CustomDrawer.SwitchToNext();
+            Draw(rects[1], layer.Enabled, "Enable OneLine");
+            Draw(rects[2], layer.DrawVerticalSeparator, "Draw Vertical Separator");
+            Draw(rects[3], layer.DrawHorizontalSeparator, "Draw Horizontal Separator");
+            Draw(rects[4], layer.Expandable, "Expand Object references via [Expandable]");
+            Draw(rects[5], layer.CustomDrawer, "Draw custom property drawers");
+        }
+
+        private void Draw(Rect rect, TernaryBoolean value, string tooltip) {
+            var content = new GUIContent(value.ToString(), tooltip); 
+            if (GUI.Button(rect, content)){
+                value.SwitchToNext();
             }
         }
 
