@@ -5,5 +5,6 @@ namespace OneLine.Settings {
         TernaryBoolean DrawVerticalSeparator { get; }
         TernaryBoolean DrawHorizontalSeparator { get; }
         TernaryBoolean Expandable { get; }
+        TernaryBoolean CustomDrawer { get; }
     }
 }

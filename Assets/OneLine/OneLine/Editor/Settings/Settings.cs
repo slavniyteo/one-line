@@ -24,11 +24,10 @@ namespace OneLine.Settings {
         }
 
         public TernaryBoolean Enabled { get { return GetBoolean(x => x.Enabled); } }
-
         public TernaryBoolean DrawVerticalSeparator { get { return GetBoolean(x => x.DrawVerticalSeparator); } }
-
         public TernaryBoolean DrawHorizontalSeparator { get { return GetBoolean(x => x.DrawHorizontalSeparator); } }
         public TernaryBoolean Expandable { get { return GetBoolean(x => x.Expandable); } }
+        public TernaryBoolean CustomDrawer { get { return GetBoolean(x => x.CustomDrawer); } }
 
         private TernaryBoolean GetBoolean(Func<ISettings, TernaryBoolean> get) {
                 var result = get(Defaults);
@@ -63,6 +62,11 @@ namespace OneLine.Settings {
             allDefines.Add("ONE_LINE_EXPANDABLE_DISABLE");
             if (Expandable.HasValue && ! Expandable.BoolValue) {
                 defines.Add("ONE_LINE_EXPANDABLE_DISABLE");
+            }
+
+            allDefines.Add("ONE_LINE_CUSTOM_DRAWER_DISABLE");
+            if (CustomDrawer.HasValue && ! CustomDrawer.BoolValue) {
+                defines.Add("ONE_LINE_CUSTOM_DRAWER_DISABLE");
             }
 
             BuildTargetGroup target = EditorUserBuildSettings.selectedBuildTargetGroup;

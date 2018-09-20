@@ -33,8 +33,8 @@ namespace OneLine.Settings {
             EditorGUI.LabelField(rects[1], "Enabled");
             EditorGUI.LabelField(rects[2], "V Separator");
             EditorGUI.LabelField(rects[3], "H Separator");
-
             EditorGUI.LabelField(rects[4], "Expandable");
+            EditorGUI.LabelField(rects[5], "Custom Drawer");
         }
 
         private void DrawReadOnlyLayer(Rect rect, string label, ISettings layer) {
@@ -63,12 +63,16 @@ namespace OneLine.Settings {
             if (GUI.Button(rects[4], content)){
                 layer.Expandable.SwitchToNext();
             }
+            content = new GUIContent(layer.CustomDrawer.ToString(), "Draw custom property drawers"); 
+            if (GUI.Button(rects[5], content)){
+                layer.CustomDrawer.SwitchToNext();
+            }
         }
 
         private Rect[] Row(Rect rect) {
             return rect.Row(
-                new float[]{0,   0,  0,  0, 0}, 
-                new float[]{100, 50, 50, 50, 50}
+                new float[]{0,   0,  0,  0,  0,  0}, 
+                new float[]{100, 50, 50, 50, 50, 50}
             );
         }
 

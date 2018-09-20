@@ -29,5 +29,11 @@ namespace OneLine.Settings {
         public TernaryBoolean Expandable {
             get { return expandable; }
         }
+
+        [SerializeField]
+        private TernaryBoolean customDrawer;
+        public TernaryBoolean CustomDrawer {
+            get { return customDrawer; }
+        }
     }
 }

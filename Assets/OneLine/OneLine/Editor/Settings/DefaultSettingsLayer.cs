@@ -20,5 +20,9 @@ namespace OneLine.Settings {
         public TernaryBoolean Expandable {
             get { return TernaryBoolean.TRUE; }
         }
+
+        public TernaryBoolean CustomDrawer {
+            get { return TernaryBoolean.TRUE; }
+        }
     }
 }

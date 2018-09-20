@@ -51,6 +51,17 @@ namespace OneLine.Settings {
             } 
         }
 
+        private const string CUSTOM_DRAWER_NAME = "ONE_LINE_SETTINGS_CUSTOM_DRAWER";
+        private TernaryBoolean customDrawer;
+        public TernaryBoolean CustomDrawer { 
+            get { 
+                if (customDrawer == null) {
+                    customDrawer = readBoolean(CUSTOM_DRAWER_NAME);
+                }
+                return customDrawer; 
+            } 
+        }
+
         private TernaryBoolean readBoolean(string key) {
             return new TernaryBoolean((byte) EditorPrefs.GetInt(key, 0));
         }
@@ -67,6 +78,9 @@ namespace OneLine.Settings {
             }
             if (expandable != null) {
                 EditorPrefs.SetInt(EXPANDABLE_NAME, expandable.RawValue);
+            }
+            if (customDrawer != null) {
+                EditorPrefs.SetInt(CUSTOM_DRAWER_NAME, customDrawer.RawValue);
             }
         }
     }
