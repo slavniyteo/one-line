@@ -17,5 +17,11 @@ namespace OneLine.Settings {
         public TernaryBoolean DrawVerticalSeparator {
             get { return drawVerticalSeparator; }
         }
+
+        [SerializeField]
+        private TernaryBoolean drawHorizontalSeparator;
+        public TernaryBoolean DrawHorizontalSeparator {
+            get { return drawHorizontalSeparator; }
+        }
     }
 }

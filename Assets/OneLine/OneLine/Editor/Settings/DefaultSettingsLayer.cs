@@ -12,5 +12,9 @@ namespace OneLine.Settings {
         public TernaryBoolean DrawVerticalSeparator {
             get { return TernaryBoolean.TRUE; }
         }
+
+        public TernaryBoolean DrawHorizontalSeparator {
+            get { return TernaryBoolean.TRUE; }
+        }
     }
 }

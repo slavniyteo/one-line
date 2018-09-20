@@ -29,6 +29,17 @@ namespace OneLine.Settings {
             } 
         }
 
+        private const string DRAW_HORIZONTAL_SEPARATOR_NAME = "ONE_LINE_SETTINGS_DRAW_HORIZONTAL_SEPARATOR";
+        private TernaryBoolean drawHorizontalSeparator;
+        public TernaryBoolean DrawHorizontalSeparator { 
+            get { 
+                if (drawHorizontalSeparator == null) {
+                    drawHorizontalSeparator = readBoolean(DRAW_HORIZONTAL_SEPARATOR_NAME);
+                }
+                return drawHorizontalSeparator; 
+            } 
+        }
+
         private TernaryBoolean readBoolean(string key) {
             return new TernaryBoolean((byte) EditorPrefs.GetInt(key, 0));
         }
@@ -39,6 +50,9 @@ namespace OneLine.Settings {
             }
             if (drawVerticalSeparator != null) {
                 EditorPrefs.SetInt(DRAW_VERTICAL_SEPARATOR_NAME, drawVerticalSeparator.RawValue);
+            }
+            if (drawHorizontalSeparator != null) {
+                EditorPrefs.SetInt(DRAW_HORIZONTAL_SEPARATOR_NAME, drawHorizontalSeparator.RawValue);
             }
         }
     }

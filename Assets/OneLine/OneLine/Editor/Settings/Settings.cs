@@ -23,30 +23,21 @@ namespace OneLine.Settings {
             ApplyDirectivesInOrderToCurrentSettings();
         }
 
-        public TernaryBoolean Enabled {
-            get {
-                var result = Defaults.Enabled;
-                if (layer.Enabled.HasValue) {
-                    result = layer.Enabled;
-                }
-                if (Local.Enabled.HasValue) {
-                    result = Local.Enabled;
-                }
-                return result;
-            }
-        }
+        public TernaryBoolean Enabled { get { return GetBoolean(x => x.Enabled); } }
 
-        public TernaryBoolean DrawVerticalSeparator {
-            get {
-                var result = Defaults.DrawVerticalSeparator;
-                if (layer.DrawVerticalSeparator.HasValue) {
-                    result = layer.DrawVerticalSeparator;
+        public TernaryBoolean DrawVerticalSeparator { get { return GetBoolean(x => x.DrawVerticalSeparator); } }
+
+        public TernaryBoolean DrawHorizontalSeparator { get { return GetBoolean(x => x.DrawHorizontalSeparator); } }
+
+        private TernaryBoolean GetBoolean(Func<ISettings, TernaryBoolean> get) {
+                var result = get(Defaults);
+                if (get(layer).HasValue) {
+                    result = get(layer);
                 }
-                if (Local.DrawVerticalSeparator.HasValue) {
-                    result = Local.DrawVerticalSeparator;
+                if (get(Local).HasValue) {
+                    result = get(Local);
                 }
                 return result;
-            }
         }
 
         public void ApplyDirectivesInOrderToCurrentSettings(){
@@ -61,6 +52,11 @@ namespace OneLine.Settings {
             allDefines.Add("ONE_LINE_VERTICAL_SEPARATOR_DISABLE");
             if (DrawVerticalSeparator.HasValue && ! DrawVerticalSeparator.BoolValue) {
                 defines.Add("ONE_LINE_VERTICAL_SEPARATOR_DISABLE");
+            }
+
+            allDefines.Add("ONE_LINE_HORIZONTAL_SEPARATOR_DISABLE");
+            if (DrawHorizontalSeparator.HasValue && ! DrawHorizontalSeparator.BoolValue) {
+                defines.Add("ONE_LINE_HORIZONTAL_SEPARATOR_DISABLE");
             }
 
             BuildTargetGroup target = EditorUserBuildSettings.selectedBuildTargetGroup;
