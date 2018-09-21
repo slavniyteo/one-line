@@ -25,6 +25,7 @@ namespace OneLine.Settings {
             DrawReadOnlyLayer(rect = rect.MoveDown(20), "Results", target);
 
             DrawSaveButton(rect = rect.MoveDown(20));
+            DrawRemoveButton(rect = rect.MoveDown(20));
         }
 
         private void DrawHeader(Rect rect) {
@@ -71,6 +72,15 @@ namespace OneLine.Settings {
         private void DrawSaveButton(Rect rect) {
             if (GUI.Button(rect.CutFromLeft(50)[0], "Save")){
                 target.SaveAndApply();
+            }
+        }
+
+        private void DrawRemoveButton(Rect rect) {
+            var rects = rect.CutFromRight(75);
+
+            EditorGUI.LabelField(rects[0], "Remove Settings File And Always Use Default Parameters");
+            if (GUI.Button(rects[1], "Remove")){
+                SettingsMenu.RemoveSettingsForever();
             }
         }
 

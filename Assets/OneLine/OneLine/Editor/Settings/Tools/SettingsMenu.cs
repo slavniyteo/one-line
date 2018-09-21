@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -55,6 +56,55 @@ namespace OneLine.Settings {
                     yield return result;
                 }
             }
+        }
+
+
+        public static void RemoveSettingsForever() {
+            var path  = PATH + "/" + SETTINGS_FILE_NAME_WITH_EXTENSION;
+            AssetDatabase.DeleteAsset(path);
+
+            ApplyDirectivesInOrderToCurrentSettings(new DefaultSettingsLayer());
+        }
+
+        public static void ApplyDirectivesInOrderToCurrentSettings(ISettings settings){
+            var allDefines = new HashSet<string>();
+            var defines = new List<string>();
+
+            define(allDefines, defines, settings.Enabled, "ONE_LINE_DISABLED");
+            define(allDefines, defines, settings.DrawVerticalSeparator, "ONE_LINE_VERTICAL_SEPARATOR_DISABLE");
+            define(allDefines, defines, settings.DrawHorizontalSeparator, "ONE_LINE_HORIZONTAL_SEPARATOR_DISABLE");
+            define(allDefines, defines, settings.Expandable, "ONE_LINE_EXPANDABLE_DISABLE");
+            define(allDefines, defines, settings.CustomDrawer, "ONE_LINE_CUSTOM_DRAWER_DISABLE");
+
+            AddDefinesForCurrentBuildTarget(allDefines, defines);
+        }
+
+        private static void define(HashSet<string> allDefines, List<string> defines, TernaryBoolean value, string key) {
+            allDefines.Add(key);
+            if (value.HasValue && ! value.BoolValue) {
+                defines.Add(key);
+            }
+        }
+
+        public static void AddDefinesForCurrentBuildTarget(IEnumerable<string> allDefines, IEnumerable<string> defines) {
+            BuildTargetGroup target = EditorUserBuildSettings.selectedBuildTargetGroup;
+            if (target == BuildTargetGroup.Unknown) {
+                Debug.LogError("OneLine Settings Error: can not determine current BuildTargetGroup");
+                return;
+            }
+
+            var currentDefines = PlayerSettings.GetScriptingDefineSymbolsForGroup(target);
+            var resultDefines = new List<string>();
+            foreach (var define in currentDefines.Split(';')) {
+                if (!string.IsNullOrEmpty(define)) {
+                    if (!allDefines.Contains(define)){
+                        resultDefines.Add(define);
+                    }
+                }
+            }
+
+            resultDefines.AddRange(defines);
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(target, string.Join(";", resultDefines.ToArray()));
         }
 
     }

@@ -21,7 +21,7 @@ namespace OneLine.Settings {
         private void OnEnable() {
             Defaults = new DefaultSettingsLayer();
 
-            ApplyDirectivesInOrderToCurrentSettings();
+            SettingsMenu.ApplyDirectivesInOrderToCurrentSettings(this);
         }
 
         public TernaryBoolean Enabled { get { return GetBoolean(x => x.Enabled); } }
@@ -44,45 +44,9 @@ namespace OneLine.Settings {
         public void SaveAndApply() {
             local.Save();
             EditorUtility.SetDirty(this);
-            ApplyDirectivesInOrderToCurrentSettings();
+            SettingsMenu.ApplyDirectivesInOrderToCurrentSettings(this);
         }
 
-        public void ApplyDirectivesInOrderToCurrentSettings(){
-            var allDefines = new HashSet<string>();
-            var defines = new List<string>();
-
-            define(allDefines, defines, Enabled, "ONE_LINE_DISABLED");
-            define(allDefines, defines, DrawVerticalSeparator, "ONE_LINE_VERTICAL_SEPARATOR_DISABLE");
-            define(allDefines, defines, DrawHorizontalSeparator, "ONE_LINE_HORIZONTAL_SEPARATOR_DISABLE");
-            define(allDefines, defines, Expandable, "ONE_LINE_EXPANDABLE_DISABLE");
-            define(allDefines, defines, CustomDrawer, "ONE_LINE_CUSTOM_DRAWER_DISABLE");
-
-            BuildTargetGroup target = EditorUserBuildSettings.selectedBuildTargetGroup;
-            if (target == BuildTargetGroup.Unknown) {
-                Debug.LogError("OneLine Settings Error: can not determine current BuildTargetGroup");
-                return;
-            }
-
-            var currentDefines = PlayerSettings.GetScriptingDefineSymbolsForGroup(target);
-            var resultDefines = new List<String>();
-            foreach (var define in currentDefines.Split(';')) {
-                if (!string.IsNullOrEmpty(define)) {
-                    if (!allDefines.Contains(define)){
-                        resultDefines.Add(define);
-                    }
-                }
-            }
-
-            resultDefines.AddRange(defines);
-            PlayerSettings.SetScriptingDefineSymbolsForGroup(target, string.Join(";", resultDefines.ToArray()));
-        }
-
-        private static void define(HashSet<string> allDefines, List<string> defines, TernaryBoolean value, string key) {
-            allDefines.Add(key);
-            if (value.HasValue && ! value.BoolValue) {
-                defines.Add(key);
-            }
-        }
 
     }
 }
