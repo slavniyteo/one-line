@@ -4,9 +4,9 @@ using UnityEngine;
 namespace OneLine.Settings {
     [Serializable]
     public class TernaryBoolean {
-        public static readonly TernaryBoolean NULL = new TernaryBoolean(NULL_VALUE);
-        public static readonly TernaryBoolean TRUE = new TernaryBoolean(TRUE_VALUE);
-        public static readonly TernaryBoolean FALSE = new TernaryBoolean(FALSE_VALUE);
+        public static TernaryBoolean NULL { get { return new TernaryBoolean(NULL_VALUE); } }
+        public static TernaryBoolean TRUE { get { return new TernaryBoolean(TRUE_VALUE); } }
+        public static TernaryBoolean FALSE { get { return new TernaryBoolean(FALSE_VALUE); } }
 
         private const byte NULL_VALUE = 0;
         private const byte TRUE_VALUE = 1;
