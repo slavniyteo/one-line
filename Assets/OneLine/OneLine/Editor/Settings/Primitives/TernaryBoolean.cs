@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace OneLine.Settings {
     [Serializable]
-    public class TernaryBoolean {
+    public class TernaryBoolean : object{
         public static TernaryBoolean NULL { get { return new TernaryBoolean(NULL_VALUE); } }
         public static TernaryBoolean TRUE { get { return new TernaryBoolean(TRUE_VALUE); } }
         public static TernaryBoolean FALSE { get { return new TernaryBoolean(FALSE_VALUE); } }
@@ -98,6 +98,32 @@ namespace OneLine.Settings {
                 default:
                     throw new InvalidOperationException();
             }
+        }
+
+        public static bool operator ==(TernaryBoolean left, TernaryBoolean right) {
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) {
+                return ReferenceEquals(left, right);
+            }
+            return left.RawValue == right.RawValue;
+        }
+
+        public static bool operator !=(TernaryBoolean left, TernaryBoolean right) {
+            return !(left == right);
+        }
+
+        public override bool Equals(object obj) {
+            if (!(obj is TernaryBoolean)){
+                return false;
+            }
+            return this == (obj as TernaryBoolean);
+        }
+
+        public override int GetHashCode(){
+            return value;
+        }
+
+        public static TernaryBoolean operator !(TernaryBoolean value) {
+            return new TernaryBoolean(!value.Value);
         }
     }
 }
