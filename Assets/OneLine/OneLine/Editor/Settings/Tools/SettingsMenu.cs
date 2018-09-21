@@ -40,7 +40,7 @@ namespace OneLine.Settings {
         }
 
 
-        private static Settings LoadSettingsFromResources() {
+        public static Settings LoadSettingsFromResources() {
             return Resources.Load<Settings>(SETTINGS_RESOURCES_PATH);
         }
 
@@ -71,11 +71,7 @@ namespace OneLine.Settings {
             }
         }
 
-        public static void RemoveSettingsForever() {
-            ApplyDirectiveDefaultsOnly(true);
-            ApplyDirectivesInOrderToCurrentSettings(new DefaultSettingsLayer());
-
-            var settings = LoadSettingsFromResources();
+        public static void RemoveSettingsForever(Settings settings) {
             var path = AssetDatabase.GetAssetPath(settings);
             AssetDatabase.DeleteAsset(path);
             foreach (string directory in GetPathElements(Directory.GetParent(path).ToString()).Reverse()){
@@ -86,6 +82,10 @@ namespace OneLine.Settings {
                     FileUtil.DeleteFileOrDirectory(directory + ".meta");
                 }
             }
+
+            ApplyDirectiveDefaultsOnly(true);
+            ApplyDirectivesInOrderToCurrentSettings(new DefaultSettingsLayer());
+
         }
 
         public static void ApplyDirectivesInOrderToCurrentSettings(ISettings settings){

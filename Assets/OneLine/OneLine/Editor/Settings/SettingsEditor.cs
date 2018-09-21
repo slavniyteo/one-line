@@ -15,8 +15,20 @@ namespace OneLine.Settings {
         private new Settings target { get { return (Settings) base.target;} }
 
         public override void OnInspectorGUI() {
+#if ONE_LINE_DEFAULTS_ONLY
+            PrintErrorUnusedSettingsFile();
+#else
+            if (SettingsMenu.LoadSettingsFromResources() != target) {
+                PrintErrorUnusedSettingsFile();
+                EditorGUI.BeginDisabledGroup(true);
+            }
+
             var height = EditorGUIUtility.singleLineHeight;
             var rect = EditorGUILayout.GetControlRect(false, height);
+
+            //In order to beat EventType.Layout
+            rect.height = 16;
+            var startRect = rect;
 
             DrawHeader(rect);
             DrawReadOnlyLayer(rect = rect.MoveDown(), "Defaults", target.Defaults);
@@ -26,6 +38,14 @@ namespace OneLine.Settings {
 
             DrawSaveButton(rect = rect.MoveDown(20));
             DrawRemoveButton(rect = rect.MoveDown(20));
+
+            //In order to beat EventType.Layout
+            EditorGUILayout.GetControlRect(false, rect.yMax - startRect.yMin);
+#endif
+        }
+
+        private void PrintErrorUnusedSettingsFile(){
+            EditorGUILayout.HelpBox("This settings file is not actually used by OneLine.\nDelete it, please.", MessageType.Error);
         }
 
         private void DrawHeader(Rect rect) {
@@ -80,7 +100,7 @@ namespace OneLine.Settings {
 
             EditorGUI.LabelField(rects[0], "Remove Settings File And Always Use Default Parameters");
             if (GUI.Button(rects[1], "Remove")){
-                SettingsMenu.RemoveSettingsForever();
+                SettingsMenu.RemoveSettingsForever(target);
             }
         }
 
