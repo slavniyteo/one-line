@@ -24,5 +24,9 @@ namespace OneLine.Settings {
         public TernaryBoolean CustomDrawer {
             get { return TernaryBoolean.TRUE; }
         }
+
+        public TernaryBoolean CullingOptimization {
+            get { return TernaryBoolean.TRUE; }
+        }
     }
 }

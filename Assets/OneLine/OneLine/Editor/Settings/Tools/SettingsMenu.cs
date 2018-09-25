@@ -31,7 +31,7 @@ namespace OneLine.Settings {
         }
 #endif
 
-        private static Settings LoadSettings() {
+        public static Settings LoadSettings() {
             var settings = LoadSettingsFromResources();
             if (settings == null) {
                 settings = CreateSettings();
@@ -39,10 +39,11 @@ namespace OneLine.Settings {
             return settings;
         }
 
-
         public static Settings LoadSettingsFromResources() {
             return Resources.Load<Settings>(SETTINGS_RESOURCES_PATH);
         }
+
+        public static Settings Value { get { return SettingsMenu.LoadSettings(); } }
 
         private static Settings CreateSettings() {
             PrepareResourcesDirectory();

@@ -125,5 +125,9 @@ namespace OneLine.Settings {
         public static TernaryBoolean operator !(TernaryBoolean value) {
             return new TernaryBoolean(!value.Value);
         }
+
+        public static implicit operator bool(TernaryBoolean value) {
+            return value == TRUE;
+        }
     }
 }

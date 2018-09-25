@@ -35,5 +35,11 @@ namespace OneLine.Settings {
         public TernaryBoolean CustomDrawer {
             get { return customDrawer; }
         }
+
+        [SerializeField]
+        private TernaryBoolean cullingOptimization = TernaryBoolean.NULL;
+        public TernaryBoolean CullingOptimization {
+            get { return cullingOptimization; }
+        }
     }
 }
