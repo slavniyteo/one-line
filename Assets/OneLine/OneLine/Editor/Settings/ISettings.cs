@@ -8,5 +8,6 @@ namespace OneLine.Settings {
         TernaryBoolean CustomDrawer { get; }
 
         TernaryBoolean CullingOptimization { get; }
+        TernaryBoolean CacheOptimization { get; }
     }
 }

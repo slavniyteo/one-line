@@ -41,5 +41,11 @@ namespace OneLine.Settings {
         public TernaryBoolean CullingOptimization {
             get { return cullingOptimization; }
         }
+
+        [SerializeField]
+        private TernaryBoolean cacheOptimization = TernaryBoolean.NULL;
+        public TernaryBoolean CacheOptimization {
+            get { return cacheOptimization; }
+        }
     }
 }

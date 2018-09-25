@@ -57,6 +57,7 @@ namespace OneLine.Settings {
             EditorGUI.LabelField(rects[4], "Expandable");
             EditorGUI.LabelField(rects[5], "Custom Drawer");
             EditorGUI.LabelField(rects[6], "Culling");
+            EditorGUI.LabelField(rects[7], "Cache");
         }
 
         private void DrawReadOnlyLayer(Rect rect, string label, ISettings layer) {
@@ -75,6 +76,7 @@ namespace OneLine.Settings {
             Draw(rects[4], layer.Expandable, "Expand Object references via [Expandable]");
             Draw(rects[5], layer.CustomDrawer, "Draw custom property drawers");
             Draw(rects[6], layer.CullingOptimization, "Use culling optimization");
+            Draw(rects[7], layer.CacheOptimization, "Use cache optimization");
         }
 
         private void Draw(Rect rect, TernaryBoolean value, string tooltip) {
@@ -86,8 +88,8 @@ namespace OneLine.Settings {
 
         private Rect[] Row(Rect rect) {
             return rect.Row(
-                new float[]{0,   0,  0,  0,  0,  0, 0}, 
-                new float[]{100, 50, 50, 50, 50, 50, 50}
+                new float[]{0,   0,  0,  0,  0,  0, 0, 0}, 
+                new float[]{100, 50, 50, 50, 50, 50, 50, 50}
             );
         }
 

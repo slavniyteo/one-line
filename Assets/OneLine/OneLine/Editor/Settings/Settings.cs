@@ -30,6 +30,7 @@ namespace OneLine.Settings {
         public TernaryBoolean Expandable { get { return GetBoolean(x => x.Expandable); } }
         public TernaryBoolean CustomDrawer { get { return GetBoolean(x => x.CustomDrawer); } }
         public TernaryBoolean CullingOptimization { get { return GetBoolean(x => x.CullingOptimization); } }
+        public TernaryBoolean CacheOptimization { get { return GetBoolean(x => x.CacheOptimization); } }
 
         private TernaryBoolean GetBoolean(Func<ISettings, TernaryBoolean> get) {
                 var result = get(Defaults);
