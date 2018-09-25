@@ -9,8 +9,14 @@
 /Assets/scene.unity*
 /Assets/VSCode*
 /.vscode/
+
 /.idea/
 /Assets/Plugins.meta
 /Assets/Plugins/Editor.meta
 /Assets/Plugins/Editor/JetBrains.meta
 /Assets/Plugins/Editor/JetBrains/
+
+/Assets/Editor.meta
+/Assets/Editor/Resources.meta
+/Assets/Editor/Resources/OneLine.meta
+/Assets/Editor/Resources/OneLine/

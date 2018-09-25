@@ -4,7 +4,9 @@ using OneLine;
 using RectEx;
 
 namespace OneLine {
+#if ! ONE_LINE_HORIZONTAL_SEPARATOR_DISABLE
     [CustomPropertyDrawer(typeof(SeparatorAttribute))]
+#endif
     public class SeparatorAttributeDrawer : UnityEditor.DecoratorDrawer {
 
         private new SeparatorAttribute attribute { get { return base.attribute as SeparatorAttribute; }}

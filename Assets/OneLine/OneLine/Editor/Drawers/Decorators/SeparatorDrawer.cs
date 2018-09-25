@@ -10,6 +10,7 @@ namespace OneLine {
         private const float lineWidth = 2;
 
         public void Draw(SerializedProperty property, Slices slices){
+#if ! ONE_LINE_VERTICAL_SEPARATOR_DISABLE
             Slice slice;
             if (property.IsArrayElement()){
                 slice = new SliceImpl(0, width, DrawInternal);
@@ -18,6 +19,7 @@ namespace OneLine {
                 slice = new SliceImpl(0, width, DrawInternal, DrawInternal);
             }
             slices.Add(slice);
+#endif
         }
 
 

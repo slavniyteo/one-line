@@ -6,7 +6,9 @@ using RectEx;
 using System;
 
 namespace OneLine {
+#if ! ONE_LINE_EXPANDABLE_DISABLE
     [CustomPropertyDrawer(typeof(ExpandableAttribute), true)]
+#endif
     public class ExpandableAttributeDrawer : PropertyDrawer {
 
         private static readonly float FOLDOUT_WIDTH = 14;

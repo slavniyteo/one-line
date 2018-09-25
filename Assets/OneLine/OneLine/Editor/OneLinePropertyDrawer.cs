@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using RectEx;
 
 namespace OneLine {
+    #if ! ONE_LINE_DISABLED
     [CustomPropertyDrawer(typeof(OneLineAttribute), true)]
+    #endif
     public class OneLinePropertyDrawer : PropertyDrawer {
 
         private Drawer simpleDrawer;

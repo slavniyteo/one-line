@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+using OneLine.Settings;
+
 namespace OneLine {
 	internal class SlicesCache {
 
@@ -20,6 +22,12 @@ namespace OneLine {
 
 		public Slices this[SerializedProperty property] {
 			get {
+				if (!SettingsMenu.Value.CacheOptimization) {
+					var slices = new SlicesImpl();
+					calculate(property, slices);
+					return slices;
+				}
+
 				lastId = GetId(property);
 				if (cache.ContainsKey(lastId)){
 					return cache[lastId];

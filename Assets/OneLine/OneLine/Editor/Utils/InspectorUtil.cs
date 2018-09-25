@@ -5,6 +5,8 @@ using UnityEditor;
 using UnityEngine;
 using System.Reflection;
 
+using OneLine.Settings;
+
 namespace OneLine {
     // Optimization: ommit drawing properties that lie outside window.
     // Grow up performance on drawing bit (100+ arrays)
@@ -33,6 +35,7 @@ Please create an issue on https://github.com/slavniyteo/one-line/ and we will re
         public InspectorUtil() {
             enabled = false;
             if (EditorWindow.focusedWindow is PopupWindow) return; // Detect is it [Expandable] popup
+            if (!SettingsMenu.Value.CullingOptimization) return; // If culling is disabled via settings
 
             try {
                 Initialize();
