@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32277f55e69c547a19c4089e3d0316d1, type: 3}
-  m_Name: New Benchmark
+  m_Name: Array Benchmark
   m_EditorClassIdentifier: 
   pure:
   - integerField: 0

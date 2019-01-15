@@ -2,8 +2,11 @@
 using System;
 using UnityEngine;
 using OneLine;
-using UnityEditor;
 using RectEx;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace OneLine.Example {
 	[CreateAssetMenu]
@@ -38,6 +41,7 @@ namespace OneLine.Example {
 			public string third;
 		}
 
+#if UNITY_EDITOR
 		[CustomPropertyDrawer(typeof(Root2))]
 		public class Root2Editor : PropertyDrawer {
 
@@ -54,15 +58,16 @@ namespace OneLine.Example {
 				int i = 0;
 				EditorGUI.TextField(rects[i++], "");
 				EditorGUI.TextField(rects[i++], "");
-				GuiUtil.DrawRect(rects[i++], Color.gray);
+				EditorGUI.DrawRect(rects[i++], Color.gray);
 				EditorGUI.TextField(rects[i++], "");
 				EditorGUI.TextField(rects[i++], "");
 				GUI.Button(rects[i++], "+");
 				GUI.Button(rects[i++], "-");
-				GuiUtil.DrawRect(rects[i++], Color.gray);
+				EditorGUI.DrawRect(rects[i++], Color.gray);
 				EditorGUI.TextField(rects[i++], "");
 			}
 
 		}
+#endif
 	}
 }
