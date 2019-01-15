@@ -14,22 +14,25 @@ namespace OneLine.Settings {
         private const string SETTINGS_FILE_NAME_WITH_EXTENSION = SETTINGS_FILE_NAME + ".asset";
         private const string SETTINGS_RESOURCES_PATH = "OneLine/" + SETTINGS_FILE_NAME;
 
-
-#if ONE_LINE_DEFAULTS_ONLY
-        [MenuItem(itemName: "Window/Restore OneLine Settings Asset")]
-        public static void RestoreSettingsAsset(){
-            ApplyDirectiveDefaultsOnly(false);
-        }
-#else
         static SettingsMenu() {
             LoadSettings();
         }
 
+#if ONE_LINE_DEFAULTS_ONLY
+        [MenuItem(itemName: "Window/OneLine Settings - Create")]
+        public static void RestoreSettingsAsset(){
+            ApplyDirectiveDefaultsOnly(false);
+        }
+
+        public static Settings LoadSettings() {
+            var settings = Settings.CreateInstance<Settings>();
+            return settings;
+        }
+#else
         [MenuItem(itemName: "Window/OneLine Settings")]
         public static void OpenSettings(){
             Selection.activeObject = LoadSettings();
         }
-#endif
 
         public static Settings LoadSettings() {
             var settings = LoadSettingsFromResources();
@@ -38,6 +41,7 @@ namespace OneLine.Settings {
             }
             return settings;
         }
+#endif
 
         public static Settings LoadSettingsFromResources() {
             return Resources.Load<Settings>(SETTINGS_RESOURCES_PATH);
@@ -83,6 +87,7 @@ namespace OneLine.Settings {
                     FileUtil.DeleteFileOrDirectory(directory + ".meta");
                 }
             }
+            AssetDatabase.Refresh();
 
             ApplyDirectiveDefaultsOnly(true);
             ApplyDirectivesInOrderToCurrentSettings(new DefaultSettingsLayer());

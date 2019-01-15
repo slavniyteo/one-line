@@ -14,9 +14,7 @@ namespace OneLine.Settings {
 
         [SerializeField]
         private GlobalSettingsLayer layer = new GlobalSettingsLayer();
-        public ISettings Layer { 
-            get { return layer; } 
-        }
+        public ISettings Layer { get { return layer; } }
 
         private void OnEnable() {
             Defaults = new DefaultSettingsLayer();

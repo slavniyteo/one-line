@@ -26,12 +26,16 @@ namespace OneLine.Settings {
         public TernaryBoolean CacheOptimization { get { return getBool(CACHE_OPTIMIZATION_NAME); } }
 
         private TernaryBoolean getBool(string key) {
+#if ONE_LINE_DEFAULTS_ONLY
+            return new TernaryBoolean(null);
+#else
             TernaryBoolean result = null;
             if (!booleans.TryGetValue(key, out result)) {
                 result = new TernaryBoolean((byte) EditorPrefs.GetInt(key, 0));
                 booleans[key] = result;
             }
             return result;
+#endif
         }
 
         public void Save() {

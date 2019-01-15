@@ -12,6 +12,22 @@ namespace OneLine.Settings {
     [CustomEditor(typeof(Settings))]
     public class SettingsEditor : Editor {
 
+        private const String SETTINGS_README = 
+@"<b>OneLine Settings</b>
+
+Here you can manage OneLine features (every column represents a separate feature, read the tooltips over buttons). 
+
+There are features of two types: <b>drawing feature</b> and <b>optimization feature</b>.
+
+All of them are Enabled by default. You can disable them globally (store in ScriptableObject and share with your team) or locally (store on your PC only).
+If value <b>is not null</b>, it <b>overrides</b> column above.
+
+Resulting values are shown in the bottom row (RESULTS row).
+Do not forget to click <b>Save</b>.
+
+By clicking <b>Remove</b> you reset your global <b>and</b> local settings to default, remove this ScriptableObject and add #define ONE_LINE_DEFAULTS_ONLY=true to the solution. It is shared with your team.
+If you just remove this ScriptableObject, your local settings stay changed.";
+
         private new Settings target { get { return (Settings) base.target;} }
 
         public override void OnInspectorGUI() {
@@ -23,6 +39,8 @@ namespace OneLine.Settings {
                 EditorGUI.BeginDisabledGroup(true);
             }
 
+            DrawReadme();
+
             var height = EditorGUIUtility.singleLineHeight;
             var rect = EditorGUILayout.GetControlRect(false, height);
 
@@ -32,8 +50,8 @@ namespace OneLine.Settings {
 
             DrawHeader(rect);
             DrawReadOnlyLayer(rect = rect.MoveDown(), "Defaults", target.Defaults);
-            DrawLayer(rect = rect.MoveDown(), "Global settings", target.Layer);
-            DrawLayer(rect = rect.MoveDown(), "Local settings", target.Local);
+            DrawLayer(rect = rect.MoveDown(), "Global override", target.Layer);
+            DrawLayer(rect = rect.MoveDown(), "Local override", target.Local);
             DrawReadOnlyLayer(rect = rect.MoveDown(20), "Results", target);
 
             DrawSaveButton(rect = rect.MoveDown(20));
@@ -46,6 +64,15 @@ namespace OneLine.Settings {
 
         private void PrintErrorUnusedSettingsFile(){
             EditorGUILayout.HelpBox("This settings file is not actually used by OneLine.\nDelete it, please.", MessageType.Error);
+        }
+
+        private void DrawReadme() {
+            var style = new GUIStyle(GUI.skin.box);
+            style.padding = new RectOffset(10, 10, 10, 10);
+            style.richText = true;
+            style.alignment = TextAnchor.MiddleLeft;
+
+            GUILayout.Box(SETTINGS_README, style);
         }
 
         private void DrawHeader(Rect rect) {
