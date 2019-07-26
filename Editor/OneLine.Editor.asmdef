@@ -1,0 +1,18 @@
+{
+    "name": "st.one-line.Editor",
+    "references": [
+        "GUID:73c70a6eb6b6f444c878926f743350f6",
+        "GUID:7a0017bf928d9644fa38a04cabefce63"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
