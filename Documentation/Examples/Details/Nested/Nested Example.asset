@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a3f622692a5b4a2591f53e468b12ec2, type: 3}
-  m_Name: nested example
+  m_Name: Nested Example
   m_EditorClassIdentifier: 
   root:
     first: 
