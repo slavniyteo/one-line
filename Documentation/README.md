@@ -1,37 +1,3 @@
-# Overview
-
-OneLine provides a simple way to organize your databases without writing dozens of boilerplate code. It draws objects in Inspector into one line instead default line-by-line style. Also it provides a few features like field highlightning, locking array size, etc...
-
-Read about `OneLine` on habr: [1](https://habr.com/post/340536/), [2](https://habr.com/post/341064/) (ru).
-
-[![Unity Asset Store](https://img.shields.io/badge/Unity%20Asset%20Store-Free-green.svg)](https://assetstore.unity.com/packages/tools/gui/oneline-110758)
-![GitHub release](https://img.shields.io/github/release/slavniyteo/one-line.svg)
-![GitHub Release Date](https://img.shields.io/github/release-date/slavniyteo/one-line.svg)
-![Github commits (since latest release)](https://img.shields.io/github/commits-since/slavniyteo/one-line/latest.svg)
-![GitHub last commit](https://img.shields.io/github/last-commit/slavniyteo/one-line.svg)
-
-# News
-
-- **2019.01.15**: [v0.4.0](https://github.com/slavniyteo/one-line/releases/tag/v0.4.0) released!
-- **2018.03.01**: [v0.3.0](https://github.com/slavniyteo/one-line/releases/tag/v0.3.0) released!
-- **2018.02.27**: Added `[Expandable]` attribute. See [description below](#expandableattribute) and [#22](https://github.com/slavniyteo/one-line/issues/22)
-- **2018.02.26**: Added custom property drawers support.  
-Now any custom drawer, which returns height < 20, is drown. 
-Acceptable for custom drawers of either types or attributes.
-- **2018.02.18**: Available on the [Asset Store](https://www.assetstore.unity3d.com/en/#!/content/110758) for free.
-
-# TL;DR
-
-- After importing look at `Assets/OneLine/Example/Overview/Overview.asset` and open it in InspectorWindow. It'll show you all capabilities of the library;
-- In your code, add `using OneLine;` and `[OneLine]` to fields you want to draw into one line. Note that internal fields don't need `[OneLine]`: they are processed automatically;
-- IToo customize onelined fields, use **Width**, **Weight**, **HideLabel**, **Highlight**, **HideButtons** and **ArrayLength** attributes (see **Example.asset**);
-- Use **Separator** attribute to separate different fields;
-- Use **Expandable** attribute to follow object references (real street magic is here) (idea is stolen from [here](https://forum.unity.com/threads/editor-tool-better-scriptableobject-inspector-editing.484393/);
-- OneLine uses [RectEx](https://github.com/slavniyteo/rect-ex), so feel free to try it.
-- Compatible with either **.Net 2.0** or **.Net 4.5** backends.
-
-![Overview](mdsrc/one-line-overview.png)
-
 # Details
 
 Table of contents:
