@@ -1,0 +1,19 @@
+{
+  "name": "st.one-line",
+  "displayName": "OneLine",
+  "version": "0.5.0",
+  "unity": "2017.1",
+  "description": "Draw any object in the inspector into a single line.",
+  "keywords": [
+    "editor",
+    "unity",
+    "inspector"
+  ],
+  "author": {
+    "name": "Slavniyteo"
+  },
+  "category": "Editor",
+  "dependencies": {
+    "st.rect-ex": "0.2.0"
+  }
+}

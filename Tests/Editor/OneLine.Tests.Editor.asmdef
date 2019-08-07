@@ -1,0 +1,19 @@
+{
+    "name": "OneLine.Tests.Editor",
+    "references": [
+        "GUID:7a0017bf928d9644fa38a04cabefce63",
+        "GUID:48490628f29f5a745823c646508b1c74",
+        "GUID:73c70a6eb6b6f444c878926f743350f6"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
