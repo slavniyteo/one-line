@@ -18,6 +18,7 @@ Full Reference is [here](./Documentation/README.md).
 
 # News
 
+- **2019.08.20**: Added **how to build** instruction [here](#edit-oneline-project) on request [39](https://github.com/slavniyteo/one-line/issues/39).
 - **2019.08.08**: [v0.5.0](https://github.com/slavniyteo/one-line/releases/tag/v0.5.0) released! Added UPM Support.
 - **2019.01.15**: [v0.4.0](https://github.com/slavniyteo/one-line/releases/tag/v0.4.0) released!
 - **2018.03.01**: [v0.3.0](https://github.com/slavniyteo/one-line/releases/tag/v0.3.0) released!
@@ -77,3 +78,40 @@ but RectEx has):
 }
 ```
 
+# Edit OneLine Project
+
+Added on request [39](https://github.com/slavniyteo/one-line/issues/39).
+
+When you add OneLine via UPM as described above, it becomes readonly. To be able to edit OneLine, you should add it to project as local dependency:
+
+1. Clone repository to local directory:
+
+```bash
+git clone https://github.com/slavniyteo/one-line /home/user/projects/one-line
+```
+
+2. In your working project add dependency to cloned OneLine:
+
+```json
+{
+  "dependencies": {
+    "st.rect-ex": "https://github.com/slavniyteo/rect-ex.git#master",
+    "st.one-line": "file:/home/user/projects/one-line"
+  }
+}
+```
+
+On Windows: 
+
+```json
+{
+  "dependencies": {
+    "st.rect-ex": "https://github.com/slavniyteo/rect-ex.git#master",
+    "st.one-line": "file:D:/projects/one-line"
+  }
+}
+```
+
+Note that [RectEx](https://github.com/slavniyteo/rect-ex) is git dependency.
+
+It's all. OneLine becomes editable at InspectorWindow when your working project is open. Besides you can edit scripts of OneLine and they'll be compiled with our project.
