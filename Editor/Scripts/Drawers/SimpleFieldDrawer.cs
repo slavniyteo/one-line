@@ -10,28 +10,37 @@ namespace OneLine {
     internal class SimpleFieldDrawer : Drawer {
 
         public float GetWeight(SerializedProperty property){
-            switch (property.propertyType){
-                case SerializedPropertyType.Boolean: {
-                    return 0;
-                }
-                default: {
-                    var weights = property.GetCustomAttributes<WeightAttribute>()
-                                        .Select(x => x.Weight)
-                                        .ToArray();
-                    return weights.Length > 0 ? weights.Sum() : 1;
+            var weights = property.GetCustomAttributes<WeightAttribute>();
+            if (weights.Any()) { 
+                return weights.Sum(w=>w.Weight);
+            }
+            else
+            {
+                switch (property.propertyType) {
+                    case SerializedPropertyType.Boolean: {
+                        return 0;
+                    }
+                    default: {
+                        return 1;
+                    }
                 }
             }
         }
 
         public float GetFixedWidth(SerializedProperty property){
-            switch (property.propertyType){
-                case SerializedPropertyType.Boolean: {
-                    return EditorGUIUtility.singleLineHeight - 2;
-                }
-                default: {
-                    return property.GetCustomAttributes<WidthAttribute>()
-                                .Select(x => x.Width)
-                                .Sum();
+            var widths = property.GetCustomAttributes<WidthAttribute>();
+            if (widths.Any()) {
+                return widths.Sum(w=>w.Width);
+            }
+            else
+            {
+                switch (property.propertyType){
+                    case SerializedPropertyType.Boolean: {
+                        return EditorGUIUtility.singleLineHeight - 2;
+                    }
+                    default: {
+                        return 0; 
+                    }
                 }
             }
         }
