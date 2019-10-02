@@ -1,6 +1,14 @@
-﻿{
-  "name": "st.one-line.Runtime",
-  "references": [
-    "GUID:73c70a6eb6b6f444c878926f743350f6"
-  ]
+{
+    "name": "st.one-line.Runtime",
+    "references": [
+        "st.rect-ex.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": []
 }
