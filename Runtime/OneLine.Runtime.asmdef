@@ -3,12 +3,12 @@
     "references": [
         "st.rect-ex.Runtime"
     ],
+    "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
-    "defineConstraints": [],
-    "versionDefines": []
+    "autoReferenced": true,
+    "defineConstraints": []
 }
