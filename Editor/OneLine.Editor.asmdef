@@ -4,6 +4,7 @@
         "st.rect-ex.Runtime",
         "st.one-line.Runtime"
     ],
+    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
@@ -11,7 +12,6 @@
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
-    "defineConstraints": [],
-    "versionDefines": []
+    "autoReferenced": true,
+    "defineConstraints": []
 }
