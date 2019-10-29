@@ -12,8 +12,18 @@
   "author": {
     "name": "Slavniyteo"
   },
-  "category": "Editor",
   "dependencies": {
     "st.rect-ex": "0.2.0"
+  },
+  "samples": [
+    {
+      "displayName": "OneLine Examples",
+      "description": "Overview and details examples.",
+      "path": "Samples~"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/d4160/one-line.git"
   }
 }
