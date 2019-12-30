@@ -43,14 +43,14 @@ Full Reference is [here](./Documentation/README.md).
 
 # Installation
 
-Versions prior v0.5.0 (current) are available at [![Unity Asset Store](https://img.shields.io/badge/Unity%20Asset%20Store-Free-green.svg)](https://assetstore.unity.com/packages/tools/gui/oneline-110758).
+Versions prior v0.5.0 are available at [![Unity Asset Store](https://img.shields.io/badge/Unity%20Asset%20Store-Free-green.svg)](https://assetstore.unity.com/packages/tools/gui/oneline-110758).
 
 Since v0.5.0 One Line is managed via [Unity Package Manager](https://docs.unity3d.com/Manual/Packages.html).
 
 To add OneLine to your Unity project, add following dependency to your 
 `manifest.json` as described [here](https://docs.unity3d.com/Manual/upm-dependencies.html)
 and [here](https://docs.unity3d.com/Manual/upm-git.html). Use **master** or 
-any version above **v0.5.0** (including) because v0.4.0 and previos versions are
+any version above **v0.5.0** (including) because v0.4.0 and previous versions are
 not compatible with Unity Package Manager. 
 
 ```json
