@@ -8,7 +8,7 @@ locking array size, etc...
 Read about `OneLine` on habr: [1](https://habr.com/post/340536/), 
 [2](https://habr.com/post/341064/) (ru).
 
-Full Reference is [here](./Documentation/README.md).
+Full Reference is [here](./Documentation~/README.md).
 
 [![Unity Asset Store](https://img.shields.io/badge/Unity%20Asset%20Store-Free-green.svg)](https://assetstore.unity.com/packages/tools/gui/oneline-110758)
 ![GitHub release](https://img.shields.io/github/release/slavniyteo/one-line.svg)
@@ -22,7 +22,7 @@ Full Reference is [here](./Documentation/README.md).
 - **2019.08.08**: [v0.5.0](https://github.com/slavniyteo/one-line/releases/tag/v0.5.0) released! Added UPM Support.
 - **2019.01.15**: [v0.4.0](https://github.com/slavniyteo/one-line/releases/tag/v0.4.0) released!
 - **2018.03.01**: [v0.3.0](https://github.com/slavniyteo/one-line/releases/tag/v0.3.0) released!
-- **2018.02.27**: Added `[Expandable]` attribute. See [full documentation](./Documentation/README.md) and [#22](https://github.com/slavniyteo/one-line/issues/22)
+- **2018.02.27**: Added `[Expandable]` attribute. See [full documentation](./Documentation~/README.md) and [#22](https://github.com/slavniyteo/one-line/issues/22)
 - **2018.02.26**: Added custom property drawers support.  
     Now any custom drawer, which returns height < 20, is drown. Acceptable for 
     custom drawers of either types or attributes.
@@ -31,7 +31,7 @@ Full Reference is [here](./Documentation/README.md).
 
 # TL;DR
 
-- After importing look at `Documentation/Examples/Overview/Overview.asset` and open it in InspectorWindow. It'll show you all capabilities of the library;
+- After importing look at `Documentation~/Examples/Overview/Overview.asset` (see the screenshot below) and open it in InspectorWindow. It'll show you all capabilities of the library;
 - In your code, add `using OneLine;` and `[OneLine]` to fields you want to draw into one line. Note that internal fields don't need `[OneLine]`: they are processed automatically;
 - IToo customize onelined fields, use **Width**, **Weight**, **HideLabel**, **Highlight**, **HideButtons** and **ArrayLength** attributes (see **Example.asset**);
 - Use **Separator** attribute to separate different fields;
@@ -39,7 +39,9 @@ Full Reference is [here](./Documentation/README.md).
 - OneLine uses [RectEx](https://github.com/slavniyteo/rect-ex), so feel free to try it.
 - Compatible with either **.Net 2.0** or **.Net 4.5** backends.
 
-![Overview](./Documentation/mdsrc/one-line-overview.png)
+![Overview](./Documentation~/mdsrc/one-line-overview.png)
+
+Code of the screenshot above is [here](./Samples~/Scripts/Overview/Overview.cs).
 
 # Installation
 
