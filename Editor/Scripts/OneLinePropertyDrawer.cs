@@ -1,8 +1,5 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using System;
-using System.Linq;
-using System.Collections.Generic;
 using RectEx;
 
 namespace OneLine {
@@ -19,7 +16,6 @@ namespace OneLine {
         private RootDirectoryDrawer rootDirectoryDrawer;
 
         private SlicesCache cache;
-        private InspectorUtil inspectorUtil;
         private ArraysSizeObserver arraysSizeObserver;
 
         private new OneLineAttribute attribute { get { return base.attribute as OneLineAttribute; } }
@@ -33,7 +29,6 @@ namespace OneLine {
             directoryDrawer = new DirectoryDrawer(GetDrawer);
             rootDirectoryDrawer = new RootDirectoryDrawer(GetDrawer);
 
-            inspectorUtil = new InspectorUtil();
             ResetCache();
             Undo.undoRedoPerformed += ResetCache;
             arraysSizeObserver = new ArraysSizeObserver();
@@ -96,7 +91,6 @@ namespace OneLine {
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
             if (Event.current.type == EventType.Layout){ return; } // In [Expandable] popup it happens
-            if (inspectorUtil.IsOutOfScreen(position)){ return; } // Culling
 
             if (arraysSizeObserver.IsArraySizeChanged(property)){ ResetCache(); }
 

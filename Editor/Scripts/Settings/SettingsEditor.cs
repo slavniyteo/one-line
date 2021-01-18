@@ -1,9 +1,5 @@
-﻿using System.IO;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEditor;
-using UnityEditorInternal;
 
 using RectEx;
 using System;
@@ -83,8 +79,7 @@ If you just remove this ScriptableObject, your local settings stay changed.";
             EditorGUI.LabelField(rects[3], "H Separator");
             EditorGUI.LabelField(rects[4], "Expandable");
             EditorGUI.LabelField(rects[5], "Custom Drawer");
-            EditorGUI.LabelField(rects[6], "Culling");
-            EditorGUI.LabelField(rects[7], "Cache");
+            EditorGUI.LabelField(rects[6], "Cache");
         }
 
         private void DrawReadOnlyLayer(Rect rect, string label, ISettings layer) {
@@ -102,8 +97,7 @@ If you just remove this ScriptableObject, your local settings stay changed.";
             Draw(rects[3], layer.DrawHorizontalSeparator, "Draw Horizontal Separator");
             Draw(rects[4], layer.Expandable, "Expand Object references via [Expandable]");
             Draw(rects[5], layer.CustomDrawer, "Draw custom property drawers");
-            Draw(rects[6], layer.CullingOptimization, "Use culling optimization");
-            Draw(rects[7], layer.CacheOptimization, "Use cache optimization");
+            Draw(rects[6], layer.CacheOptimization, "Use cache optimization");
         }
 
         private void Draw(Rect rect, TernaryBoolean value, string tooltip) {
@@ -115,8 +109,8 @@ If you just remove this ScriptableObject, your local settings stay changed.";
 
         private Rect[] Row(Rect rect) {
             return rect.Row(
-                new float[]{0,   0,  0,  0,  0,  0, 0, 0}, 
-                new float[]{100, 50, 50, 50, 50, 50, 50, 50}
+                new float[]{0,   0,  0,  0,  0,  0, 0}, 
+                new float[]{100, 50, 50, 50, 50, 50, 50}
             );
         }
 

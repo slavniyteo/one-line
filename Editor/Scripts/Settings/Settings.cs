@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -27,7 +24,6 @@ namespace OneLine.Settings {
         public TernaryBoolean DrawHorizontalSeparator { get { return GetBoolean(x => x.DrawHorizontalSeparator); } }
         public TernaryBoolean Expandable { get { return GetBoolean(x => x.Expandable); } }
         public TernaryBoolean CustomDrawer { get { return GetBoolean(x => x.CustomDrawer); } }
-        public TernaryBoolean CullingOptimization { get { return GetBoolean(x => x.CullingOptimization); } }
         public TernaryBoolean CacheOptimization { get { return GetBoolean(x => x.CacheOptimization); } }
 
         private TernaryBoolean GetBoolean(Func<ISettings, TernaryBoolean> get) {

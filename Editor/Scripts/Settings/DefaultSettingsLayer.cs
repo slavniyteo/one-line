@@ -25,10 +25,6 @@ namespace OneLine.Settings {
             get { return TernaryBoolean.TRUE; }
         }
 
-        public TernaryBoolean CullingOptimization {
-            get { return TernaryBoolean.TRUE; }
-        }
-
         public TernaryBoolean CacheOptimization {
             get { return TernaryBoolean.TRUE; }
         }
